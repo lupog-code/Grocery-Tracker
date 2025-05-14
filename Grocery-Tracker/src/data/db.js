@@ -1,22 +1,23 @@
 import * as SQLite from 'expo-sqlite';
 
+let db;
 
-const db = await SQLite.openDatabaseAsync('grocery');
+export const initDatabase = async () => {
+  db = await SQLite.openDatabaseAsync('grocery');
+}
 
-
-export  const  createTables = async ()=>{
-    await db.execAsync(`
-
-        CREATE TABLE IF NOT EXISTS lists (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL
+export const createTables = async () => {
+  if (!db) await initDatabase();
+  
+  await db.execAsync(`
+    CREATE TABLE IF NOT EXISTS lists (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL
     );
-
     CREATE TABLE IF NOT EXISTS categories (
-    name TEXT PRIMARY KEY
+      name TEXT PRIMARY KEY
     );
-
-CREATE TABLE IF NOT EXISTS items (
+    CREATE TABLE IF NOT EXISTS items (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
       quantity INTEGER NOT NULL,
@@ -27,14 +28,13 @@ CREATE TABLE IF NOT EXISTS items (
       FOREIGN KEY (list_id) REFERENCES lists(id),
       FOREIGN KEY (category) REFERENCES categories(name)
     );
-
-        INSERT OR IGNORE INTO categories (name) VALUES
-    ('Fruits'),
-    ('Vegetables'),
-    ('Dairy'),
-    ('Meat'),
-    ('Snacks'),
-    ('Beverages'),
-    ('Other');`
-  );
+    INSERT OR IGNORE INTO categories (name) VALUES
+      ('Fruits'),
+      ('Vegetables'),
+      ('Dairy'),
+      ('Meat'),
+      ('Snacks'),
+      ('Beverages'),
+      ('Other');
+  `);
 }
