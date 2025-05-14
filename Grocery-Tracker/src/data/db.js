@@ -4,6 +4,7 @@ let db;
 
 export const initDatabase = async () => {
   db = await SQLite.openDatabaseAsync('grocery');
+  console.log(db.databasePath)
 }
 
 export const createTables = async () => {
@@ -37,4 +38,11 @@ export const createTables = async () => {
       ('Beverages'),
       ('Other');
   `);
+
+
+  export const creaNuovaLista = async () =>{
+    if(!db) await initDatabase();
+  }
+
+
 }
