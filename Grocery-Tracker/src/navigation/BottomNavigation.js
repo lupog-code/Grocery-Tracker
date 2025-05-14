@@ -10,6 +10,7 @@ import AnalysisScreen from '../screens/AnalysisScreen';
 const Tab = createBottomTabNavigator();
 
 const BottomNavigation = ()=>{
+    return(
     <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} 
         options={{
@@ -25,6 +26,7 @@ const BottomNavigation = ()=>{
         }}/>
        
     </Tab.Navigator>
+    ); 
 
 }
 

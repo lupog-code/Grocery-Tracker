@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, SafeAreaView } from 'react-native';
+import { StyleSheet, SafeAreaView , View } from 'react-native';
 import { createTables } from './src/data/db';
 import { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -14,7 +14,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <SafeAreaView >
+      <SafeAreaView style={styles.container}> 
         <StatusBar style="auto" />
         <BottomNavigation />
       </SafeAreaView>
