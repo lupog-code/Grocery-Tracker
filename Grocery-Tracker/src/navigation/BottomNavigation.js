@@ -3,7 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Ionicons} from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen';
 import AnalysisScreen from '../screens/AnalysisScreen';
-    
+import RecentScreen from '../screens/RecentScreen';
 
 
 
@@ -18,15 +18,25 @@ const BottomNavigation = ()=>{
                 <Ionicons name="home" color={color} size={size}/>
             )
         }}/>
+        <Tab.Screen name="Recent" component={RecentScreen}
+        options={{
+            tabBarIcon: ({color, size}) => (
+                <Ionicons name="time" color={color} size={size}/>
+            )
+        }}/>
        <Tab.Screen name="Stats" component ={AnalysisScreen}
         options={{
             tabBarIcon: ({color, size}) => (
                 <Ionicons name="stats-chart" color={color} size={size}/>
             )
         }}/>
+
+
+
        
     </Tab.Navigator>
     ); 
+    
 
 }
 
