@@ -5,7 +5,9 @@ import { useEffect } from 'react';
 
 export default function App() {
   useEffect(() => {
+    console.log('Creating database tables...');
     createTables();
+    console.log('Database tables created successfully');
   }, []);
 
   return (
