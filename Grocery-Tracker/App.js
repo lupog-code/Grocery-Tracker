@@ -1,52 +1,20 @@
-import React from 'react';
-import { Text, View, SafeAreaView } from 'react-native';
-import AppNavigator from './src/navigation/BottomTabNavigator';
-import { db , createTables } from './src/data/db';
-import ListStackNavigator from './src/navigation/MainStackNavigator';
-import MainStackNavigator from './src/navigation/MainStackNavigator';
-import { NavigationContainer } from '@react-navigation/native';
-import { createTable } from './src/data/db';
-import { useEffect } from 'react';
-import { insertItem } from './src/data/db';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
 
-
-function App() {
-
-  useEffect(() => {
-    const initDB = async () => {
-      try {
-        await createTable();
-        console.log('Tabella creata (o già esistente)');
-      } catch (error) {
-        console.error('Errore nella creazione della tabella:', error);
-      }
-    };
-
-    initDB();
-  }, []);
-
-
-  useEffect(() => {
-  const initDB = async () => {
-    try {
-      await createTable();
-      await insertItem('Mela', 5);  // Inserisci un elemento di prova
-      console.log('Elemento aggiunto');
-    } catch (error) {
-      console.error('Errore durante l\'inizializzazione del DB:', error);
-  }}
-  });
-
-
+export default function App() {
   return (
-    <NavigationContainer>
-    <View style={{flex:1}}>
-          
-<MainStackNavigator></MainStackNavigator>
-          
+    <View style={styles.container}>
+      <Text>Open up App.js to start working on your app!</Text>
+      <StatusBar style="auto" />
     </View>
-    </NavigationContainer>
   );
 }
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
