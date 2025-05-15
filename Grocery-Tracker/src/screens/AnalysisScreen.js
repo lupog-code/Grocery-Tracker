@@ -79,12 +79,13 @@ const AnalysisScreen = () => {
           </View>
 
           <View style={styles.chartCard}>
+                <PieChartItems />
+          </View>
+
+        <View style={styles.chartCard}>
                 <LineChartItems items={items} period={currentPeriod} />
           </View>
 
-          <View style={styles.chartCard}>
-                <PieChartItems />
-          </View>
           </ScrollView>
         </SafeAreaView>
     );

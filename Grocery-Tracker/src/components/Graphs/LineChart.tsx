@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Dimensions, StyleSheet } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 
-const LineChartItems = ({ items, period }) => {
+const LineChartItems = ({ items }) => {
   const transformItemsForLineChart = (items) => {
     const totalsByDate = {};
     
@@ -42,38 +42,18 @@ const LineChartItems = ({ items, period }) => {
       return;
     }
 
-    let filteredItems = items;
     const now = new Date();
-    let cutoffDate = null;
+    const cutoffDate = new Date(now.getFullYear(), now.getMonth() - 6, now.getDate());
 
-    switch (period) {
-      case '1m':
-        cutoffDate = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
-        break;
-      case '3m':
-        cutoffDate = new Date(now.getFullYear(), now.getMonth() - 3, now.getDate());
-        break;
-      case '6m':
-        cutoffDate = new Date(now.getFullYear(), now.getMonth() - 6, now.getDate());
-        break;
-      case '1y':
-        cutoffDate = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
-        break;
-      default:
-        cutoffDate = null;
-    }
-
-    if (cutoffDate) {
-      filteredItems = items.filter(item => {
-        if (!item.inserted_at) return false;
-        const itemDate = new Date(item.inserted_at.split(' ')[0]);
-        return itemDate >= cutoffDate;
-      });
-    }
+    const filteredItems = items.filter(item => {
+      if (!item.inserted_at) return false;
+      const itemDate = new Date(item.inserted_at.split(' ')[0]);
+      return itemDate >= cutoffDate;
+    });
 
     const dataForChart = transformItemsForLineChart(filteredItems);
     setChartData(dataForChart);
-  }, [items, period]);
+  }, [items]);
   
   // Configurazione del grafico
   const chartConfig = {
