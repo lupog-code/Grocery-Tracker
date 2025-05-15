@@ -10,11 +10,11 @@ const PieChartItems = ()=>{
     function formatData(data)
 {
     const result = data.map(item => ({
-        name: item.category,
-        population: item.count, //Dato da reportare nel grafico a torta
-        color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
-        legendFontColor: '#7F7F7F',
-        legendFontSize: 15
+      name: item.category,
+      population: item.count,
+      color: `#${Math.floor(Math.random() * 0xCFFFFF + 0x300000).toString(16)}`,
+      legendFontColor: '#7F7F7F',
+      legendFontSize: 15
     }));
     return result;
 }

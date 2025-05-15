@@ -20,7 +20,7 @@ const HomeScreen = () => {
             try {
                 const newData = await getNumeroItemPerCategoria();
                 setData(newData);
-                console.log('Data fetched:', newData);
+               
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
