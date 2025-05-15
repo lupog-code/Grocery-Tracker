@@ -48,11 +48,11 @@ const AnalysisScreen = () => {
 
         const spesaTotale = await getSpesaTotale(startDate);
         console.log('Total spending:', spesaTotale);
-        setSpesaTotale(spesaTotale);
+        setSpesaTotale(spesaTotale.toFixed(2));
 
         const mediaGiornaliera = await getMediaGiornaliera(startDate);
         console.log('Daily average:', mediaGiornaliera);
-        setMediaGiornaliera(mediaGiornaliera);
+        setMediaGiornaliera(mediaGiornaliera.toFixed(2));
       } catch (error) {
         console.error('Error fetching items:', error);
       }
@@ -75,7 +75,7 @@ const AnalysisScreen = () => {
           </View>
 
           <View>
-            <StatisticsCard totalSpending={1} dailyAverage={2}></StatisticsCard>
+            <StatisticsCard totalSpending={spesaTotale} dailyAverage={mediaGiornaliera}></StatisticsCard>
           </View>
 
           <View style={styles.chartCard}>

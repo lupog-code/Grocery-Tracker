@@ -5,7 +5,7 @@ import {Ionicons} from "@expo/vector-icons";
 import {List} from "../components/listObj";
 import {AddListBtn} from "../components/btnsObj";
 import { getListe } from '../data/db';
-import { useState } from 'react';
+
 const ListsScreen = () => {
     const [lists, setLists] = useState([]);
 
