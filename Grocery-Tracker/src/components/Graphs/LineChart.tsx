@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
+import { getCostiMensili } from '../../data/db';
 
-const LineChartItems = ({ items, period = '3m' }) => {
+const LineChartItems = ({startDate}) => {
+
+    const [data, setData] = useState([]);
+
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [{ data: [] }]
@@ -12,19 +16,18 @@ const LineChartItems = ({ items, period = '3m' }) => {
   
   useEffect(() => {
     // Generiamo i dati di esempio per il grafico
-    const now = new Date();
-    
-    // Determina periodo da mostrare
-    let monthsToShow;
-    switch (period) {
-      case '3m': monthsToShow = 3; break;
-      case '6m': monthsToShow = 6; break;
-      case '1y': monthsToShow = 12; break;
-      default: monthsToShow = 3;
-    }
-    
-    // Calcola intervallo tra punti per avere sempre 6 punti
-    const intervalMonths = Math.max(1, Math.floor(monthsToShow / 5));
+    const getData = async () => {
+        try {
+            const data = await getCostiMensili();
+            console.log('Items fetched for line chart:', data);
+            setData(data);
+        } catch (error) {
+            console.error('Error fetching items:', error);
+            return [];
+        }
+    };
+
+    getData();
     
     // Prepara array per i 6 punti
     const dataPoints = [];
@@ -32,34 +35,22 @@ const LineChartItems = ({ items, period = '3m' }) => {
     
     // Calcola le date per i 6 punti
     for (let i = 0; i < 6; i++) {
-      const pointDate = new Date(now);
-      pointDate.setMonth(now.getMonth() - (monthsToShow - i * intervalMonths));
+      const pointDate = new Date();
+      pointDate.setMonth(pointDate.getMonth() - (6 - i));
       
       // Formatta etichetta come Mese abbreviato
       const months = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'];
       const monthLabel = months[pointDate.getMonth()];
       
       labelPoints.push(monthLabel);
-      
-      // Nella pratica qui filtreresti i tuoi dati reali.
-      // Per adesso generiamo dati casuali verosimili a titolo di esempio
-      if (items && items.length > 0) {
-        // Qui dovresti filtrare gli items nella data corretta e fare la somma
-        // Esempio pseudocodice:
-        // const filteredItems = items.filter(item => 
-        //   isSameMonth(new Date(item.inserted_at), pointDate));
-        // const total = filteredItems.reduce((sum, item) => 
-        //   sum + item.price * item.quantity, 0);
-        
-        // Per ora generiamo dati simulati
-        const baseValue = 200; // Valore base
-        const variation = Math.floor(Math.random() * 100) - 20; // Variazione casuale
-        dataPoints.push(baseValue + variation);
+
+      if (data && data.length > 0) {
+        const currentMonthStr = `${pointDate.getFullYear()}-${String(pointDate.getMonth() + 1).padStart(2, '0')}`;
+        const monthData = data.find(d => d.mese === currentMonthStr);
+        const total = monthData ? Number(monthData.totale) : 0;
+        dataPoints.push(Number(total.toFixed(2)));
       } else {
-        // Nessun dato reale, inseriamo dati di esempio
-        const baseValue = 200; // Valore base
-        const variation = Math.floor(Math.random() * 100) - 20; // Variazione casuale
-        dataPoints.push(baseValue + variation);
+        dataPoints.push(0);
       }
     }
     
@@ -67,7 +58,7 @@ const LineChartItems = ({ items, period = '3m' }) => {
       labels: labelPoints,
       datasets: [{ data: dataPoints }]
     });
-  }, [items, period]);
+  }, [startDate]);
   
   // Configurazione del grafico
   const chartConfig = {
@@ -90,18 +81,9 @@ const LineChartItems = ({ items, period = '3m' }) => {
     },
   };
   
-  const getPeriodTitle = () => {
-    switch(period) {
-      case '3m': return 'Ultimi 3 mesi';
-      case '6m': return 'Ultimi 6 mesi';
-      case '1y': return 'Ultimo anno';
-      default: return 'Ultimi 3 mesi';
-    }
-  };
-  
   return (
     <View style={styles.container}>
-      <Text style={styles.cardTitle}>{getPeriodTitle()}</Text>
+      <Text style={styles.cardTitle}>Ultimi 6 mesi</Text>
       
       {chartData.datasets[0].data.length > 0 ? (
         <LineChart

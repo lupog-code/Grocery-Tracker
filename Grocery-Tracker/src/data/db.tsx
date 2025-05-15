@@ -106,6 +106,32 @@ export const getItemsRecenti = async (time) => {
   }
 };
 
+// Ottieni items recenti acquistati
+export const getItemsRecentiAcquistati = async (time) => {
+  try {
+    const result = await db.getAllAsync(`SELECT * FROM items WHERE data_compera >= ? AND comprato = true;`, [time]);
+    return result;
+  } catch (error) {
+    console.error('Errore nel recupero degli item recenti acquistati', error);
+  }
+}
+
+// Costi mensili
+export const getCostiMensili = async () => {
+  try {
+    const result = await db.getAllAsync(`
+      SELECT strftime('%Y-%m', data_compera) as mese, SUM(price * quantity) as totale
+      FROM items
+      WHERE data_compera > date('now', '-6 months') AND comprato = true
+      GROUP BY mese
+      ORDER BY mese DESC;
+    `);
+    return result;
+  } catch (error) {
+    console.error('Errore nel recupero dei costi mensili', error);
+  }
+};
+
 // Rimuovi lista
 export const rimuoviLista = async (idLista) => {
   try {

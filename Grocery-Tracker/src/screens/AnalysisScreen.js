@@ -9,25 +9,24 @@ import { getItemsRecenti } from '../data/db';
 import StatisticsCard from '../components/Stats';
 
 const AnalysisScreen = () => {
-  const [currentPeriod, setCurrentPeriod] = useState("3 mesi");
-  const [items, setItems] = useState([]);
+  const [currentPeriod, setCurrentPeriod] = useState("3m");
 
-  const periods = ["1 mese", "3 mesi", "6 mesi", "1 anno"];
+  const periods = ["1m", "3m", "6m", "1y"];
 
   const getStartDate = (period) => {
     const now = new Date();
     const newDate = new Date(now);
     switch (period) {
-      case '1 mese':
+      case '1m':
         newDate.setMonth(now.getMonth() - 1);
         break;
-      case '3 mesi':
+      case '3m':
         newDate.setMonth(now.getMonth() - 3);
         break;
-      case '6 mesi':
+      case '6m':
         newDate.setMonth(now.getMonth() - 6);
         break;
-      case '1 anno':
+      case '1y':
         newDate.setFullYear(now.getFullYear() - 1);
         break;
     }
@@ -39,9 +38,6 @@ const AnalysisScreen = () => {
       try {
         const startDate = getStartDate(currentPeriod);
         console.log('Start date:', startDate);
-
-        const items = await getItemsRecenti(startDate);
-        setItems(items);
 
       } catch (error) {
         console.error('Error fetching items:', error);
@@ -75,7 +71,7 @@ const AnalysisScreen = () => {
           </View>
 
         <View style={styles.chartCard}>
-                <LineChartItems items={items} period={currentPeriod} />
+                <LineChartItems startDate={startDate} />
           </View>
 
           </ScrollView>
