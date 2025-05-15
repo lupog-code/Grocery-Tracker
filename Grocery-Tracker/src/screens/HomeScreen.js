@@ -74,8 +74,7 @@ const HomeScreen = () => {
             <Text style={commStyle.subTitle}>Recent Products</Text>
                
                 <FlatList
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
+                scrollEnabled={false}
                 data={products}
                 renderItem={({ item }) => (
                     <OldProduct name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera}/>

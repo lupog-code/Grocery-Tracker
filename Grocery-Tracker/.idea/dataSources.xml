@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="grocery" uuid="d85faa04-e279-4e3f-8dce-f396dc22264a">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$USER_HOME$/Library/Developer/CoreSimulator/Devices/8EBB5184-6C7D-465E-B969-47655D5715DC/data/Containers/Data/Application/2F76AD62-9A32-4526-B570-327DB6E14D4F/Documents/ExponentExperienceData/@anonymous/Grocery-Tracker-667746f9-c7a3-41ff-a7f3-c35a502bbfac/SQLite/grocery</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>
