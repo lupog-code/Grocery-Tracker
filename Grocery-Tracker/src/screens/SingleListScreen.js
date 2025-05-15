@@ -7,6 +7,7 @@ import { Button } from 'react-native';
 import { getItemsByListId ,getByName} from '../data/db';
 import { useState, useEffect } from 'react';
 import { SearchBar } from '../components/search';
+import { AddProductBtn } from '../components/btnsObj';
 
 const ListsScreen = ({navigation , route}) => {
     const listId = route.params.id; //Ricevo l'id della lista
@@ -70,10 +71,11 @@ const ListsScreen = ({navigation , route}) => {
             </View>
 
 
-
+            <ScrollView showsVerticalScrollIndicator={false}>
             <FlatList
             data={products}
             keyExtractor={(item) => item.id.toString()}
+            scrollEnabled={false}
             renderItem={({ item }) => (
                 //Se l'elemento è stato comprato, mostra OldProduct, altrimenti mostra Product
                  item.comprato ?
@@ -85,8 +87,9 @@ const ListsScreen = ({navigation , route}) => {
 
             </FlatList>
 
+            </ScrollView>
                 
-
+           <AddProductBtn setItems={setProducts} listID={listId} /> 
 
         </View>
     );

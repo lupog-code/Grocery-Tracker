@@ -4,15 +4,35 @@ import btnStyle from '../styles/btnStyle';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {Ionicons} from "@expo/vector-icons";
 import {Button} from 'react-native'
-import { inserisciLista } from '../data/db';
+import { inserisciLista , inserisciItem , getItemsByListId} from '../data/db';
 import { useEffect } from 'react';
 import { rimuoviItem } from '../data/db';
 
 
 
-export const PopUp_AddProduct = ({ visible, setVisible, items }) => {
+export const PopUp_AddProduct = ({ visible, setVisible, setItems , listID}) => {
 
-
+    const addProduct = async () => {
+        try {
+            // Inserisci il nuovo prodotto
+            await inserisciItem(name, quantity, price, category, listID);
+            
+            // Recupera la lista aggiornata dei prodotti
+            const data = await getItemsByListId(listID);
+            setItems(data);
+            
+            // Resetta i campi del form
+            setName('');
+            setQuantity('');
+            setPrice('');
+            setCategory('');
+            
+            // Chiudi il modal
+            setVisible(false);
+        } catch (error) {
+            console.error("Error adding product:", error);
+        }
+    };
 
 
 
@@ -21,7 +41,7 @@ export const PopUp_AddProduct = ({ visible, setVisible, items }) => {
     const [price,setPrice] = React.useState('');
     const [category,setCategory] = React.useState('');
     const [open, setOpen] = React.useState(false);
-    const [pickerItems, setItems] = React.useState([
+    const [pickerItems, setPickerItems] = React.useState([
         { label: 'Fruits', value: 'Fruits' },
         { label: 'Vegetables', value: 'Vegetables' },
         { label: 'Meat', value: 'Meat' },
@@ -61,7 +81,7 @@ export const PopUp_AddProduct = ({ visible, setVisible, items }) => {
                             items={pickerItems}
                             setOpen={setOpen}
                             setValue={setCategory}
-                            setItems={setItems}
+                            setItems={setPickerItems}
                             placeholder="Select a category..."
                             style={[
                                 btnStyle.pickerInput
@@ -75,7 +95,7 @@ export const PopUp_AddProduct = ({ visible, setVisible, items }) => {
                         />
                     </View>
 
-                    <Button title="Add Product" onPress={()=>{}}>Add Product</Button>
+                    <Button title="Add Product" onPress={()=>{addProduct()}}>Add Product</Button>
                 </View>
             </TouchableOpacity>
 
@@ -115,7 +135,7 @@ export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visi
     const [price,setPrice] = React.useState(pricein);
     const [category,setCategory] = React.useState(categoryin);
     const [open, setOpen] = React.useState(false);
-    const [pickerItems, setItems] = React.useState([
+    const [pickerItems, setPickerItems] = React.useState([
         { label: 'Fruits', value: 'Fruits' },
         { label: 'Vegetables', value: 'Vegetables' },
         { label: 'Meat', value: 'Meat' },
@@ -158,7 +178,7 @@ export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visi
                             items={pickerItems}
                             setOpen={setOpen}
                             setValue={setCategory}
-                            setItems={setItems}
+                            setItems={setPickerItems}
                             placeholder="Select a category..."
                             style={[
                                 btnStyle.pickerInput

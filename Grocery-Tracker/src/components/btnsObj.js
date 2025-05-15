@@ -21,13 +21,13 @@ export const AddListBtn = () => {
     );
 }
 
-export const AddProductBtn = () => {
+export const AddProductBtn = ({setItems,listID}) => {
     const [visible, setVisible] = useState(false);
 
     return (
         <>
             {/* Modal separato dal bottone */}
-            <PopUp_AddProduct visible={visible} setVisible={setVisible} items={null} />
+            <PopUp_AddProduct visible={visible} setVisible={setVisible} setItems={setItems} listID={listID}/>
 
             {/* Bottone */}
             <TouchableOpacity onPress={() => setVisible(true)}>
