@@ -12,7 +12,7 @@ function getRandomBlue() {
 }
 
 const getEmoji = ({ category }) => {
-    if (category === "Fruit") {
+    if (category === "Fruits") {
         return "🍎";
     } else if (category === "Vegetables") {
         return "🥬";

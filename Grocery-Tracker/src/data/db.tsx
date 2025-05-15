@@ -20,6 +20,8 @@ export const createTables = async () => {
         category TEXT NOT NULL,
         inserted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         list_id INTEGER,
+        comprato boolean DEFAULT false,
+        data_compera date DEFAULT null,
         FOREIGN KEY (list_id) REFERENCES lists(id),
         FOREIGN KEY (category) REFERENCES categories(name)
       );
@@ -203,5 +205,22 @@ export const getUltimeDueListe = async () => {
     return result;
   } catch (error) {
     console.error('Error fetching the last two lists:', error);
+  }
+};
+
+
+
+//Ottieni gli ultimi 10 item comprati 
+export const getUltimiDieciItemComprati = async () => {
+  try {
+    const result = await db.getAllAsync(`
+      SELECT * FROM items
+      WHERE comprato = true
+      ORDER BY data_compera DESC
+      LIMIT 10;
+    `);
+    return result;
+  } catch (error) {
+    console.error('Error fetching the last ten purchased items:', error);
   }
 };

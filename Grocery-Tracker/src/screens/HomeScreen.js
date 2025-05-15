@@ -7,10 +7,22 @@ import {AddListBtn} from "../components/btnsObj";
 import { getUltimeDueListe } from '../data/db';
 import { useState, useEffect } from 'react';
 import Fallback from '../components/fallback';
+import { getUltimiDieciItemComprati } from '../data/db';
 
 const HomeScreen = () => {
     const [lists, setLists] = useState([]);
-    
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const data = await getUltimiDieciItemComprati();
+                setProducts(data); //Inizializza le due liste 
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
+        };
+        fetchProducts();
+    }, [])
     
     useEffect(() => {
         const fetchLists = async () => {
@@ -60,8 +72,17 @@ const HomeScreen = () => {
                 />
 
             <Text style={commStyle.subTitle}>Recent Products</Text>
-                <Product name="Prodotto 1" quantity={3} price={2.3} category="Fruit" />
-                <OldProduct name="Prodotto 2" quantity={3} price={2.3} category="Vegetables" data="11/07/25" />
+               
+                <FlatList
+                horizontal={true}
+                data={products}
+                renderItem={({ item }) => (
+                    <OldProduct name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera}/>
+                )}
+                keyExtractor={(item) => item.id.toString()}
+                >
+
+                </FlatList>
 
                 <View style={{height: 400}}/>
 
