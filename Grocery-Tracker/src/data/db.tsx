@@ -1,7 +1,6 @@
 import * as SQLite from 'expo-sqlite';
 
-
-const db = SQLite.openDatabaseSync('grocery.db');
+const db = SQLite.openDatabaseSync('grocery');
 
 export const createTables = async () => {
   try {
@@ -157,7 +156,6 @@ export const modificaLista = async (idLista, nome) => {
   }
 };
 
-
 //Ottieni il numero di item per categoria 
 interface CategoryCount {
   category: string;
@@ -182,11 +180,7 @@ export const getNumeroItemPerCategoria = async () => {
   }
 };
 
-
-
-
-
-
+// Ottieni tutti gli item
 export const getAllItems = async () => {
   try {
     const result = await db.getAllAsync(`
