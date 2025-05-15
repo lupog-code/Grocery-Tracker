@@ -85,7 +85,7 @@ const HomeScreen = () => {
                 />
 
 
-                <View style={{height: 400}}/>
+                <View style={{height: 200}}/>
 
             </ScrollView>
 
