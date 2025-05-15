@@ -23,18 +23,9 @@ export default function App() {
   }, []);
 
   return (
-    <NavigationContainer>
-      <SafeAreaView style={styles.container}> 
-        <StatusBar style="auto" />
+      <NavigationContainer >
         <BottomNavigation />
-      </SafeAreaView>
-    </NavigationContainer>
+      </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-});
