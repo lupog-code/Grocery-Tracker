@@ -68,8 +68,8 @@ export const inserisciItem = async (nome, quantita, prezzo, categoria, idLista) 
 // Ottieni lista
 export const getListe = async () => {
   try {
-    const result = await db.execAsync(`SELECT * FROM lists;`);
-    return result[0].rows._array;
+    const result = await db.getAllAsync(`SELECT * FROM lists;`);
+    return result
   } catch (error) {
     console.error('Errore nel recupero delle liste', error);
   }
@@ -78,8 +78,8 @@ export const getListe = async () => {
 // Ottieni categorie
 export const getCategorie = async () => {
   try {
-    const result = await db.execAsync(`SELECT * FROM categories;`);
-    return result[0].rows._array;
+    const result = await db.getAllAsync(`SELECT * FROM categories;`);
+    return result
   } catch (error) {
     console.error('Errore nel recupero delle categorie', error);
   }
@@ -88,8 +88,8 @@ export const getCategorie = async () => {
 // Filtro categorie
 export const getFiltroCategorie = async (categoria) => {
   try {
-    const result = await db.runAsync(`SELECT * FROM items WHERE category LIKE ?;`, [`%${categoria}%`]);
-    return result[0].rows._array;
+    const result = await db.getAllAsync(`SELECT * FROM items WHERE category LIKE ?;`, [`%${categoria}%`]);
+    return result
   } catch (error) {
     console.error('Errore nel filtro per categorie', error);
   }
@@ -98,8 +98,8 @@ export const getFiltroCategorie = async (categoria) => {
 // Ottieni item recenti
 export const getItemsRecenti = async (time) => {
   try {
-    const result = await db.runAsync(`SELECT * FROM items WHERE inserted_at >= ?;`, [time]);
-    return result[0].rows._array;
+    const result = await db.getAllAsync(`SELECT * FROM items WHERE inserted_at >= ?;`, [time]);
+    return result;
   } catch (error) {
     console.error('Errore nel recupero degli item recenti', error);
   }
@@ -197,5 +197,3 @@ export const getAllItems = async () => {
     console.error('Error fetching all items:', error);
   }
 }
-
-

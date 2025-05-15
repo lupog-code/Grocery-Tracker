@@ -1,28 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, SafeAreaView , View } from 'react-native';
-import { createTables } from './src/data/db';
+
 import { use, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import BottomNavigation from './src/navigation/BottomNavigation';
-import { insertTestData } from './src/data/db';
-import { getAllItems } from './src/data/db';
+import { createTables } from './src/data/db';
 
 
 export default function App() {
-useEffect(() => {
-    const initializeDatabase = async () => {
+  //Crea le tabelle
+  useEffect(() => {
+    const createTablesAsync = async () => {
       try {
         await createTables();
-        console.log('Database initialized');
-        // Uncomment the next line to insert test data
-        // await insertTestData();
-       
+        console.log('Tabelle createTables createTablesAsync');
       } catch (error) {
-        console.error('Error initializing database:', error);
+        console.error('Error creating tables:', error);
       }
     };
 
-    initializeDatabase();
+    createTablesAsync();
   }, []);
 
   return (
