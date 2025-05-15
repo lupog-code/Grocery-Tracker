@@ -34,7 +34,7 @@ export const List = ({id , name}) => {
     const navigation = useNavigation();
     const backgroundColor = getRandomBlue();
     function goToDetailsOfList(id) {
-        navigation.navigate("SingleListScreen", { id });
+        navigation.navigate("SingleListScreen", { id , name });
     }
 
 
@@ -48,13 +48,14 @@ export const List = ({id , name}) => {
     );
 }
 
-export const Product = ({name, quantity, price, category}) => {
+export const Product = ({id, name, quantity, price, category}) => {
+   
     const [isEnabled, setIsEnabled] = useState(false);
     const [visible, setVisible] = useState(false);
 
     return(
         <>
-        <PopUp_editProduct namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
+        <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
 
         <View style={compStyle.ProductContainer}>
 
@@ -86,13 +87,13 @@ export const Product = ({name, quantity, price, category}) => {
     );
 }
 
-export const OldProduct = ({name, quantity, price, category, data}) => {
+export const OldProduct = ({id, name, quantity, price, category, data}) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const [visible, setVisible] = useState(false);
 
     return(
         <>
-            <PopUp_editProduct namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
+            <PopUp_editProduct id={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
             <View style={compStyle.ProductContainer}>
 
             <View style={compStyle.Cont20}>

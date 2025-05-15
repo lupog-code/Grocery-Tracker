@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 
 const ListsScreen = ({navigation , route}) => {
     const listId = route.params.id; //Ricevo l'id della lista
+    const listName = route.params.name; //Ricevo il nome della lista
     const [products, setProducts] = useState([]); //Inizializzo la lista dei prodotti
     useEffect(() => {
         const fetchProducts = async () => {
@@ -32,7 +33,7 @@ const ListsScreen = ({navigation , route}) => {
                 </TouchableOpacity>
 
                 <View style={{width:'43%'}}>
-                    <Text style={commStyle.homeTitle2} >Home Page</Text>
+                    <Text style={commStyle.homeTitle2} >{listName}</Text>
                 </View>
 
                 <View style={{width:'28%'}}/>
@@ -46,9 +47,9 @@ const ListsScreen = ({navigation , route}) => {
             renderItem={({ item }) => (
                 //Se l'elemento è stato comprato, mostra OldProduct, altrimenti mostra Product
                  item.comprato ?
-                <OldProduct name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera} />
+                <OldProduct id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera} />
                 :
-                <Product name={item.name} quantity={item.quantity} price={item.price} category={item.category} />
+                <Product id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} />
             )}
             >
 
