@@ -23,7 +23,6 @@ const HomeScreen = () => {
         };
         fetchProducts();
     }, [])
-    
     useEffect(() => {
         const fetchLists = async () => {
             try {
@@ -57,7 +56,7 @@ const HomeScreen = () => {
                 />
             </SafeAreaView>
 
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                
                 
             <Text style={commStyle.subTitle}>Recent Lists</Text>

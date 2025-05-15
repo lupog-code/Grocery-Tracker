@@ -11,7 +11,6 @@ const MainStackNavigator = () => {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="BottomNavigation" component={BottomNavigation} />
             <Stack.Screen name ="SingleListScreen" component={SingleListScreen} />
-            
         </Stack.Navigator>
     );
 }

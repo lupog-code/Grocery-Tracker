@@ -4,6 +4,7 @@ import compStyle from '../styles/componentStyle';
 import {Ionicons} from "@expo/vector-icons";
 import {PopUp_editProduct} from "./modalObj";
 import { useNavigation } from '@react-navigation/native';
+
 function getRandomBlue() {
     const hue = Math.floor(Math.random() * 30) + 210;
     const saturation = 50 + Math.random() * 20;
@@ -40,7 +41,7 @@ export const List = ({id , name}) => {
 
     return(
         <TouchableOpacity onPress={() => {goToDetailsOfList(id)}}>
-            <View style={[compStyle.listContainer, {backgroundColor: "blue"}]}>
+            <View style={[compStyle.listContainer, {backgroundColor: '#244B6E'}]}>
                 <Text style={compStyle.listTitle}>{name}</Text>
                 <Ionicons name="arrow-forward-outline" style={compStyle.arrow} />
             </View>
@@ -128,22 +129,17 @@ export const SmallOldProduct = ({id , name, quantity, price, category, data}) =>
     return(
         <>
             <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
+
             <View style={compStyle.SmallProductContainer}>
-
-                <View style={compStyle.Cont30}>
+                <TouchableOpacity onPress={() => setVisible(true)}>
+                <View style={{width: '100%'}}>
                     <Text style={compStyle.SmallCategoryEmoji}>{getEmoji({ category })}</Text>
-
-                    <TouchableOpacity onPress={() => setVisible(true)}>
-                        <Ionicons style={compStyle.SmallModifyProduct} name="pencil-outline" />
-                    </TouchableOpacity>
-                </View>
-
-                <View style={compStyle.Cont70}>
                     <Text style={compStyle.SmallProductTitle}>{quantity}x {name}</Text>
                     <Text style={compStyle.SmallPrice}>{price} $</Text>
                 </View>
-
+                </TouchableOpacity>
             </View>
+
         </>
     );
 }

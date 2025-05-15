@@ -1,11 +1,12 @@
 import React from 'react';
 import {View, Text, Image, Touchable, TouchableOpacity, ScrollView, SafeAreaView, FlatList} from 'react-native';
 import commStyle from '../styles/commonStyle';
-import {Ionicons} from "@expo/vector-icons";
 import {OldProduct , Product} from "../components/listObj";
 import { Button } from 'react-native';
 import { getItemsByListId } from '../data/db';
 import { useState, useEffect } from 'react';
+import {AddProductBtn} from "../components/btnsObj";
+
 
 const ListsScreen = ({navigation , route}) => {
     const listId = route.params.id; //Ricevo l'id della lista
@@ -46,10 +47,12 @@ const ListsScreen = ({navigation , route}) => {
             </View>
 
 
+            <ScrollView showsVerticalScrollIndicator={false}>
 
             <FlatList
             data={products}
             keyExtractor={(item) => item.id.toString()}
+            scrollEnabled={false}
             renderItem={({ item }) => (
                 //Se l'elemento è stato comprato, mostra OldProduct, altrimenti mostra Product
                  item.comprato ?
@@ -57,12 +60,11 @@ const ListsScreen = ({navigation , route}) => {
                 :
                 <Product onDelete={handleDelete} id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} />
             )}
-            >
+            />
 
-            </FlatList>
+            </ScrollView>
 
-                
-
+            <AddProductBtn/>
 
         </View>
     );
