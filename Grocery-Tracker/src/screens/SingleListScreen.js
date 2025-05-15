@@ -1,12 +1,27 @@
 import React from 'react';
-import {View, Text, Image, Touchable, TouchableOpacity, ScrollView, SafeAreaView} from 'react-native';
+import {View, Text, Image, Touchable, TouchableOpacity, ScrollView, SafeAreaView, FlatList} from 'react-native';
 import commStyle from '../styles/commonStyle';
 import {Ionicons} from "@expo/vector-icons";
-import {OldProduct, Product} from "../components/listObj";
+import {OldProduct , Product} from "../components/listObj";
 import { Button } from 'react-native';
+import { getItemsByListId } from '../data/db';
+import { useState, useEffect } from 'react';
 
+const ListsScreen = ({navigation , route}) => {
+    const listId = route.params.id; //Ricevo l'id della lista
+    const [products, setProducts] = useState([]); //Inizializzo la lista dei prodotti
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const data = await getItemsByListId(listId);
+                setProducts(data); //Inizializza la lista dei prodotti
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
+        };
+        fetchProducts();
+    }, [])
 
-const ListsScreen = ({navigation}) => {
     return (
         <View style={commStyle.body}>
 
@@ -25,15 +40,22 @@ const ListsScreen = ({navigation}) => {
 
 
 
-            <ScrollView>
-                <Product name="Prodotto 1" quantity={3} price={2.3} category="Fruit" />
-                <Product name="Prodotto 2" quantity={3} price={2.3} category="Vegetables" />
-                <Product name="Prodotto 1" quantity={3} price={2.3} category="Meat" />
-                <Product name="Prodotto 2" quantity={3} price={2.3} category="Dairy" />
+            <FlatList
+            data={products}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+                //Se l'elemento è stato comprato, mostra OldProduct, altrimenti mostra Product
+                 item.comprato ?
+                <OldProduct name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera} />
+                :
+                <Product name={item.name} quantity={item.quantity} price={item.price} category={item.category} />
+            )}
+            >
 
-                <View style={{height: 200}}/>
+            </FlatList>
+
                 
-            </ScrollView>
+
 
         </View>
     );

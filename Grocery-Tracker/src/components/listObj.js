@@ -105,7 +105,7 @@ export const OldProduct = ({name, quantity, price, category, data}) => {
 
             <View style={compStyle.Cont60}>
                 <Text style={compStyle.ProductTitle}>{name}</Text>
-                <Text style={compStyle.ProductSubTitle}>Quanity: {quantity}</Text>
+                <Text style={compStyle.ProductSubTitle}>Quantity: {quantity}</Text>
                 <Text style={compStyle.ProductSubTitle}>{category}</Text>
             </View>
 
