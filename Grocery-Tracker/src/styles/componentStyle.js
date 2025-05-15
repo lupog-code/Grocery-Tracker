@@ -98,7 +98,62 @@ const compStyle = StyleSheet.create({
         fontSize:15,
         alignItems:'center',
         marginRight:'auto',
-    }
+    },
+
+    SmallProductContainer:{
+        backgroundColor:'#274472',
+        height: 140,
+        width: '47%',
+        marginTop: 20,
+        borderRadius: 15,
+        paddingTop: 15,
+        paddingBottom: 15,
+        flexDirection:'row',
+    },
+
+    Cont30:{
+        flexDirection:'column',
+        width:'30%',
+        height:'100%',
+    },
+
+    Cont70:{
+        flexDirection:'column',
+        width:'70%',
+        height:'100%',
+    },
+
+    SmallCategoryEmoji:{
+        fontSize:40,
+        marginBottom:'auto',
+        marginLeft:'auto',
+        marginRight:'auto',
+    },
+
+    SmallModifyProduct:{
+        color:'white',
+        fontSize: 22,
+        marginLeft:'auto',
+        marginRight:'auto',
+    },
+
+    SmallPrice:{
+        color:'white',
+        marginTop: "auto",
+        fontSize: 21,
+        fontWeight: 500,
+        alignItems:'center',
+        marginRight:'auto',
+    },
+
+    SmallProductTitle:{
+        marginTop: 5,
+        marginLeft:10,
+        marginBottom: 5,
+        fontSize: 22,
+        fontWeight: 500,
+        color:'white',
+    },
 });
 
 export default compStyle;

@@ -34,7 +34,7 @@ export const List = ({id , name}) => {
     const navigation = useNavigation();
     const backgroundColor = getRandomBlue();
     function goToDetailsOfList(id) {
-        navigation.navigate("SingleListScreen", { id });
+        navigation.navigate("SingleListScreen", { id , name });
     }
 
 
@@ -48,13 +48,14 @@ export const List = ({id , name}) => {
     );
 }
 
-export const Product = ({name, quantity, price, category}) => {
+export const Product = ({id, name, quantity, price, category}) => {
+   
     const [isEnabled, setIsEnabled] = useState(false);
     const [visible, setVisible] = useState(false);
 
     return(
         <>
-        <PopUp_editProduct namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
+        <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
 
         <View style={compStyle.ProductContainer}>
 
@@ -86,34 +87,64 @@ export const Product = ({name, quantity, price, category}) => {
     );
 }
 
-export const OldProduct = ({name, quantity, price, category, data}) => {
+export const OldProduct = ({id, name, quantity, price, category, data}) => {
+    const [isEnabled, setIsEnabled] = useState(false);
+    const [visible, setVisible] = useState(false);
+
+    return(
+        <>
+            <PopUp_editProduct id={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
+            <View style={compStyle.ProductContainer}>
+
+                <View style={compStyle.Cont20}>
+                    <Text style={compStyle.categoryEmoji}>{getEmoji({ category })}</Text>
+
+                    <TouchableOpacity onPress={() => setVisible(true)}>
+                        <Ionicons style={compStyle.modifyProduct} name="pencil-outline" />
+                    </TouchableOpacity>
+                </View>
+
+
+            <View style={compStyle.Cont60}>
+                <Text style={compStyle.ProductTitle}>{name}</Text>
+                <Text style={compStyle.ProductSubTitle}>Quantity: {quantity}</Text>
+                <Text style={compStyle.ProductSubTitle}>{category}</Text>
+            </View>
+
+
+                <View style={compStyle.Cont20}>
+                    <Text style={compStyle.data}>{data}</Text>
+                    <Text style={compStyle.price}>{price} $</Text>
+                </View>
+            </View>
+        </>
+    );
+}
+
+export const SmallOldProduct = ({name, quantity, price, category, data}) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const [visible, setVisible] = useState(false);
 
     return(
         <>
             <PopUp_editProduct namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
-            <View style={compStyle.ProductContainer}>
+            <View style={compStyle.SmallProductContainer}>
 
-            <View style={compStyle.Cont20}>
-                <Text style={compStyle.categoryEmoji}>{getEmoji({ category })}</Text>
+                <View style={compStyle.Cont30}>
+                    <Text style={compStyle.SmallCategoryEmoji}>{getEmoji({ category })}</Text>
 
-                <TouchableOpacity onPress={() => setVisible(true)}>
-                    <Ionicons style={compStyle.modifyProduct} name="pencil-outline" />
-                </TouchableOpacity>
+                    <TouchableOpacity onPress={() => setVisible(true)}>
+                        <Ionicons style={compStyle.SmallModifyProduct} name="pencil-outline" />
+                    </TouchableOpacity>
+                </View>
+
+                <View style={compStyle.Cont70}>
+                    <Text style={compStyle.SmallProductTitle}>{quantity}x {name}</Text>
+                    <Text style={compStyle.SmallPrice}>{price} $</Text>
+                </View>
+
             </View>
-
-            <View style={compStyle.Cont60}>
-                <Text style={compStyle.ProductTitle}>{name}</Text>
-                <Text style={compStyle.ProductSubTitle}>Quanity: {quantity}</Text>
-                <Text style={compStyle.ProductSubTitle}>{category}</Text>
-            </View>
-
-            <View style={compStyle.Cont20}>
-                <Text style={compStyle.data}>{data}</Text>
-                <Text style={compStyle.price}>{price} $</Text>
-            </View>
-        </View>
         </>
     );
 }
+

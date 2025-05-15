@@ -224,3 +224,18 @@ export const getUltimiDieciItemComprati = async () => {
     console.error('Error fetching the last ten purchased items:', error);
   }
 };
+
+
+
+//Ottieni gli item di una determinata lista 
+export const getItemsByListId = async (listId) => {
+  try {
+    const result = await db.getAllAsync(`
+      SELECT * FROM items
+      WHERE list_id = ?;
+    `, [listId]);
+    return result;
+  } catch (error) {
+    console.error('Error fetching items by list ID:', error);
+  }
+};

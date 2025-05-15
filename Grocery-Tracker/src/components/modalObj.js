@@ -88,7 +88,18 @@ export const PopUp_AddProduct = ({ visible, setVisible, items }) => {
 
 
 
-export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visible, setVisible, items }) => {
+export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visible, setVisible, items , idProduct }) => {
+    
+//Functions
+function deleteProduct(id){
+    console.log("Deleting product with id: " + id);
+
+}
+
+
+    
+    
+    //States
     const [name,setName] = React.useState(namein);
     const [quantity,setQuantity] = React.useState(quantityin);
     const [price,setPrice] = React.useState(pricein);
@@ -104,6 +115,9 @@ export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visi
         { label: 'Other', value: 'Other' },
     ]);
 
+
+
+//ComponentDidMount
 
     return (
         <Modal
@@ -148,10 +162,10 @@ export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visi
                         />
                     </View>
 
-                    <TouchableOpacity>
-                        <Text style={btnStyle.addBtn}>Add Product</Text>
+                    <TouchableOpacity >
+                        <Text style={btnStyle.addBtn}>Save Edits</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{deleteProduct(idProduct)}}>
                         <Text style={btnStyle.deleteBtn}>Delete</Text>
                     </TouchableOpacity>
 
