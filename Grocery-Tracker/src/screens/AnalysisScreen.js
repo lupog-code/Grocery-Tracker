@@ -41,7 +41,6 @@ const AnalysisScreen = () => {
         console.log('Start date:', startDate);
 
         const items = await getItemsRecenti(startDate);
-        console.log('Fetched items:', items);
         setItems(items);
 
       } catch (error) {
@@ -68,11 +67,11 @@ const AnalysisScreen = () => {
           </View>
 
           <View>
-            <StatisticsCard startDate={startDate}></StatisticsCard>
+            <StatisticsCard startDate={startDate}/>
           </View>
 
           <View style={styles.chartCard}>
-                <PieChartItems />
+                <PieChartItems startDate={startDate}/>
           </View>
 
         <View style={styles.chartCard}>

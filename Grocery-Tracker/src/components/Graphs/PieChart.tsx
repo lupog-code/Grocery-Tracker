@@ -2,28 +2,28 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { getNumeroItemPerCategoria } from "../../data/db";
+import { getItemsCompratiPerDataECategoria } from "../../data/db";
 import { PieChart } from "react-native-chart-kit";
 
-const PieChartItems = ()=>{
+const PieChartItems = ({ startDate })=>{
 
-    function formatData(data)
-{
-    const result = data.map(item => ({
-      name: item.category,
-      population: item.count,
-      color: `#${Math.floor(Math.random() * 0xCFFFFF + 0x300000).toString(16)}`,
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 15
-    }));
-    return result;
-}
+    function formatData(data){
+      const result = data.map(item => ({
+        name: item.category,
+        population: item.count,
+        color: `#${Math.floor(Math.random() * 0xCFFFFF + 0x300000).toString(16)}`,
+        legendFontColor: '#7F7F7F',
+        legendFontSize: 15
+      }));
+      return result;
+  }
 
 const [chartData, setChartData] = useState([])
 useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getNumeroItemPerCategoria();
+        const data = await getItemsCompratiPerDataECategoria(startDate);
+        console.log('Data fetched for pie chart:', data);
         const formattedData = formatData(data); // Formatta i dati per il grafico a torta
         setChartData(formattedData);
       } catch (error) {
@@ -31,7 +31,7 @@ useEffect(() => {
       }
     };
     fetchData();
-}, []);
+}, [startDate]);
 
 
 

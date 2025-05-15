@@ -179,6 +179,23 @@ export const getNumeroItemPerCategoria = async () => {
   }
 };
 
+// Ottieni gli item comprati per data e categoria
+export  const getItemsCompratiPerDataECategoria = async (startDate: string) => {
+  try {
+    const result = await db.getAllAsync<CategoryCount>(`
+      SELECT category, COUNT(*) as count
+      FROM items
+      WHERE data_compera > ? AND comprato = true
+      GROUP BY category;
+    `, [startDate]);
+    console.log('Items comprati per data e categoria:', result);
+    return result;
+  } catch (error) {
+    console.error('Error fetching purchased items by date and category:', error);
+    return [];
+  }
+}
+
 // Ottieni tutti gli item
 export const getAllItems = async () => {
   try {
@@ -247,7 +264,6 @@ interface TotalSpendingResult {
 
 export const getSpesaTotale = async (startDate: string) => {
   try {
-    console.log('Start date:', startDate);
     const result = await db.getAllAsync<TotalSpendingResult>(`
       SELECT SUM(price * quantity) as total_spending
       FROM items
@@ -266,7 +282,6 @@ interface AverageResult {
 
 export const getMediaGiornaliera = async (startDate: string) => {
   try {
-    console.log('Start date:', startDate);
     const result = await db.getAllAsync<AverageResult>(`
       SELECT AVG(daily_total) as daily_average
       FROM (
@@ -282,3 +297,4 @@ export const getMediaGiornaliera = async (startDate: string) => {
     return null;
   }
 }
+
