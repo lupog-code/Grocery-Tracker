@@ -1,18 +1,19 @@
 import React from 'react';
 import {View, Text, Image, Touchable, TouchableOpacity, ScrollView, SafeAreaView, FlatList} from 'react-native';
 import commStyle from '../styles/commonStyle';
+import {Ionicons} from "@expo/vector-icons";
 import {OldProduct , Product} from "../components/listObj";
 import { Button } from 'react-native';
-import { getItemsByListId } from '../data/db';
+import { getItemsByListId ,getByName} from '../data/db';
 import { useState, useEffect } from 'react';
-import {AddProductBtn} from "../components/btnsObj";
-
+import { SearchBar } from '../components/search';
 
 const ListsScreen = ({navigation , route}) => {
     const listId = route.params.id; //Ricevo l'id della lista
     const listName = route.params.name; //Ricevo il nome della lista
     const [products, setProducts] = useState([]); //Inizializzo la lista dei prodotti
-    
+   
+
     const fetchProducts = async () => {
         try {
             const data = await getItemsByListId(listId);
@@ -30,9 +31,31 @@ const ListsScreen = ({navigation , route}) => {
         fetchProducts(); // Refresh the list after deletion
     };
 
+    const [visualizableProducts, setVisualizableProducts] = useState(products); //Inizializzo la lista dei prodotti visualizzabili
+    const [searchText, setSearchText] = useState(''); 
+
+    useEffect(() => {
+        if (searchText.trim() === '') {
+            // Se la search bar è vuota, mostra tutti i prodotti
+            setVisualizableProducts(products);
+        } else {
+            // Altrimenti filtra
+            const filteredProducts = products.filter(item =>
+                item.name.toLowerCase().includes(searchText.toLowerCase())
+            );
+
+            //DOVRESTI FILTRARE ANCHE PER CATEGORIA.
+            //E PER PREZZO
+            setVisualizableProducts(filteredProducts);
+        }
+    }, [searchText, products]);
+    
+    
+    
     return (
         <View style={commStyle.body}>
-
+            {/*<SearchBar searchText = {searchText} setSearchText={setSearchText}> </SearchBar>
+            come data nella flatList ci va visualizableProducts*/}
             <View style={commStyle.flexView2}>
 
                 <TouchableOpacity style={{width:'28%'}} onPress={() => navigation.goBack()}>
@@ -47,12 +70,10 @@ const ListsScreen = ({navigation , route}) => {
             </View>
 
 
-            <ScrollView showsVerticalScrollIndicator={false}>
 
             <FlatList
             data={products}
             keyExtractor={(item) => item.id.toString()}
-            scrollEnabled={false}
             renderItem={({ item }) => (
                 //Se l'elemento è stato comprato, mostra OldProduct, altrimenti mostra Product
                  item.comprato ?
@@ -60,11 +81,12 @@ const ListsScreen = ({navigation , route}) => {
                 :
                 <Product onDelete={handleDelete} id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} />
             )}
-            />
+            >
 
-            </ScrollView>
+            </FlatList>
 
-            <AddProductBtn/>
+                
+
 
         </View>
     );
