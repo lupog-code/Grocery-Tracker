@@ -15,50 +15,42 @@ const LineChartItems = ({startDate}) => {
   const screenWidth = Dimensions.get('window').width - 32; // Larghezza dello schermo meno padding
   
   useEffect(() => {
-    // Generiamo i dati di esempio per il grafico
     const getData = async () => {
-        try {
-            const data = await getCostiMensili();
-            console.log('Items fetched for line chart:', data);
-            setData(data);
-        } catch (error) {
-            console.error('Error fetching items:', error);
-            return [];
-        }
+      try {
+        const fetchedData = await getCostiMensili();
+        setData(fetchedData);
+      } catch (error) {
+        console.error('Error fetching items:', error);
+      }
     };
-
     getData();
-    
-    // Prepara array per i 6 punti
+  }, []);
+
+  useEffect(() => {
+    if (!data || data.length === 0) return;
+
     const dataPoints = [];
     const labelPoints = [];
-    
-    // Calcola le date per i 6 punti
+
     for (let i = 0; i < 6; i++) {
       const pointDate = new Date();
       pointDate.setMonth(pointDate.getMonth() - (6 - i));
-      
-      // Formatta etichetta come Mese abbreviato
+
       const months = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'];
       const monthLabel = months[pointDate.getMonth()];
-      
       labelPoints.push(monthLabel);
 
-      if (data && data.length > 0) {
-        const currentMonthStr = `${pointDate.getFullYear()}-${String(pointDate.getMonth() + 1).padStart(2, '0')}`;
-        const monthData = data.find(d => d.mese === currentMonthStr);
-        const total = monthData ? Number(monthData.totale) : 0;
-        dataPoints.push(Number(total.toFixed(2)));
-      } else {
-        dataPoints.push(0);
-      }
+      const currentMonthStr = `${pointDate.getFullYear()}-${String(pointDate.getMonth() + 1).padStart(2, '0')}`;
+      const monthData = data.find(d => d.mese === currentMonthStr);
+      const total = monthData ? Number(monthData.totale) : 0;
+      dataPoints.push(Number(total.toFixed(2)));
     }
-    
+
     setChartData({
       labels: labelPoints,
       datasets: [{ data: dataPoints }]
     });
-  }, [startDate]);
+  }, [data, startDate]);
   
   // Configurazione del grafico
   const chartConfig = {
