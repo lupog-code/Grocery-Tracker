@@ -5,7 +5,6 @@ const commStyle = StyleSheet.create({
     body:{
         flex: 1,
         backgroundColor:'#5885AF',
-        minHeight: 1000,
         paddingTop: 70,
         paddingLeft: 25,
         paddingRight: 25,

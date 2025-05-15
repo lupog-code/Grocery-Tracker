@@ -17,7 +17,7 @@ const btnStyle = StyleSheet.create({
         shadowRadius: 4,
 
         position: 'absolute',
-        marginTop: -230,
+        top: -70,
         right: 5,
     },
 
