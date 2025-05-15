@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "grocery",
-    "slug": "grocery",
+    "name": "Grocery-Tracker",
+    "slug": "Grocery-Tracker",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

@@ -21,7 +21,7 @@ export const createTables = async () => {
         inserted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         list_id INTEGER,
         comprato boolean DEFAULT false,
-        data_compera date DEFAULT null,
+        data_compera TIMESTAMP DEFAULT null,
         FOREIGN KEY (list_id) REFERENCES lists(id),
         FOREIGN KEY (category) REFERENCES categories(name)
       );

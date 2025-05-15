@@ -75,6 +75,7 @@ const HomeScreen = () => {
                
                 <FlatList
                 horizontal={true}
+                showsHorizontalScrollIndicator={false}
                 data={products}
                 renderItem={({ item }) => (
                     <OldProduct name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera}/>
