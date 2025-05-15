@@ -1,21 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { getSpesaTotale, getMediaGiornaliera } from '../data/db';
 
-const StatisticsCard = ({ totalSpending, dailyAverage }) => {
+const StatisticsCard = ({ startDate }) => {
+  const [totalSpending, setTotalSpending] = useState(0);
+  const [dailyAverage, setDailyAverage] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const total = await getSpesaTotale(startDate);
+      const average = await getMediaGiornaliera(startDate);
+      setTotalSpending(total);
+      setDailyAverage(average);
+    };
+    fetchData();
+  }, [startDate]);
+
   return (
     <View style={styles.card}>
       <Text style={styles.cardTitle}>Statistiche spesa</Text>
       
       <View style={styles.statsContainer}>
         <View style={styles.statItem}>
-          <Text style={styles.statValue}>€ {totalSpending}</Text>
+          <Text style={styles.statValue}>€ {totalSpending.toFixed(2)}</Text>
           <Text style={styles.statLabel}>Spesa totale</Text>
         </View>
         
         <View style={styles.divider} />
         
         <View style={styles.statItem}>
-          <Text style={styles.statValue}>€ {dailyAverage}</Text>
+          <Text style={styles.statValue}>€ {dailyAverage.toFixed(2)}</Text>
           <Text style={styles.statLabel}>Media giornaliera</Text>
         </View>
       </View>

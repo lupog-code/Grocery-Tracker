@@ -5,14 +5,12 @@ import PieChartItems from '../components/Graphs/PieChart';
 import LineChartItems from '../components/Graphs/LineChart';
 import { Text, StyleSheet } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
-import { getItemsRecenti, getSpesaTotale, getMediaGiornaliera } from '../data/db';
+import { getItemsRecenti } from '../data/db';
 import StatisticsCard from '../components/Stats';
 
 const AnalysisScreen = () => {
   const [currentPeriod, setCurrentPeriod] = useState("3 mesi");
   const [items, setItems] = useState([]);
-  const [spesaTotale, setSpesaTotale] = useState(0);
-  const [mediaGiornaliera, setMediaGiornaliera] = useState(0);
 
   const periods = ["1 mese", "3 mesi", "6 mesi", "1 anno"];
 
@@ -46,13 +44,6 @@ const AnalysisScreen = () => {
         console.log('Fetched items:', items);
         setItems(items);
 
-        const spesaTotale = await getSpesaTotale(startDate);
-        console.log('Total spending:', spesaTotale);
-        setSpesaTotale(spesaTotale.toFixed(2));
-
-        const mediaGiornaliera = await getMediaGiornaliera(startDate);
-        console.log('Daily average:', mediaGiornaliera);
-        setMediaGiornaliera(mediaGiornaliera.toFixed(2));
       } catch (error) {
         console.error('Error fetching items:', error);
       }
@@ -60,6 +51,8 @@ const AnalysisScreen = () => {
 
     fetchItems();
   }, [currentPeriod]);
+
+  const startDate = getStartDate(currentPeriod);
 
     return (
         <SafeAreaView>
@@ -75,7 +68,7 @@ const AnalysisScreen = () => {
           </View>
 
           <View>
-            <StatisticsCard totalSpending={spesaTotale} dailyAverage={mediaGiornaliera}></StatisticsCard>
+            <StatisticsCard startDate={startDate}></StatisticsCard>
           </View>
 
           <View style={styles.chartCard}>
