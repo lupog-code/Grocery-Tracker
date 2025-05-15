@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import BottomNavigation from './src/navigation/BottomNavigation';
 import { createTables } from './src/data/db';
+import MainStackNavigator from './src/navigation/MainStackNavigator';
+
 
 export default function App() {
   const [dbReady, setDbReady] = useState(false);
@@ -31,7 +33,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <BottomNavigation />
+     <MainStackNavigator />
     </NavigationContainer>
   );
 }
