@@ -1,11 +1,13 @@
 import React from 'react';
-import {View, Text, Image, Touchable, TouchableOpacity, SafeAreaView, FlatList} from 'react-native';
+import {View, Text, Image, Touchable, TouchableOpacity, SafeAreaView, FlatList, ScrollView} from 'react-native';
 import commStyle from '../styles/commonStyle';
 import {Ionicons} from "@expo/vector-icons";
 import {List, Product, OldProduct} from "../components/listObj";
 import {AddListBtn} from "../components/btnsObj";
 import { getUltimeDueListe } from '../data/db';
 import { useState, useEffect } from 'react';
+import Fallback from '../components/fallback';
+
 const HomeScreen = () => {
     const [lists, setLists] = useState([]);
     
@@ -43,9 +45,13 @@ const HomeScreen = () => {
                 />
             </SafeAreaView>
 
-            <View>
+            <ScrollView>
+               
+                
             <Text style={commStyle.subTitle}>Recent Lists</Text>
+             {lists.length === 0 && <Fallback />}
                 <FlatList
+                scrollEnabled={false}
                 data={lists}
                 renderItem={({ item }) => (
                     <List id={item.id} name={item.name} />
@@ -59,7 +65,7 @@ const HomeScreen = () => {
 
                 <View style={{height: 400}}/>
 
-            </View>
+            </ScrollView>
 
             <AddListBtn />
 
