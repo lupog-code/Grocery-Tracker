@@ -1,11 +1,28 @@
 import React from 'react';
-import {View, Text, Image, Touchable, TouchableOpacity, ScrollView, SafeAreaView} from 'react-native';
+import {View, Text, Image, Touchable, TouchableOpacity, SafeAreaView, FlatList} from 'react-native';
 import commStyle from '../styles/commonStyle';
 import {Ionicons} from "@expo/vector-icons";
 import {List, Product, OldProduct} from "../components/listObj";
 import {AddListBtn} from "../components/btnsObj";
-
+import { getUltimeDueListe } from '../data/db';
+import { useState, useEffect } from 'react';
 const HomeScreen = () => {
+    const [lists, setLists] = useState([]);
+    
+    
+    useEffect(() => {
+        const fetchLists = async () => {
+            try {
+                const data = await getUltimeDueListe();
+                setLists(data); //Inizializza le due liste 
+            } catch (error) {
+                console.error("Error fetching lists:", error);
+            }
+        };
+        fetchLists();
+    })
+
+
     return (
         <View style={commStyle.body}>
 
@@ -26,11 +43,15 @@ const HomeScreen = () => {
                 />
             </SafeAreaView>
 
-            <ScrollView>
+            <View>
             <Text style={commStyle.subTitle}>Recent Lists</Text>
-                <List name="Nome lista inserita 1" />
-                <List name="Nome lista inserita 2" />
-
+                <FlatList
+                data={lists}
+                renderItem={({ item }) => (
+                    <List id={item.id} name={item.name} />
+                )}
+                keyExtractor={(item) => item.id.toString()}
+                />
 
             <Text style={commStyle.subTitle}>Recent Products</Text>
                 <Product name="Prodotto 1" quantity={3} price={2.3} category="Fruit" />
@@ -38,7 +59,7 @@ const HomeScreen = () => {
 
                 <View style={{height: 400}}/>
 
-            </ScrollView>
+            </View>
 
             <AddListBtn />
 

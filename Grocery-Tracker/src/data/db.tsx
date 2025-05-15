@@ -188,3 +188,20 @@ export const getAllItems = async () => {
     console.error('Error fetching all items:', error);
   }
 }
+
+
+
+
+// Ottieni le ultime due liste create 
+export const getUltimeDueListe = async () => {
+  try {
+    const result = await db.getAllAsync(`
+      SELECT * FROM lists
+      ORDER BY id DESC
+      LIMIT 2;
+    `);
+    return result;
+  } catch (error) {
+    console.error('Error fetching the last two lists:', error);
+  }
+};

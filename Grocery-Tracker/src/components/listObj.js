@@ -30,12 +30,12 @@ const getEmoji = ({ category }) => {
     return "❓"; // fallback se nessuna corrispondenza
 };
 
-export const List = ({name}) => {
+export const List = ({id , name}) => {
     const backgroundColor = getRandomBlue();
 
     return(
         <TouchableOpacity>
-            <View style={[compStyle.listContainer, {backgroundColor: backgroundColor}]}>
+            <View style={[compStyle.listContainer, {backgroundColor: "blue"}]}>
                 <Text style={compStyle.listTitle}>{name}</Text>
                 <Ionicons name="arrow-forward-outline" style={compStyle.arrow} />
             </View>
