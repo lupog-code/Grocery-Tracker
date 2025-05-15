@@ -3,14 +3,16 @@ import {View, Text, Image, Touchable, TouchableOpacity, ScrollView, SafeAreaView
 import commStyle from '../styles/commonStyle';
 import {Ionicons} from "@expo/vector-icons";
 import {OldProduct, Product} from "../components/listObj";
+import { Button } from 'react-native';
 
-const ListsScreen = () => {
+
+const ListsScreen = ({navigation}) => {
     return (
         <View style={commStyle.body}>
 
             <View style={commStyle.flexView2}>
 
-                <TouchableOpacity style={{width:'28%'}}>
+                <TouchableOpacity style={{width:'28%'}} onPress={() => navigation.goBack()}>
                     <Text style={commStyle.gobackText}>Home</Text>
                 </TouchableOpacity>
 
@@ -30,7 +32,9 @@ const ListsScreen = () => {
                 <Product name="Prodotto 2" quantity={3} price={2.3} category="Dairy" />
 
                 <View style={{height: 200}}/>
+                
             </ScrollView>
+
         </View>
     );
 }

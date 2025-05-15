@@ -3,7 +3,7 @@ import {View, Text, Image, Switch, TouchableOpacity} from 'react-native';
 import compStyle from '../styles/componentStyle';
 import {Ionicons} from "@expo/vector-icons";
 import {PopUp_editProduct} from "./modalObj";
-
+import { useNavigation } from '@react-navigation/native';
 function getRandomBlue() {
     const hue = Math.floor(Math.random() * 30) + 210;
     const saturation = 50 + Math.random() * 20;
@@ -31,10 +31,15 @@ const getEmoji = ({ category }) => {
 };
 
 export const List = ({id , name}) => {
+    const navigation = useNavigation();
     const backgroundColor = getRandomBlue();
+    function goToDetailsOfList(id) {
+        navigation.navigate("SingleListScreen", { id });
+    }
+
 
     return(
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {goToDetailsOfList(id)}}>
             <View style={[compStyle.listContainer, {backgroundColor: "blue"}]}>
                 <Text style={compStyle.listTitle}>{name}</Text>
                 <Ionicons name="arrow-forward-outline" style={compStyle.arrow} />
