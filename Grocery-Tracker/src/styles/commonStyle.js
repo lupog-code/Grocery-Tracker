@@ -101,7 +101,8 @@ const commStyle = StyleSheet.create({
         marginBottom:'auto',
         fontSize:20,
         fontWeight:500,
-    }
+    },
+
 
 });
 

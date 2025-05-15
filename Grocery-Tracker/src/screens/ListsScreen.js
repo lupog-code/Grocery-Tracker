@@ -1,11 +1,28 @@
-import React from 'react';
-import {View, Text, Image, Touchable, TouchableOpacity, ScrollView, SafeAreaView} from 'react-native';
+import React, { useEffect } from 'react';
+import {View, Text, Image, Touchable, TouchableOpacity, ScrollView, SafeAreaView, FlatList} from 'react-native';
 import commStyle from '../styles/commonStyle';
 import {Ionicons} from "@expo/vector-icons";
 import {List} from "../components/listObj";
 import {AddListBtn} from "../components/btnsObj";
+import { getListe } from '../data/db';
 
 const ListsScreen = () => {
+    const [lists, setLists] = useState([]);
+
+    useEffect(() => {
+        const fetchLists = async () => {
+            try {
+                const data = await getListe();
+                console.log("Fetched lists:", data);
+                setLists(data); 
+            } catch (error) {
+                console.error("Error fetching lists:", error);
+            }
+        };
+        fetchLists();
+    }
+    , [])
+
     return (
         <View style={commStyle.body}>
 
@@ -22,15 +39,11 @@ const ListsScreen = () => {
                 <View style={{width:'28%'}}/>
             </View>
 
-            <ScrollView>
-                <List name="Nome lista inserita 1" />
-                <List name="Nome lista inserita 2" />
-                <List name="Nome lista inserita 3" />
-                <List name="Nome lista inserita 4" />
-
-                <View style={{height: 200}}/>
-
-            </ScrollView>
+                <FlatList
+                    data={lists}
+                    renderItem={({ item }) => <List id={item.id} name={item.name} />}
+                    keyExtractor={(item) => item.id.toString()}
+                    showsVerticalScrollIndicator={false}/>
 
             <AddListBtn/>
         </View>

@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Text, Image, Touchable, TouchableOpacity, SafeAreaView, FlatList, ScrollView} from 'react-native';
+import {View, Text, Image, TouchableOpacity, SafeAreaView, FlatList, ScrollView} from 'react-native';
 import commStyle from '../styles/commonStyle';
 import {Ionicons} from "@expo/vector-icons";
-import {List, Product, OldProduct} from "../components/listObj";
+import {List, Product, OldProduct, SmallOldProduct} from "../components/listObj";
 import {AddListBtn} from "../components/btnsObj";
 import { getUltimeDueListe } from '../data/db';
 import { useState, useEffect } from 'react';
@@ -72,18 +72,19 @@ const HomeScreen = () => {
                 />
 
             <Text style={commStyle.subTitle}>Recent Products</Text>
-               
-                <FlatList
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                data={products}
-                renderItem={({ item }) => (
-                    <OldProduct id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera}/>
-                )}
-                keyExtractor={(item) => item.id.toString()}
-                >
 
-                </FlatList>
+
+                    <FlatList
+                    scrollEnabled={false}
+                    data={products}
+                    numColumns={2}
+                    columnWrapperStyle={{ justifyContent: 'space-between', marginBottom: 10 }}
+                    renderItem={({ item }) => (
+                        <SmallOldProduct name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera}/>
+                    )}
+                    keyExtractor={(item) => item.id.toString()}
+                />
+
 
                 <View style={{height: 400}}/>
 
