@@ -3,8 +3,19 @@ import {View, Text, TextInput, Modal, TouchableOpacity} from 'react-native';
 import btnStyle from '../styles/btnStyle';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {Ionicons} from "@expo/vector-icons";
+import {Button} from 'react-native'
+import { inserisciLista } from '../data/db';
+import { useEffect } from 'react';
+
+
+
 
 export const PopUp_AddProduct = ({ visible, setVisible, items }) => {
+
+
+
+
+
     const [name,setName] = React.useState('');
     const [quantity,setQuantity] = React.useState();
     const [price,setPrice] = React.useState('');
@@ -64,13 +75,18 @@ export const PopUp_AddProduct = ({ visible, setVisible, items }) => {
                         />
                     </View>
 
-                    <Text style={btnStyle.addBtn}>Add Product</Text>
+                    <Button title="Add Product" onPress={()=>{}}>Add Product</Button>
                 </View>
             </TouchableOpacity>
 
         </Modal>
     );
 }
+
+
+
+
+
 
 export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visible, setVisible, items }) => {
     const [name,setName] = React.useState(namein);
@@ -147,7 +163,17 @@ export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visi
 }
 
 export const PopUp_AddList = ({ visible, setVisible, items }) => {
-    const [name,setName] = React.useState('');
+    
+   const inserisciNuovaLista = async () => {
+    try {
+        await inserisciLista(name);
+        setVisible(false); // magari nascondi il popup dopo l'aggiunta
+    } catch (error) {
+        console.error("Error adding list:", error);
+    }
+};
+    
+    const [name,setName] = useState('');
 
 
     return (
@@ -171,7 +197,7 @@ export const PopUp_AddList = ({ visible, setVisible, items }) => {
                     <View style={{marginTop: 30}}/>
                     <TextInput style={btnStyle.textInput} placeholder={"Name"} onChangeText={(val)=>{setName(val)}} />
 
-                    <Text style={btnStyle.addBtn}>Add List</Text>
+                    <Button  title="Add List" onPress={()=>{inserisciNuovaLista()}}></Button>
                 </View>
             </TouchableOpacity>
 
