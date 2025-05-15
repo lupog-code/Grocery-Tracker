@@ -6,28 +6,24 @@ import { NavigationContainer } from '@react-navigation/native';
 import BottomNavigation from './src/navigation/BottomNavigation';
 import { insertTestData } from './src/data/db';
 import { getAllItems } from './src/data/db';
-export default function App() {
-  useEffect(() => {
-    console.log('Creating database tables...');
-    createTables();
-    console.log('Database tables created successfully');
-  }, []);
-  useEffect(() => {
-    console.log('Inserting test data...');
-    insertTestData();
-    console.log('Test data inserted successfully');
-  }, []);
-  useEffect(() => {
-    console.log('Fetching all items...');
-    getAllItems()
-      .then((items) => {
-        console.log('Fetched items:', items);
-      })
-      .catch((error) => {
-        console.error('Error fetching items:', error);
-      });
-  }, []);
 
+
+export default function App() {
+useEffect(() => {
+    const initializeDatabase = async () => {
+      try {
+        await createTables();
+        console.log('Database initialized');
+        // Uncomment the next line to insert test data
+        // await insertTestData();
+       
+      } catch (error) {
+        console.error('Error initializing database:', error);
+      }
+    };
+
+    initializeDatabase();
+  }, []);
 
   return (
     <NavigationContainer>
@@ -35,7 +31,6 @@ export default function App() {
         <StatusBar style="auto" />
         <BottomNavigation />
       </SafeAreaView>
-      
     </NavigationContainer>
   );
 }

@@ -1,7 +1,7 @@
 
 
 import React, { use } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import { useEffect } from 'react';
 import { getNumeroItemPerCategoria } from '../data/db';
 import { useState } from 'react';
@@ -20,6 +20,7 @@ const HomeScreen = () => {
             try {
                 const newData = await getNumeroItemPerCategoria();
                 setData(newData);
+                console.log('Data fetched:', newData);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -27,12 +28,20 @@ const HomeScreen = () => {
 
         fetchData();
     }, []);
-        console.log('Data fetched:', data);
-    return (
+    
+        return (
 
         
         <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>{data}</Text>
+            <FlatList
+                data={data}
+                renderItem={({ item }) => (
+                    <View style={{ padding: 20, borderBottomWidth: 1, borderBottomColor: '#ccc' }}>
+                        <Text style={{ fontSize: 18 }}>{item.category}</Text>
+                        <Text style={{ fontSize: 16 }}>Numero di prodotti: {item.count}</Text>
+                    </View>
+                )}
+            />
         </SafeAreaView>
     );
 }

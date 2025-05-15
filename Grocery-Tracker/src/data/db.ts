@@ -159,14 +159,23 @@ export const modificaLista = async (idLista, nome) => {
 
 
 //Ottieni il numero di item per categoria 
+interface CategoryCount {
+  category: string;
+  count: number;
+}
+
 export const getNumeroItemPerCategoria = async () => {
   try {
-    const result = await db.execAsync(`
+    const allRows = await db.getAllAsync<CategoryCount>(`
       SELECT category, COUNT(*) as count
       FROM items
       GROUP BY category;
     `);
-    return result?.[0]?.rows?._array ?? [];
+    for(const row of allRows) {
+      console.log(`Categoria: ${row.category}, Numero di item: ${row.count}`);
+    }
+
+    return allRows;
   } catch (error) {
     console.error('Errore nel recupero del numero di item per categoria', error);
     return [];
@@ -174,26 +183,16 @@ export const getNumeroItemPerCategoria = async () => {
 };
 
 
-export const insertTestData = async () => {
-  try {
-    await db.runAsync(`
-      INSERT INTO items (name, quantity, price, category)
-      VALUES 
-        ('Mela', 1, 0.5, 'Fruits'),
-        ('Carota', 2, 1.0, 'Vegetables');
-    `);
-    console.log('Test data inserted successfully');
-  } catch (error) {
-    console.error('Error inserting test data:', error);
-  }
-};
+
 
 
 
 export const getAllItems = async () => {
   try {
-    const result = await db.execAsync(`SELECT * FROM items;`);
-    return result?.[0]?.rows?._array ?? [];
+    const result = await db.getAllAsync(`
+      SELECT * FROM items;
+    `);
+    return result;
   } catch (error) {
     console.error('Error fetching all items:', error);
   }
