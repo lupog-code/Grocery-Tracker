@@ -215,7 +215,7 @@ export const getUltimiDieciItemComprati = async () => {
   try {
     const result = await db.getAllAsync(`
       SELECT * FROM items
-      WHERE comprato = true
+      WHERE comprato = true AND data_compera IS NOT NULL
       ORDER BY data_compera DESC
       LIMIT 10;
     `);
