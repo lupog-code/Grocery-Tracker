@@ -13,7 +13,7 @@ export default function App() {
     const createTablesAsync = async () => {
       try {
         await createTables();
-        console.log('Tabelle createTables createTablesAsync');
+ 
       } catch (error) {
         console.error('Error creating tables:', error);
       }

@@ -45,7 +45,7 @@ export const inserisciLista = async (nomeLista) => {
       `INSERT INTO lists (name) VALUES (?);`,
       [nomeLista]
     );
-    console.log('Lista inserita con successo');
+    
   } catch (error) {
     console.error('Errore durante l\'inserimento della lista', error);
   }
@@ -58,7 +58,7 @@ export const inserisciItem = async (nome, quantita, prezzo, categoria, idLista) 
       `INSERT INTO items (name, quantity, price, category, list_id, inserted_at) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP);`,
       [nome, quantita, prezzo, categoria, idLista]
     );
-    console.log('Item inserito con successo');
+
   } catch (error) {
     console.error('Errore durante l\'inserimento dell\'item', error);
   }
@@ -108,7 +108,7 @@ export const getItemsRecenti = async (time) => {
 export const rimuoviLista = async (idLista) => {
   try {
     await db.runAsync(`DELETE FROM lists WHERE id = ?;`, [idLista]);
-    console.log('Lista rimossa con successo');
+   
   } catch (error) {
     console.error('Errore nella rimozione della lista', error);
   }
@@ -117,7 +117,7 @@ export const rimuoviLista = async (idLista) => {
 export const rimuoviItem = async (idItem) => {
   try {
     await db.runAsync(`DELETE FROM items WHERE id = ?;`, [idItem]);
-    console.log('Item rimosso con successo');
+  
   } catch (error) {
     console.error('Errore nella rimozione dell\'item', error);
   }
@@ -127,7 +127,7 @@ export const rimuoviItem = async (idItem) => {
 export const rimuoviCategoria = async (categoria: string) => {
   try {
     await db.runAsync(`DELETE FROM categories WHERE name = ?;`, [categoria]);
-    console.log('Categoria rimossa con successo');
+
   } catch (error) {
     console.error('Errore nella rimozione della categoria', error);
   }
@@ -150,7 +150,7 @@ export const modificaItem = async (idItem, nome, quantita, prezzo, categoria) =>
 export const modificaLista = async (idLista, nome) => {
   try {
     await db.runAsync(`UPDATE lists SET name = ? WHERE id = ?;`, [nome, idLista]);
-    console.log('Lista modificata con successo');
+   
   } catch (error) {
     console.error('Errore nella modifica della lista', error);
   }
@@ -169,9 +169,6 @@ export const getNumeroItemPerCategoria = async () => {
       FROM items
       GROUP BY category;
     `);
-    for(const row of allRows) {
-      console.log(`Categoria: ${row.category}, Numero di item: ${row.count}`);
-    }
 
     return allRows;
   } catch (error) {
