@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PieChartItems from '../components/Graphs/PieChart';
+import LineChartItems from '../components/Graphs/LineChart';
 import { Text, StyleSheet } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
-import { getItemsRecenti } from '../data/db';
+import { getItemsRecenti, getSpesaTotale, getMediaGiornaliera } from '../data/db';
+import StatisticsCard from '../components/Stats';
 
 const AnalysisScreen = () => {
   const [currentPeriod, setCurrentPeriod] = useState("3 mesi");
+  const [items, setItems] = useState([]);
+  const [spesaTotale, setSpesaTotale] = useState(0);
+  const [mediaGiornaliera, setMediaGiornaliera] = useState(0);
 
   const periods = ["1 mese", "3 mesi", "6 mesi", "1 anno"];
 
@@ -36,9 +41,18 @@ const AnalysisScreen = () => {
       try {
         const startDate = getStartDate(currentPeriod);
         console.log('Start date:', startDate);
+
         const items = await getItemsRecenti(startDate);
         console.log('Fetched items:', items);
+        setItems(items);
 
+        const spesaTotale = await getSpesaTotale(startDate);
+        console.log('Total spending:', spesaTotale);
+        setSpesaTotale(spesaTotale);
+
+        const mediaGiornaliera = await getMediaGiornaliera(startDate);
+        console.log('Daily average:', mediaGiornaliera);
+        setMediaGiornaliera(mediaGiornaliera);
       } catch (error) {
         console.error('Error fetching items:', error);
       }
@@ -49,6 +63,7 @@ const AnalysisScreen = () => {
 
     return (
         <SafeAreaView>
+          <ScrollView>
           <View style={styles.card}>
             <Text style={styles.cardTitle}>Periodo di analisi</Text>
             <SegmentedButtons
@@ -59,11 +74,18 @@ const AnalysisScreen = () => {
             />
           </View>
 
+          <View>
+            <StatisticsCard totalSpending={1} dailyAverage={2}></StatisticsCard>
+          </View>
 
+          <View style={styles.chartCard}>
+                <LineChartItems items={items} period={currentPeriod} />
+          </View>
 
-            <View style={{ flex: 1, alignItems: 'center' }}>
+          <View style={styles.chartCard}>
                 <PieChartItems />
-            </View>
+          </View>
+          </ScrollView>
         </SafeAreaView>
     );
 }

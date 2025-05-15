@@ -239,3 +239,45 @@ export const getItemsByListId = async (listId) => {
     console.error('Error fetching items by list ID:', error);
   }
 };
+
+// Spesa totale per periodo
+interface TotalSpendingResult {
+  total_spending: number | null;
+}
+
+export const getSpesaTotale = async (startDate: string) => {
+  try {
+    console.log('Start date:', startDate);
+    const result = await db.getAllAsync<TotalSpendingResult>(`
+      SELECT SUM(price * quantity) as total_spending
+      FROM items
+      WHERE data_compera > ? AND comprato = 1;`, [startDate]);
+    return result[0]?.total_spending ?? 0;
+  } catch (error) {
+    console.error('Error fetching total spending:', error);
+    return null;
+  }
+};
+
+interface AverageResult {
+  daily_average: number | null;
+}
+
+export const getMediaGiornaliera = async (startDate: string) => {
+  try {
+    console.log('Start date:', startDate);
+    const result = await db.getAllAsync<AverageResult>(`
+      SELECT AVG(daily_total) as daily_average
+      FROM (
+        SELECT DATE(data_compera) as giorno, SUM(price * quantity) as daily_total
+        FROM items
+        WHERE data_compera > ? AND comprato = 1
+        GROUP BY giorno
+      );
+    `, [startDate]);
+    return result[0]?.daily_average ?? 0;
+  } catch (error) {
+    console.error('Error fetching daily average:', error);
+    return null;
+  }
+}
