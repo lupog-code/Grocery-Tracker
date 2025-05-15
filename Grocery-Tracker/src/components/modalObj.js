@@ -6,7 +6,7 @@ import {Ionicons} from "@expo/vector-icons";
 import {Button} from 'react-native'
 import { inserisciLista } from '../data/db';
 import { useEffect } from 'react';
-
+import { rimuoviItem } from '../data/db';
 
 
 
@@ -88,13 +88,23 @@ export const PopUp_AddProduct = ({ visible, setVisible, items }) => {
 
 
 
-export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visible, setVisible, items , idProduct }) => {
-    
-//Functions
-function deleteProduct(id){
-    console.log("Deleting product with id: " + id);
+export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visible, setVisible, items , idProduct , onDelete }) => {
 
-}
+
+
+//Functions
+ async function deleteProduct(id){
+        try {
+            await rimuoviItem(id);
+            setVisible(false);
+            if (onDelete) {
+                onDelete(); // Call the refresh callback
+            }
+            console.log("Deleted product with id: " + id);
+        } catch (error) {
+            console.error("Error deleting product:", error);
+        }
+    }
 
 
     

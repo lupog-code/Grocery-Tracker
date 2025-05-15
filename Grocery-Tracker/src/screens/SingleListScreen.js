@@ -11,17 +11,23 @@ const ListsScreen = ({navigation , route}) => {
     const listId = route.params.id; //Ricevo l'id della lista
     const listName = route.params.name; //Ricevo il nome della lista
     const [products, setProducts] = useState([]); //Inizializzo la lista dei prodotti
+    
+    const fetchProducts = async () => {
+        try {
+            const data = await getItemsByListId(listId);
+            setProducts(data);
+        } catch (error) {
+            console.error("Error fetching products:", error);
+        }
+    };
+
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const data = await getItemsByListId(listId);
-                setProducts(data); //Inizializza la lista dei prodotti
-            } catch (error) {
-                console.error("Error fetching products:", error);
-            }
-        };
         fetchProducts();
-    }, [])
+    }, []);
+
+      const handleDelete = () => {
+        fetchProducts(); // Refresh the list after deletion
+    };
 
     return (
         <View style={commStyle.body}>
@@ -47,9 +53,9 @@ const ListsScreen = ({navigation , route}) => {
             renderItem={({ item }) => (
                 //Se l'elemento è stato comprato, mostra OldProduct, altrimenti mostra Product
                  item.comprato ?
-                <OldProduct id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera} />
+                <OldProduct onDelete={handleDelete} id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera} />
                 :
-                <Product id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} />
+                <Product onDelete={handleDelete} id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} />
             )}
             >
 

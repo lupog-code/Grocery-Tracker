@@ -80,7 +80,7 @@ const HomeScreen = () => {
                     numColumns={2}
                     columnWrapperStyle={{ justifyContent: 'space-between', marginBottom: 10 }}
                     renderItem={({ item }) => (
-                        <SmallOldProduct name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera}/>
+                        <SmallOldProduct id = {item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera}/>
                     )}
                     keyExtractor={(item) => item.id.toString()}
                 />

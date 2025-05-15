@@ -48,14 +48,14 @@ export const List = ({id , name}) => {
     );
 }
 
-export const Product = ({id, name, quantity, price, category}) => {
+export const Product = ({id, name, quantity, price, category ,onDelete}) => {
    
     const [isEnabled, setIsEnabled] = useState(false);
     const [visible, setVisible] = useState(false);
 
     return(
         <>
-        <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
+        <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} onDelete={onDelete} />
 
         <View style={compStyle.ProductContainer}>
 
@@ -87,13 +87,13 @@ export const Product = ({id, name, quantity, price, category}) => {
     );
 }
 
-export const OldProduct = ({id, name, quantity, price, category, data}) => {
+export const OldProduct = ({id, name, quantity, price, category, data , onDelete}) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const [visible, setVisible] = useState(false);
 
     return(
         <>
-            <PopUp_editProduct id={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
+            <PopUp_editProduct onDelete={onDelete} idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
             <View style={compStyle.ProductContainer}>
 
                 <View style={compStyle.Cont20}>
@@ -121,13 +121,13 @@ export const OldProduct = ({id, name, quantity, price, category, data}) => {
     );
 }
 
-export const SmallOldProduct = ({name, quantity, price, category, data}) => {
+export const SmallOldProduct = ({id , name, quantity, price, category, data}) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const [visible, setVisible] = useState(false);
 
     return(
         <>
-            <PopUp_editProduct namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
+            <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
             <View style={compStyle.SmallProductContainer}>
 
                 <View style={compStyle.Cont30}>
