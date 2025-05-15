@@ -8,10 +8,21 @@ import { PieChart } from "react-native-chart-kit";
 const PieChartItems = ({ startDate })=>{
 
     function formatData(data){
+      
+      const categoryColors: Record<string, string> = {
+        Fruits: '#E53935',
+        Vegetables: '#43A047',
+        Dairy: '#FDD835',
+        Meat: '#8E24AA',
+        Snacks: '#FB8C00',
+        Beverages: '#1E88E5',
+        Other: '#757575',
+      };
+
       const result = data.map(item => ({
         name: item.category,
         population: item.count,
-        color: `#${Math.floor(Math.random() * 0xCFFFFF + 0x300000).toString(16)}`,
+        color: categoryColors[item.category] || '#999999',
         legendFontColor: '#7F7F7F',
         legendFontSize: 15
       }));
@@ -32,10 +43,6 @@ useEffect(() => {
     };
     fetchData();
 }, [startDate]);
-
-
-
-
 
 return (
     <SafeAreaView>
