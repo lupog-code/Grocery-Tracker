@@ -3,13 +3,12 @@ import { StyleSheet, SafeAreaView , View, ActivityIndicator } from 'react-native
 import { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import BottomNavigation from './src/navigation/BottomNavigation';
-import { createTables } from './src/data/db';
+import { createTables , DropTabelle} from './src/data/db';
 import MainStackNavigator from './src/navigation/MainStackNavigator';
 
 
 export default function App() {
   const [dbReady, setDbReady] = useState(false);
-
   useEffect(() => {
     const createTablesAsync = async () => {
       try {

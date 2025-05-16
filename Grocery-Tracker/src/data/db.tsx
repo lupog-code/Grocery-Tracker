@@ -324,3 +324,15 @@ export const getMediaGiornaliera = async (startDate: string) => {
   }
 }
 
+export const DropTabelle = async () => {
+  try {
+    await db.runAsync(`
+      DROP TABLE IF EXISTS items;
+      DROP TABLE IF EXISTS lists;
+      DROP TABLE IF EXISTS categories;
+    `);
+    console.log('Tabelle eliminate con successo');
+  } catch (error) {
+    console.error('Errore nell\'eliminazione delle tabelle', error);
+  }
+}

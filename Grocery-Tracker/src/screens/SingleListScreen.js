@@ -56,7 +56,7 @@ const ListsScreen = ({navigation , route}) => {
 
     const [visualizableProducts, setVisualizableProducts] = useState(products); //Inizializzo la lista dei prodotti visualizzabili
     const [searchText, setSearchText] = useState(''); 
-
+    console.log(visualizableProducts)
     useEffect(() => {
         if (searchText.trim() === '') {
             // Se la search bar è vuota, mostra tutti i prodotti
@@ -77,8 +77,8 @@ const ListsScreen = ({navigation , route}) => {
     
     return (
         <View style={commStyle.body}>
-            {/*<SearchBar searchText = {searchText} setSearchText={setSearchText}> </SearchBar>
-            come data nella flatList ci va visualizableProducts*/}
+            <SearchBar setSearchText={setSearchText}> </SearchBar>
+            
             <View style={commStyle.flexView2}>
 
                 <TouchableOpacity style={{width:'28%'}} onPress={() => navigation.goBack()}>
@@ -95,7 +95,7 @@ const ListsScreen = ({navigation , route}) => {
 
             <ScrollView showsVerticalScrollIndicator={false}>
             <FlatList
-            data={products}
+            data={visualizableProducts}
             keyExtractor={(item) => item.id.toString()}
             scrollEnabled={false}
             renderItem={({ item }) => (
