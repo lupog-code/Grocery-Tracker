@@ -115,7 +115,7 @@ export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visi
 //Functions
  async function deleteProduct(id){
         try {
-            await rimuoviItem(id);
+           
             setVisible(false);
             if (onDelete) {
                 onDelete(); // Call the refresh callback
@@ -168,11 +168,12 @@ export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visi
                     </View>
 
                     <View style={{marginTop: 30}}/>
-                    <TextInput style={btnStyle.textInput} placeholder={"Name"} value={name} />
-                    <TextInput style={btnStyle.textInput} placeholder={"Quantity"}  value={quantity?.toString()} keyboardType="numeric" />
-                    <TextInput style={btnStyle.textInput} placeholder={"Price"} value={price?.toString()} keyboardType="numeric" />
+                    <TextInput style={btnStyle.textInput} value={name} onChangeText={(val)=>{setName(val)}} placeholder={"Name"}  />
+                    <TextInput style={btnStyle.textInput} placeholder={"Quantity"} onChangeText={(val)=>{setQuantity(val)}}  keyboardType="numeric" />
+                    <TextInput style={btnStyle.textInput} placeholder={"Price"} onChangeText={(val)=>{setPrice(val)}} keyboardType="numeric" />
                     <View>
                         <DropDownPicker
+                            onChangeValue={(val)=>{setCategory(val)}}
                             open={open}
                             value={category}
                             items={pickerItems}

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, Touchable, TouchableOpacity, ScrollView, SafeAreaView, FlatList} from 'react-native';
+import {View, Text, Image, Touchable, TouchableOpacity, ScrollView, SafeAreaView, FlatList, Alert} from 'react-native';
 import commStyle from '../styles/commonStyle';
 import {Ionicons} from "@expo/vector-icons";
 import {OldProduct , Product} from "../components/listObj";
@@ -8,6 +8,7 @@ import { getItemsByListId ,getByName} from '../data/db';
 import { useState, useEffect } from 'react';
 import { SearchBar } from '../components/search';
 import { AddProductBtn } from '../components/btnsObj';
+import { rimuoviItem } from '../data/db';
 
 const ListsScreen = ({navigation , route}) => {
     const listId = route.params.id; //Ricevo l'id della lista
@@ -28,8 +29,29 @@ const ListsScreen = ({navigation , route}) => {
         fetchProducts();
     }, []);
 
-      const handleDelete = () => {
-        fetchProducts(); // Refresh the list after deletion
+    const handleDelete = (idProd) => {
+        Alert.alert(
+            "Sei sicuro di voler eliminare questo prodotto?", 
+            "Questa azione non può essere annullata", 
+            [
+                {
+                    text: "Annulla",
+                    style: "cancel"
+                },
+                {
+                    text: "Elimina",
+                    onPress: async () => {
+                        try {
+                            await rimuoviItem(idProd);
+                            // Chiamiamo fetchProducts solo dopo che l'eliminazione è completata
+                            await fetchProducts();
+                        } catch (error) {
+                            console.error("Error deleting product:", error);
+                        }
+                    }
+                }
+            ]
+        );
     };
 
     const [visualizableProducts, setVisualizableProducts] = useState(products); //Inizializzo la lista dei prodotti visualizzabili
@@ -79,9 +101,9 @@ const ListsScreen = ({navigation , route}) => {
             renderItem={({ item }) => (
                 //Se l'elemento è stato comprato, mostra OldProduct, altrimenti mostra Product
                  item.comprato ?
-                <OldProduct onDelete={handleDelete} id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera} />
+                <OldProduct onDelete={(id)=>handleDelete(id)} id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera} />
                 :
-                <Product onDelete={handleDelete} id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} />
+                <Product onDelete={(id)=>handleDelete(id)} id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} />
             )}
             >
 

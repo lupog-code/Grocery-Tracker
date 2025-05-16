@@ -56,7 +56,7 @@ export const Product = ({id, name, quantity, price, category ,onDelete}) => {
 
     return(
         <>
-        <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} onDelete={onDelete} />
+        <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} onDelete={()=>onDelete(id)} />
 
         <View style={compStyle.ProductContainer}>
 
@@ -94,7 +94,7 @@ export const OldProduct = ({id, name, quantity, price, category, data , onDelete
 
     return(
         <>
-            <PopUp_editProduct onDelete={onDelete} idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
+            <PopUp_editProduct onDelete={()=>onDelete(id)} idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
             <View style={compStyle.ProductContainer}>
 
                 <View style={compStyle.Cont20}>
