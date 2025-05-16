@@ -6,7 +6,7 @@ import {OldProduct , Product} from "../components/listObj";
 import { Button } from 'react-native';
 import { getItemsByListId ,getByName} from '../data/db';
 import { useState, useEffect } from 'react';
-import { SearchBar } from '../components/search';
+import { SearchBar ,FilterBar} from '../components/search';
 import { AddProductBtn } from '../components/btnsObj';
 import { rimuoviItem } from '../data/db';
 
@@ -54,31 +54,35 @@ const ListsScreen = ({navigation , route}) => {
         );
     };
 
-    const [visualizableProducts, setVisualizableProducts] = useState(products); //Inizializzo la lista dei prodotti visualizzabili
-    const [searchText, setSearchText] = useState(''); 
-    console.log(visualizableProducts)
-    useEffect(() => {
-        if (searchText.trim() === '') {
-            // Se la search bar è vuota, mostra tutti i prodotti
-            setVisualizableProducts(products);
-        } else {
-            // Altrimenti filtra
-            const filteredProducts = products.filter(item =>
-                item.name.toLowerCase().includes(searchText.toLowerCase())
-            );
+    const [visualizableProducts, setVisualizableProducts] = useState(products);
+    const [searchText, setSearchText] = useState('');
+    const [filtri, setFiltri] = useState({ category: '', minPrice: null, maxPrice: null });
 
-            //DOVRESTI FILTRARE ANCHE PER CATEGORIA.
-            //E PER PREZZO
-            setVisualizableProducts(filteredProducts);
-        }
-    }, [searchText, products]);
+    useEffect(() => {
+        const { category, minPrice, maxPrice } = filtri;
+        
+        const filteredProducts = products.filter(item => {
+            const matchName = item.name.toLowerCase().includes(searchText.toLowerCase());
+
+            const matchCategory = category.trim() === '' 
+                || item.category.toLowerCase().includes(category.toLowerCase());
+
+            const matchMinPrice = minPrice === null || item.price >= minPrice;
+            const matchMaxPrice = maxPrice === null || item.price <= maxPrice;
+
+            return matchName && matchCategory && matchMinPrice && matchMaxPrice;
+        });
+
+        setVisualizableProducts(filteredProducts);
+    }, [filtri, searchText, products]);
+
     
     
     
     return (
         <View style={commStyle.body}>
-            <SearchBar setSearchText={setSearchText}> </SearchBar>
-            
+            <SearchBar setSearchText={setSearchText} setFiltri={setFiltri}> </SearchBar>
+            <FilterBar setFiltri={setFiltri} />
             <View style={commStyle.flexView2}>
 
                 <TouchableOpacity style={{width:'28%'}} onPress={() => navigation.goBack()}>
