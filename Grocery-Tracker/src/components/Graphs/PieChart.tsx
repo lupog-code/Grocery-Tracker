@@ -9,7 +9,7 @@ const PieChartItems = ({ startDate })=>{
 
     function formatData(data){
       
-      const categoryColors: Record<string, string> = {
+      const categoryColors = {
         Fruits: '#E53935',
         Vegetables: '#43A047',
         Dairy: '#FDD835',
@@ -30,6 +30,7 @@ const PieChartItems = ({ startDate })=>{
   }
 
 const [chartData, setChartData] = useState([])
+
 useEffect(() => {
     const fetchData = async () => {
       try {
