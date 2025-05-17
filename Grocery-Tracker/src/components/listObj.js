@@ -108,7 +108,7 @@ export const OldProduct = ({id, name, quantity, price, category, data , onDelete
 
 
                 <View style={compStyle.Cont20}>
-                    <Text style={compStyle.data}>{data}</Text>
+                    <Text style={compStyle.data}>{new Date(data).toLocaleDateString()}</Text>
                     <Text style={compStyle.price}>{price} $</Text>
                 </View>
             </View>
