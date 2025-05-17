@@ -45,7 +45,7 @@ export const List = ({id , name}) => {
         <TouchableOpacity onPress={() => {goToDetailsOfList(id)}}>
             <View style={[compStyle.listContainer, {backgroundColor: '#244B6E'}]}>
                 <Text style={compStyle.listTitle}>{name}</Text>
-                <Ionicons name="arrow-forward-outline" style={compStyle.arrow} />
+                <Ionicons name="caret-forward-outline" style={compStyle.arrow} />
             </View>
         </TouchableOpacity>
     );

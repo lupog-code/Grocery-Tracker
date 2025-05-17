@@ -79,16 +79,15 @@ const btnStyle = StyleSheet.create({
 
 
     textInput: {
-        marginTop: 17, // Ridotto
-        marginBottom: 5, // Aggiunto
-        borderWidth: 1, // Più spesso
-        borderColor: '#d0d0d0', // Più chiaro
+        marginTop: 17,
+        marginBottom: 5,
+        borderWidth: 1,
+        borderColor: '#d0d0d0',
         color: '#20385E',
-        borderRadius: 8, // Più arrotondato
-        fontSize: 19, // Leggermente più piccolo
-        padding: 12, // Più padding
-        backgroundColor: '#fafafa', // Sfondo chiaro
-        // Stile quando è focalizzato
+        borderRadius: 8,
+        fontSize: 19,
+        padding: 12,
+        backgroundColor: '#fafafa',
         ':focus': {
             borderColor: '#274472',
             backgroundColor: '#fff'
@@ -208,7 +207,6 @@ const btnStyle = StyleSheet.create({
             transform: [{ scale: 1.02 }]
         }
     },
-
     deleteButtonText: {
         color: '#d32f2f', // Testo rosso
         fontSize: 16,

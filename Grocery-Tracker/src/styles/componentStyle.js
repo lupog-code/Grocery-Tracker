@@ -3,7 +3,7 @@ const screenWidth = Dimensions.get('window').width;
 
 const compStyle = StyleSheet.create({
     listContainer:{
-        height: 120,
+        height: 100,
         width: '100%',
         marginTop: 20,
         borderRadius: 15,
@@ -11,14 +11,14 @@ const compStyle = StyleSheet.create({
     },
 
     listTitle:{
-        fontSize: 26,
-        fontWeight: 500,
+        fontSize: 22,
+        fontWeight: 600,
         color:'white',
     },
 
     arrow:{
         color:'white',
-        fontSize:50,
+        fontSize:30,
         marginTop: "auto",
         marginLeft: "auto",
     },

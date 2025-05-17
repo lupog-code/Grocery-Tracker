@@ -115,6 +115,7 @@ const commStyle = StyleSheet.create({
         color: '#e5c3c3',
         fontSize: 18,
         fontWeight: '500',
+        marginLeft: "auto",
     },
 
 
