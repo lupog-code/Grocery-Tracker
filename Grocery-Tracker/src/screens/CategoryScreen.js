@@ -4,7 +4,7 @@ import commStyle from '../styles/commonStyle';
 import {FixedCategory, ModifiableCategory} from "../components/listObj";
 import {getFixedCategorie, getModifiableCategorie} from '../data/db';
 
-const ListsScreen = (navigation , route) => {
+const ListsScreen = () => {
     const [fixCategory, setFixCategory] = useState([]);
     const [modCategory, setModCategory] = useState([]);
 
@@ -42,9 +42,7 @@ const ListsScreen = (navigation , route) => {
         <View style={commStyle.body}>
 
             <View style={commStyle.flexView2}>
-                <TouchableOpacity style={commStyle.sideBlock} onPress={() => navigation.go()}>
-                    <Text style={commStyle.gobackText}>Home</Text>
-                </TouchableOpacity>
+               
 
                 <View style={commStyle.titleBlock}>
                     <Text style={commStyle.homeTitle2}>Categories</Text>

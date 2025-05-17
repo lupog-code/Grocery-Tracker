@@ -26,12 +26,10 @@ const ListsScreen = () => {
 
             <View style={commStyle.flexView2}>
 
-                <TouchableOpacity style={{width:'28%'}}>
-                    <Text style={commStyle.gobackText}>Home</Text>
-                </TouchableOpacity>
+              
 
                 <View style={{width:'43%'}}>
-                    <Text style={commStyle.homeTitle2} >Lists</Text>
+                    <Text style={commStyle.homeTitle2}>Your Lists 📝</Text>
                 </View>
 
                 <View style={{width:'28%'}}/>
