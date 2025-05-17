@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet, Dimensions } from 'react-native';
+const screenWidth = Dimensions.get('window').width;
 
 const compStyle = StyleSheet.create({
     listContainer:{
@@ -100,34 +100,40 @@ const compStyle = StyleSheet.create({
         marginRight:'auto',
     },
 
-    SmallProductContainer:{
-        backgroundColor:'#274472',
+    SmallProductContainer: {
+        backgroundColor: '#274472',
         height: 140,
-        width: '47%',
+        width: screenWidth * 0.4, // circa 45% dello schermo
         marginTop: 20,
         borderRadius: 15,
         padding: 10,
-        flexDirection:'row',
+        flexDirection: 'row',
+        alignItems: 'center', // centra verticalmente gli elementi nella row
+        justifyContent: 'space-between', // spazio tra emoji e contenuto
     },
 
-    SmallCategoryEmoji:{
-        fontSize:40,
-        marginRight:'auto',
+    SmallCategoryEmoji: {
+        fontSize: 40,
+        marginRight: 10,
     },
 
-    SmallPrice:{
-        color:'white',
-        fontSize: 21,
-        fontWeight: 500,
-        marginLeft:'auto',
-        bottom:-5,
-        marginTop: 10,
+    SmallProductInfo: {
+        flex: 1,
+        marginLeft: 10,
     },
 
-    SmallProductTitle:{
-        fontSize: 22,
-        fontWeight: 500,
-        color:'white',
+    SmallProductTitle: {
+        fontSize: 18,
+        fontWeight: '500',
+        color: 'white',
+    },
+
+    SmallPrice: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: '500',
+        marginTop: 5,
+        textAlign: 'right',
     },
 });
 
