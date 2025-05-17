@@ -23,7 +23,7 @@ const HomeScreen = () => {
         };
         fetchProducts();
     }, [])
-    
+
     useEffect(() => {
         const fetchLists = async () => {
             try {
@@ -41,7 +41,7 @@ const HomeScreen = () => {
         <View style={commStyle.body}>
 
             <View style={commStyle.flexView}>
-                <Text style={commStyle.homeTitle}>Home Page</Text>
+                <Text style={commStyle.homeTitle}>Lists</Text>
                 <TouchableOpacity>
                     <View style={commStyle.recentButton}>
                         <Ionicons name="time" style={commStyle.recentButtonIcon}/>
