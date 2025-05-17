@@ -1,4 +1,5 @@
 import * as SQLite from 'expo-sqlite';
+import {ModifiableCategory} from "../components/listObj";
 
 const db = SQLite.openDatabaseSync('grocery');
 
@@ -81,6 +82,34 @@ export const getListe = async () => {
 export const getCategorie = async () => {
   try {
     const result = await db.getAllAsync(`SELECT * FROM categories;`);
+    return result
+  } catch (error) {
+    console.error('Errore nel recupero delle categorie', error);
+  }
+};
+
+// Ottieni categorie
+export const getFixedCategorie = async () => {
+  try {
+    const result = await db.getAllAsync(`
+        SELECT *
+        FROM categories
+        WHERE name IN ('Fruits', 'Dairy', 'Meat', 'Snacks', 'Vegetables', 'Beverages', 'Other');
+    `);
+    return result
+  } catch (error) {
+    console.error('Errore nel recupero delle categorie', error);
+  }
+};
+
+// Ottieni categorie
+export const getModifiableCategorie = async () => {
+  try {
+    const result = await db.getAllAsync(`
+      SELECT *
+      FROM categories
+      WHERE name NOT IN ('Fruits', 'Dairy', 'Meat', 'Snacks', 'Vegetables', 'Beverages', 'Other');
+    `);
     return result
   } catch (error) {
     console.error('Errore nel recupero delle categorie', error);

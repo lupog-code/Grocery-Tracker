@@ -2,24 +2,41 @@ import React, { useEffect, useState } from 'react';
 import {View, Text, TouchableOpacity, ScrollView , FlatList} from 'react-native';
 import commStyle from '../styles/commonStyle';
 import {FixedCategory, ModifiableCategory} from "../components/listObj";
-import {getCategorie} from '../data/db';
+import {getFixedCategorie, getModifiableCategorie} from '../data/db';
 
 const ListsScreen = (navigation , route) => {
-    const [category, setCategory] = useState([]);
+    const [fixCategory, setFixCategory] = useState([]);
+    const [modCategory, setModCategory] = useState([]);
 
     useEffect(() => {
-            const fetchLists = async () => {
+            const fetchFixed = async () => {
                 try {
-                    const data = await getCategorie();
+                    const data = await getFixedCategorie();
                     console.log("Fetched lists:", data);
-                    setCategory(data);
+                    setFixCategory(data);
                 } catch (error) {
                     console.error("Error fetching lists:", error);
                 }
             };
-            fetchLists();
+            fetchFixed();
         }
         , [])
+
+    useEffect(() => {
+            const fetchMod = async () => {
+                try {
+                    const data = await getModifiableCategorie();
+                    console.log("Fetched lists:", data);
+                    setModCategory(data);
+                } catch (error) {
+                    console.error("Error fetching lists:", error);
+                }
+            };
+            fetchMod();
+        }
+        , [])
+
+
 
     return (
         <View style={commStyle.body}>
@@ -40,10 +57,19 @@ const ListsScreen = (navigation , route) => {
             <ScrollView showsVerticalScrollIndicator={false}>
 
                 <FlatList
-                    data={category}
+                    data={fixCategory}
                     scrollEnabled={false}
                     renderItem={({ item }) => (
                         <FixedCategory name={item.name}  />
+                    )}
+                    keyExtractor={(item) => item.name.toString()}
+                />
+
+                <FlatList
+                    data={modCategory}
+                    scrollEnabled={false}
+                    renderItem={({ item }) => (
+                        <ModifiableCategory name={item.name}  />
                     )}
                     keyExtractor={(item) => item.name.toString()}
                 />
