@@ -8,7 +8,7 @@ import { addCategory } from '../data/db';
 const ListsScreen = () => {
 
     const [modCategory, setModCategory] = useState([]);
-
+    const [fixedCategory, setFixedCategory] = useState([]);
 
     useEffect(() => {
             const fetchMod = async () => {
@@ -24,7 +24,19 @@ const ListsScreen = () => {
         }
         , [])
 
-
+    useEffect(() => {
+            const fetchMod = async () => {
+                try {
+                    const data = await getFixedCategorie();
+                    console.log("Fetched lists:", data);
+                    setFixedCategory(data);
+                } catch (error) {
+                    console.error("Error fetching lists:", error);
+                }
+            };
+            fetchMod();
+        }
+        , [])
 
         //Funzione per aggiungere una categoria
         const handleAddCategory = async (categoryName) => {
@@ -56,6 +68,15 @@ const ListsScreen = () => {
                     scrollEnabled={false}
                     renderItem={({ item }) => (
                         <ModifiableCategory name={item.name}  />
+                    )}
+                    keyExtractor={(item) => item.name.toString()}
+                />
+
+                <FlatList
+                    data={fixedCategory}
+                    scrollEnabled={false}
+                    renderItem={({ item }) => (
+                        <FixedCategory name={item.name}  />
                     )}
                     keyExtractor={(item) => item.name.toString()}
                 />

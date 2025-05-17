@@ -92,11 +92,24 @@ export const getCategorie = async () => {
 export const getFixedCategorie = async () => {
   try {
     const result = await db.getAllAsync(`
-        SELECT *
-        FROM categories
-        WHERE name IN ('Fruits', 'Dairy', 'Meat', 'Snacks', 'Vegetables', 'Beverages', 'Other');
+      SELECT *
+      FROM categories
+      WHERE name IN ('Fruits', 'Dairy', 'Meat', 'Snacks', 'Vegetables', 'Beverages', 'Other');
     `);
     return result
+  } catch (error) {
+    console.error('Errore nel recupero delle categorie', error);
+  }
+};
+
+// cerca categoria esistente
+export const checkCategorie = async (nomeVerifca) => {
+  try {
+    const result = await db.getAllAsync(
+        `SELECT * FROM categories WHERE name = ?;`,
+        [nomeVerifca]
+    );
+    return result;
   } catch (error) {
     console.error('Errore nel recupero delle categorie', error);
   }
