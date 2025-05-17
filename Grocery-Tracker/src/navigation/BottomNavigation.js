@@ -34,7 +34,7 @@ const BottomNavigation = ()=>{
                 <Ionicons name="stats-chart" color={color} size={size}/>
             )
         }}/>
-        <Tab.Screen name="Categorys" component ={CategoryScreen}
+        <Tab.Screen name="Categories" component ={CategoryScreen}
         options={{
             tabBarIcon: ({color, size}) => (
             <Ionicons name="apps-outline" color={color} size={size}/>
