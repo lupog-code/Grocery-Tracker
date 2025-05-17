@@ -11,6 +11,7 @@ import StatisticsCard from '../components/Stats';
 const AnalysisScreen = () => {
   const [currentPeriod, setCurrentPeriod] = useState("3m");
   const [items, setItems] = useState([]);
+  const [startDate, setStartDate] = useState("");
 
   const periods = ["1m", "3m", "6m", "1y"];
 
@@ -38,7 +39,7 @@ const AnalysisScreen = () => {
 
     const fetchItems = async () => {
       try {
-        const startDate = getStartDate(currentPeriod);
+        setStartDate(getStartDate(currentPeriod));
         console.log('Start date:', startDate);
 
       } catch (error) {
@@ -48,10 +49,8 @@ const AnalysisScreen = () => {
 
     fetchItems();
     setItems(getItemsRecentiAcquistati(startDate));
-    
-  }, [currentPeriod]);
 
-  const startDate = getStartDate(currentPeriod);
+  }, [currentPeriod]);
 
     return (
         <SafeAreaView>
