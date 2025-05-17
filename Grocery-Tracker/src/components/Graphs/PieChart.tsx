@@ -4,8 +4,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { getItemsCompratiPerDataECategoria } from "../../data/db";
 import { PieChart } from "react-native-chart-kit";
+import { View, Text, StyleSheet } from "react-native";
 
-const PieChartItems = ({ startDate })=>{
+const PieChartItems = ({ startDate, items })=>{
 
     function formatData(data){
       
@@ -43,31 +44,48 @@ useEffect(() => {
       }
     };
     fetchData();
-}, [startDate]);
+}, [startDate, items]);
 
 return (
     <SafeAreaView>
-        <PieChart 
-        data={chartData}
-        width={400}
-        height={220}
-        chartConfig={{
-          backgroundColor: '#ffffff',
-          backgroundGradientFrom: '#ffffff',
-          backgroundGradientTo: '#ffffff',
-          decimalPlaces: 2,
-          color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          style: {
-            borderRadius: 16
-          }
-        }}
-        accessor="population"
-        backgroundColor="#ffffff"
-        paddingLeft="15"
-        ></PieChart>
+        {chartData.length > 0 ? (
+          <PieChart 
+            data={chartData}
+            width={400}
+            height={220}
+            chartConfig={{
+              backgroundColor: '#ffffff',
+              backgroundGradientFrom: '#ffffff',
+              backgroundGradientTo: '#ffffff',
+              decimalPlaces: 2,
+              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              style: {
+                borderRadius: 16
+              }
+            }}
+            accessor="population"
+            backgroundColor="#ffffff"
+            paddingLeft="15"
+          />
+        ) : (
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>Nessun dato disponibile per il periodo selezionato</Text>
+          </View>
+        )}
     </SafeAreaView>
   )
 }
 
-export default PieChartItems;
+const styles = StyleSheet.create({
+  emptyContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 220,
+  },
+  emptyText: {
+    fontSize: 16,
+    color: '#7F7F7F',
+  },
+});
 
+export default PieChartItems;

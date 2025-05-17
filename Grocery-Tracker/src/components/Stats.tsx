@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { getSpesaTotale, getMediaGiornaliera } from '../data/db';
 
-const StatisticsCard = ({ startDate }) => {
+const StatisticsCard = ({ startDate, items }) => {
   const [totalSpending, setTotalSpending] = useState(0);
   const [dailyAverage, setDailyAverage] = useState(0);
 
@@ -14,7 +14,7 @@ const StatisticsCard = ({ startDate }) => {
       setDailyAverage(average);
     };
     fetchData();
-  }, [startDate]);
+  }, [startDate, items]);
 
   return (
     <View style={styles.card}>

@@ -5,11 +5,12 @@ import PieChartItems from '../components/Graphs/PieChart';
 import LineChartItems from '../components/Graphs/LineChart';
 import { Text, StyleSheet } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
-import { getItemsRecenti } from '../data/db';
+import { getItemsRecentiAcquistati } from '../data/db';
 import StatisticsCard from '../components/Stats';
 
 const AnalysisScreen = () => {
   const [currentPeriod, setCurrentPeriod] = useState("3m");
+  const [items, setItems] = useState([]);
 
   const periods = ["1m", "3m", "6m", "1y"];
 
@@ -34,6 +35,7 @@ const AnalysisScreen = () => {
   };
 
   useEffect(() => {
+
     const fetchItems = async () => {
       try {
         const startDate = getStartDate(currentPeriod);
@@ -45,6 +47,8 @@ const AnalysisScreen = () => {
     }
 
     fetchItems();
+    setItems(getItemsRecentiAcquistati(startDate));
+    
   }, [currentPeriod]);
 
   const startDate = getStartDate(currentPeriod);
@@ -63,15 +67,15 @@ const AnalysisScreen = () => {
           </View>
 
           <View>
-            <StatisticsCard startDate={startDate}/>
+            <StatisticsCard startDate={startDate} items={items}/>
           </View>
 
           <View style={styles.chartCard}>
-                <PieChartItems startDate={startDate}/>
+                <PieChartItems startDate={startDate} items={items} />
           </View>
 
         <View style={styles.chartCard}>
-                <LineChartItems startDate={startDate} />
+                <LineChartItems startDate={startDate} items={items} />
           </View>
 
           </ScrollView>

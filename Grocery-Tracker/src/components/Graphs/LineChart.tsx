@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { getCostiMensili } from '../../data/db';
 
-const LineChartItems = ({startDate}) => {
+const LineChartItems = ({startDate, items}) => {
 
     const [data, setData] = useState([]);
 
@@ -50,7 +50,7 @@ const LineChartItems = ({startDate}) => {
       labels: labelPoints,
       datasets: [{ data: dataPoints }]
     });
-  }, [data, startDate]);
+  }, [data, startDate, items]);
   
   // Configurazione del grafico
   const chartConfig = {
