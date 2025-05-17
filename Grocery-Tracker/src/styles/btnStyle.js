@@ -45,7 +45,7 @@ const btnStyle = StyleSheet.create({
 
     popUp_product: {
         margin: "auto",
-        height: 390,
+        height: 410,
         width: 370,
         padding: 30, // Ridotto per più spazio
         backgroundColor: 'white',
@@ -62,7 +62,7 @@ const btnStyle = StyleSheet.create({
 
     popUp_productEdit: {
         margin: "auto",
-        height: 460,
+        height: 475,
         width: 370,
         padding: 30, // Ridotto per più spazio
         backgroundColor: 'white',
@@ -79,13 +79,13 @@ const btnStyle = StyleSheet.create({
 
 
     textInput: {
-        marginTop: 15, // Ridotto
+        marginTop: 17, // Ridotto
         marginBottom: 5, // Aggiunto
         borderWidth: 1, // Più spesso
         borderColor: '#d0d0d0', // Più chiaro
         color: '#20385E',
         borderRadius: 8, // Più arrotondato
-        fontSize: 16, // Leggermente più piccolo
+        fontSize: 19, // Leggermente più piccolo
         padding: 12, // Più padding
         backgroundColor: '#fafafa', // Sfondo chiaro
         // Stile quando è focalizzato
@@ -141,7 +141,7 @@ const btnStyle = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#d0d0d0',
         borderRadius: 8,
-        fontSize: 16,
+        fontSize: 12,
         height: 50,
         paddingHorizontal: 12,
         backgroundColor: '#fafafa',

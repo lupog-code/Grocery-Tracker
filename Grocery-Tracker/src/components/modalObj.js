@@ -110,9 +110,6 @@ export const PopUp_AddProduct = ({ visible, setVisible, setItems , listID}) => {
 }
 
 export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visible, setVisible, items , idProduct , onDelete }) => {
-
-
-
 //Functions
  async function deleteProduct(id){
         try {
@@ -127,9 +124,6 @@ export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visi
         }
     }
 
-
-    
-    
     //States
     const [name,setName] = React.useState(namein);
     const [quantity,setQuantity] = React.useState(quantityin);
@@ -146,10 +140,7 @@ export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visi
         { label: 'Other', value: 'Other' },
     ]);
 
-
-
 //ComponentDidMount
-
     return (
         <Modal
             visible={visible}
