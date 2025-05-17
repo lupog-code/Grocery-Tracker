@@ -3,11 +3,11 @@ import { View, Text, FlatList, TouchableOpacity, StyleSheet } from "react-native
 
 const RecentProductItem = ({ id, name, quantity, date , category }) => {
   return (
-    <TouchableOpacity style={styles.card}>
+    <View style={styles.card}>
       <Text style={styles.name}>{name}</Text>
       <Text style={styles.details}>Quantity: {quantity}</Text>
       <Text style={styles.details}>Purchased on: {date}</Text>
-    </TouchableOpacity>
+    </View>
   );
 };
 

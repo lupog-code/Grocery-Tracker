@@ -70,7 +70,7 @@ export const inserisciItem = async (nome, quantita, prezzo, categoria, idLista) 
 // Ottieni lista
 export const getListe = async () => {
   try {
-    const result = await db.getAllAsync(`SELECT * FROM lists;`);
+    const result = await db.getAllAsync(`SELECT * FROM lists order by id desc;`);
     return result
   } catch (error) {
     console.error('Errore nel recupero delle liste', error);

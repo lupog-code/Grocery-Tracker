@@ -131,7 +131,7 @@ const ListsScreen = ({navigation , route}) => {
             renderItem={({ item }) => (
                 //Se l'elemento è stato comprato, mostra OldProduct, altrimenti mostra Product
                  item.comprato ?
-                <OldProduct onDelete={(id)=>handleDelete(id)} id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera.split(' ')[0]} />
+                <OldProduct onDelete={(id)=>handleDelete(id)} id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera} />
                 :
                 <Product onDelete={(id)=>handleDelete(id)} id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} />
             )}
