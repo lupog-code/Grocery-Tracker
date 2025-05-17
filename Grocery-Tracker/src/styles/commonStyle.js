@@ -18,7 +18,7 @@ const commStyle = StyleSheet.create({
         marginTop: "110%",
         right: -30,
         overflow: "hidden",
-        opacity: 0.8,
+        opacity: 0.4,
     },
 
     bottomBar:{
