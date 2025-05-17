@@ -70,7 +70,6 @@ export const PopUp_AddProduct = ({ visible, setVisible, setItems , listID}) => {
                         <Text style={btnStyle.TopModalTitle}>New Product</Text>
                     </View>
 
-                    <View style={{marginTop: 30}}/>
                     <TextInput style={btnStyle.textInput} placeholder={"Name"} onChangeText={(val)=>{setName(val)}} />
                     <TextInput style={btnStyle.textInput} placeholder={"Quantity"} onChangeText={(val)=>{setQuantity(val)}} keyboardType="numeric" />
                     <TextInput style={btnStyle.textInput} placeholder={"Price"} onChangeText={(val)=>{setPrice(val)}} keyboardType="numeric" />
@@ -102,11 +101,6 @@ export const PopUp_AddProduct = ({ visible, setVisible, setItems , listID}) => {
         </Modal>
     );
 }
-
-
-
-
-
 
 export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visible, setVisible, items , idProduct , onDelete }) => {
 
@@ -162,7 +156,7 @@ export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visi
                 onPressOut={() => setVisible(false)} // chiude se clicchi fuori
             >
 
-                <View style={btnStyle.popUp_product}>
+                <View style={btnStyle.popUp_productEdit} >
                     <View style={btnStyle.topModal}>
                         <Text style={btnStyle.TopModalTitle}>Edit Product</Text>
                     </View>
@@ -193,12 +187,8 @@ export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visi
                         />
                     </View>
 
-                    <TouchableOpacity >
-                        <Text style={btnStyle.addBtn}>Save Edits</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>{deleteProduct(idProduct)}}>
-                        <Text style={btnStyle.deleteBtn}>Delete</Text>
-                    </TouchableOpacity>
+                    <Button title="Save Edits" >Save Edits</Button>
+                    <Button title="Delete"  onPress={()=>{deleteProduct(idProduct)}}>Delete</Button>
 
                 </View>
             </TouchableOpacity>
@@ -239,7 +229,6 @@ export const PopUp_AddList = ({ visible, setVisible, items }) => {
                         <Text style={btnStyle.TopModalTitle}>New List</Text>
                     </View>
 
-                    <View style={{marginTop: 30}}/>
                     <TextInput style={btnStyle.textInput} placeholder={"Name"} onChangeText={(val)=>{setName(val)}} />
 
                     <Button  title="Add List" onPress={()=>{inserisciNuovaLista()}}></Button>
