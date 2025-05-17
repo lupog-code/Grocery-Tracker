@@ -31,7 +31,7 @@ const ListsScreen = () => {
                 </TouchableOpacity>
 
                 <View style={{width:'43%'}}>
-                    <Text style={commStyle.homeTitle2} >Home Page</Text>
+                    <Text style={commStyle.homeTitle2} >Lists</Text>
                 </View>
 
                 <View style={{width:'28%'}}/>
