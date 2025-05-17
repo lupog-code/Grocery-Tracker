@@ -1,14 +1,13 @@
-
-
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import { SafeAreaView } from 'react-native';
 import { Button } from 'react-native-paper';
 import RecentProductItem from '../components/RecentProduct';
 import { getUltimiDieciItemComprati } from '../data/db';
-import { FlatList } from 'react-native';
+import {FlatList} from 'react-native';
+import commStyle from "../styles/commonStyle";
 
-//RecentProducts 
+
 const RecentProducts = ({navigation , route}) => {
     const [prodotti , setProdotti] = useState([]);
     useEffect(() => {
@@ -25,8 +24,22 @@ const RecentProducts = ({navigation , route}) => {
     }, []);
 
     return (
+        <View style={commStyle.body}>
+
+            <View style={commStyle.flexView2}>
+                <TouchableOpacity style={commStyle.sideBlock}>
+                    <Text style={commStyle.gobackText}>Home</Text>
+                </TouchableOpacity>
+
+                <View style={commStyle.titleBlock}>
+                    <Text style={commStyle.homeTitle2}>Recent Products</Text>
+                </View>
+
+                <View style={commStyle.sideBlock} />
+            </View>
+
         <SafeAreaView style={{ flex: 1, padding: 20 }}>
-            <Text>Recent Products</Text>
+
             <FlatList
                 data={prodotti}
                 renderItem={({ item }) => (
@@ -43,6 +56,10 @@ const RecentProducts = ({navigation , route}) => {
             
             <Button mode="contained" onPress={() => navigation.goBack()}>GO BACK</Button>
         </SafeAreaView>
+
+
+        </View>
+
     );
 }
 export default RecentProducts;
