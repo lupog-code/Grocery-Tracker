@@ -70,7 +70,7 @@ export const Product = ({id, name, quantity, price, category ,onDelete}) => {
 
             <View style={compStyle.Cont60}>
                 <Text style={compStyle.ProductTitle}>{name}</Text>
-                <Text style={compStyle.ProductSubTitle}>Quanity: {quantity}</Text>
+                <Text style={compStyle.ProductSubTitle}>Quantity: {quantity}</Text>
                 <Text style={compStyle.ProductSubTitle}>{category}</Text>
             </View>
 

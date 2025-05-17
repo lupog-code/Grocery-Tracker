@@ -29,7 +29,9 @@ export const SearchBar = ({setSearchText}) => {
                     placeholder="Search..."
                 />
                 <View style={{ marginLeft: 10 }}>
-                    <Ionicons name="search" size={20} color="gray" /> {/* ✅ Icona corretta */}
+                    <Text>
+                        <Ionicons name="search" size={20} color="gray" /> {/* ✅ Icona corretta */}
+                    </Text>
                 </View>
             </View>
         </SafeAreaView>
