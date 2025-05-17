@@ -5,6 +5,7 @@ import HomeScreen from '../screens/HomeScreen';
 import AnalysisScreen from '../screens/AnalysisScreen';
 import ListsScreen from '../screens/ListsScreen';
 import commStyle from '../styles/commonStyle';
+import CategoryScreen from "../screens/CategoryScreen";
 
 
 const Tab = createBottomTabNavigator();
@@ -33,9 +34,14 @@ const BottomNavigation = ()=>{
                 <Ionicons name="stats-chart" color={color} size={size}/>
             )
         }}/>
+        <Tab.Screen name="Categorys" component ={CategoryScreen}
+        options={{
+            tabBarIcon: ({color, size}) => (
+            <Ionicons name="apps-outline" color={color} size={size}/>
+            )
+        }}/>
 
 
-       
     </Tab.Navigator>
     );
     

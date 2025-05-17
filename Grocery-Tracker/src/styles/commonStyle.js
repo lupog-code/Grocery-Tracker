@@ -39,12 +39,6 @@ const commStyle = StyleSheet.create({
         width:'100%',
     },
 
-    flexView2:{
-        flexDirection:'row',
-        width:'100%',
-        marginBottom: 20,
-    },
-
     homeTitle:{
         color:'white',
         fontSize:32,
@@ -57,15 +51,6 @@ const commStyle = StyleSheet.create({
         textShadowOffset: { width: 1, height: 1 },
         textShadowRadius: 2,                     // sfocatura
 
-    },
-
-    homeTitle2:{
-        color:'white',
-        fontSize:29,
-        fontWeight: 600,
-        marginRight: "auto",
-        marginBottom: "auto",
-        width: '100%',
     },
 
     recentButton:{
@@ -94,12 +79,36 @@ const commStyle = StyleSheet.create({
         marginTop:30,
     },
 
-    gobackText:{
-        color:'#C3E0E5',
-        marginTop: 'auto',
-        marginBottom:'auto',
-        fontSize:20,
-        fontWeight:500,
+    flexView2: {
+        flexDirection: 'row',
+        alignItems: 'center', // centra verticalmente
+        justifyContent: 'space-between',
+        width: '100%',
+        marginBottom: 20,
+        paddingHorizontal: 10, // margini laterali dinamici
+    },
+
+    sideBlock: {
+        flex: 1, // prende lo spazio minimo necessario
+        alignItems: 'flex-start',
+    },
+
+    titleBlock: {
+        flex: 2, // il blocco centrale prende più spazio
+        alignItems: 'center',
+    },
+
+    homeTitle2: {
+        color: 'white',
+        fontSize: 24,
+        fontWeight: '600',
+        textAlign: 'center',
+    },
+
+    gobackText: {
+        color: '#C3E0E5',
+        fontSize: 18,
+        fontWeight: '500',
     },
 
 
