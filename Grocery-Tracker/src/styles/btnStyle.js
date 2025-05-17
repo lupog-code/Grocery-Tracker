@@ -119,6 +119,7 @@ const btnStyle = StyleSheet.create({
             backgroundColor: '#1a3152'
         }
     },
+
     deleteBtn: {
         color: '#d32f2f', // Rosso più moderno
         marginLeft: 'auto',
@@ -176,6 +177,7 @@ const btnStyle = StyleSheet.create({
             transform: [{ scale: 1.02 }]
         }
     },
+
     saveButtonText: {
         color: 'white',
         fontSize: 16,
@@ -206,6 +208,7 @@ const btnStyle = StyleSheet.create({
             transform: [{ scale: 1.02 }]
         }
     },
+
     deleteButtonText: {
         color: '#d32f2f', // Testo rosso
         fontSize: 16,
