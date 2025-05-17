@@ -25,7 +25,7 @@ const compStyle = StyleSheet.create({
 
     ProductContainer:{
         backgroundColor:'#274472',
-        height: 140,
+        height: 120,
         width: '100%',
         marginTop: 20,
         borderRadius: 15,
@@ -47,7 +47,7 @@ const compStyle = StyleSheet.create({
     },
 
     categoryEmoji:{
-        fontSize:50,
+        fontSize:43,
         marginBottom:'auto',
         marginLeft:'auto',
         marginRight:'auto',
@@ -64,8 +64,8 @@ const compStyle = StyleSheet.create({
         marginTop: 5,
         marginLeft:10,
         marginBottom: 5,
-        fontSize: 26,
-        fontWeight: 500,
+        fontSize: 24,
+        fontWeight: 600,
         color:'white',
     },
 
@@ -73,7 +73,7 @@ const compStyle = StyleSheet.create({
         marginTop: 2,
         marginLeft:10,
         marginBottom: 2,
-        fontSize: 20,
+        fontSize: 17,
         fontWeight: 500,
         color: '#C3E0E5',
     },
@@ -81,8 +81,8 @@ const compStyle = StyleSheet.create({
     price:{
         color:'white',
         marginTop: "auto",
-        fontSize: 25,
-        fontWeight: 500,
+        fontSize: 21,
+        fontWeight: 600,
         alignItems:'center',
         marginRight:'auto',
     },
