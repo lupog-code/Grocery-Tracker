@@ -341,38 +341,3 @@ export const PopUp_AddList = ({ visible, setVisible }) => {
         </Modal>
     );
 };
-
-export const PopUp_editList = ({ namein, visible, setVisible }) => {
-    const [name, setName] = useState(namein);
-
-    return (
-        <Modal
-            visible={visible}
-            transparent={true}
-            onRequestClose={() => setVisible(false)}
-            animationType="slide"
-        >
-            <TouchableOpacity
-                style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' }}
-                activeOpacity={1}
-                onPressOut={() => setVisible(false)}
-            >
-                <View style={btnStyle.popUp_list}>
-                    <View style={btnStyle.topModal}>
-                        <Text style={btnStyle.TopModalTitle}>Edit List</Text>
-                    </View>
-
-                    <View style={{ marginTop: 30 }} />
-                    <TextInput
-                        style={btnStyle.textInput}
-                        placeholder="Name"
-                        value={name}
-                        onChangeText={val => setName(val)}
-                    />
-
-                    <Text style={btnStyle.addBtn}>Edit List</Text>
-                </View>
-            </TouchableOpacity>
-        </Modal>
-    );
-};
