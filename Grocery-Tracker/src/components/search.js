@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, TextInput, SafeAreaView} from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; // ✅ Icona importata correttamente
+import { Ionicons } from '@expo/vector-icons'; 
 import { useState } from 'react';
 import {Button, Modal, Text, StyleSheet, TouchableOpacity } from 'react-native';
 

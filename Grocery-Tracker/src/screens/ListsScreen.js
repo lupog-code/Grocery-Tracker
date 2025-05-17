@@ -13,7 +13,6 @@ const ListsScreen = () => {
         const fetchLists = async () => {
             try {
                 const data = await getListe();
-                console.log("Fetched lists:", data);
                 setLists(data); 
             } catch (error) {
                 console.error("Error fetching lists:", error);
