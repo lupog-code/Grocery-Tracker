@@ -1,9 +1,7 @@
 import React from 'react';
 import {View, Text, Image, Touchable, TouchableOpacity, ScrollView, SafeAreaView, FlatList, Alert} from 'react-native';
 import commStyle from '../styles/commonStyle';
-import {Ionicons} from "@expo/vector-icons";
 import {OldProduct , Product} from "../components/listObj";
-import { Button } from 'react-native';
 import { getItemsByListId ,getByName, modificaItem} from '../data/db';
 import { useState, useEffect } from 'react';
 import { SearchBar ,FilterBar} from '../components/search';
@@ -11,9 +9,9 @@ import { AddProductBtn } from '../components/btnsObj';
 import { rimuoviItem, rimuoviLista } from '../data/db';
 
 const ListsScreen = ({navigation , route}) => {
-    const listId = route.params.id; //Ricevo l'id della lista
-    const listName = route.params.name; //Ricevo il nome della lista
-    const [products, setProducts] = useState([]); //Inizializzo la lista dei prodotti
+    const listId = route.params.id;
+    const listName = route.params.name; 
+    const [products, setProducts] = useState([]); 
    
 
     const fetchProducts = async () => {
