@@ -135,6 +135,44 @@ const compStyle = StyleSheet.create({
         marginTop: 5,
         textAlign: 'right',
     },
+
+    FixedCategoryContainer:{
+        height: 70,
+        width: '100%',
+        marginTop: 20,
+        borderRadius: 15,
+        padding: 10,
+        backgroundColor:'#274472',
+        flexDirection:'row',
+    },
+
+    ModCategoryContainer:{
+        height: 70,
+        width: '100%',
+        marginTop: 20,
+        borderRadius: 15,
+        padding: 10,
+        backgroundColor:'#334770',
+        flexDirection:'row',
+    },
+
+    CategoryTitle:{
+        fontSize: 22,
+        fontWeight: 600,
+        color:'white',
+        marginTop: "auto",
+        marginBottom:"auto",
+        marginLeft: 10,
+    },
+
+    modifyCategory:{
+        color:'white',
+        fontSize: 25,
+        marginRight: 15,
+        marginTop: "auto",
+        marginBottom:"auto",
+    },
+
 });
 
 export default compStyle;

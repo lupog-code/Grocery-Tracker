@@ -144,3 +144,22 @@ export const SmallOldProduct = ({id , name, quantity, price, category, data}) =>
     );
 }
 
+export const ModifiableCategory = ({id , name}) => {
+    return(
+        <View style={compStyle.ModCategoryContainer}>
+            <Text style={compStyle.CategoryTitle}>{name}</Text>
+
+            <TouchableOpacity style={{marginLeft:'auto'}}>
+                <Ionicons style={compStyle.modifyCategory} name="pencil-outline" />
+            </TouchableOpacity>
+        </View>
+    );
+}
+
+export const FixedCategory = ({id , name}) => {
+    return(
+        <View style={compStyle.FixedCategoryContainer}>
+            <Text style={compStyle.CategoryTitle}>{name}</Text>
+        </View>
+    );
+}
