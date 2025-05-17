@@ -8,7 +8,7 @@ import { getUltimeDueListe } from '../data/db';
 import { useState, useEffect } from 'react';
 import Fallback from '../components/fallback';
 import { getUltimiDieciItemComprati } from '../data/db';
-
+import { useNavigation } from '@react-navigation/native';
 const HomeScreen = () => {
     const [lists, setLists] = useState([]);
     const [products, setProducts] = useState([]);
@@ -37,12 +37,16 @@ const HomeScreen = () => {
     })
 
 
+    const navigation = useNavigation();
+    const goToRecentProducts = () => {
+        navigation.navigate("RecentProducts", {products: products});
+    }
     return (
         <View style={commStyle.body}>
 
             <View style={commStyle.flexView}>
-                <Text style={commStyle.homeTitle}>Home</Text>
-                <TouchableOpacity>
+                <Text style={commStyle.homeTitle}>Welcome back</Text>
+                <TouchableOpacity onPress={() => {goToRecentProducts()}} >
                     <View style={commStyle.recentButton}>
                         <Ionicons name="time" style={commStyle.recentButtonIcon}/>
                     </View>

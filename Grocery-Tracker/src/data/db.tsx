@@ -22,7 +22,7 @@ export const createTables = async () => {
         list_id INTEGER,
         comprato boolean DEFAULT false,
         data_compera TIMESTAMP DEFAULT null,
-        FOREIGN KEY (list_id) REFERENCES lists(id),
+        FOREIGN KEY (list_id) REFERENCES lists(id) ON DELETE CASCADE,
         FOREIGN KEY (category) REFERENCES categories(name)
       );
       INSERT OR IGNORE INTO categories (name) VALUES
