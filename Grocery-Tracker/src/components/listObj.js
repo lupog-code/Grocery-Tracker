@@ -131,13 +131,11 @@ export const SmallOldProduct = ({id , name, quantity, price, category, data}) =>
             <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
 
             <View style={compStyle.SmallProductContainer}>
-                <TouchableOpacity onPress={() => setVisible(true)}>
                 <View style={{width: '100%'}}>
                     <Text style={compStyle.SmallCategoryEmoji}>{getEmoji({ category })}</Text>
                     <Text style={compStyle.SmallProductTitle}>{quantity}x {name}</Text>
                     <Text style={compStyle.SmallPrice}>{price} $</Text>
                 </View>
-                </TouchableOpacity>
             </View>
 
         </>

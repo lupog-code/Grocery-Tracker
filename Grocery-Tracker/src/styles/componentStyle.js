@@ -122,8 +122,6 @@ const compStyle = StyleSheet.create({
         marginLeft:'auto',
         bottom:-5,
         marginTop: 10,
-        right: -15,
-
     },
 
     SmallProductTitle:{
