@@ -94,7 +94,14 @@ export const PopUp_AddProduct = ({ visible, setVisible, setItems , listID}) => {
                         />
                     </View>
 
-                    <Button title="Add Product" onPress={()=>{addProduct()}}>Add Product</Button>
+                    <TouchableOpacity
+                        style={btnStyle.saveButton}
+                        onPress={()=>{addProduct()}}
+                        activeOpacity={0.7}
+                    >
+                        <Text style={btnStyle.saveButtonText}>Add Product</Text>
+                    </TouchableOpacity>
+
                 </View>
             </TouchableOpacity>
 
@@ -161,7 +168,6 @@ export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visi
                         <Text style={btnStyle.TopModalTitle}>Edit Product</Text>
                     </View>
 
-                    <View style={{marginTop: 30}}/>
                     <TextInput style={btnStyle.textInput} value={name} onChangeText={(val)=>{setName(val)}} placeholder={"Name"}  />
                     <TextInput style={btnStyle.textInput} placeholder={"Quantity"} onChangeText={(val)=>{setQuantity(val)}}  keyboardType="numeric" />
                     <TextInput style={btnStyle.textInput} placeholder={"Price"} onChangeText={(val)=>{setPrice(val)}} keyboardType="numeric" />
@@ -187,9 +193,21 @@ export const PopUp_editProduct = ({namein, quantityin, pricein, categoryin, visi
                         />
                     </View>
 
-                    <Button title="Save Edits" >Save Edits</Button>
-                    <Button title="Delete"  onPress={()=>{deleteProduct(idProduct)}}>Delete</Button>
+                    <TouchableOpacity
+                        style={btnStyle.saveButton}
+                        onPress={() => saveEdits()}
+                        activeOpacity={0.7}
+                    >
+                        <Text style={btnStyle.saveButtonText}>Save Edits</Text>
+                    </TouchableOpacity>
 
+                    <TouchableOpacity
+                        style={btnStyle.deleteButton}
+                        onPress={() => deleteProduct(idProduct)}
+                        activeOpacity={0.7}
+                    >
+                        <Text style={btnStyle.deleteButtonText}>Delete</Text>
+                    </TouchableOpacity>
                 </View>
             </TouchableOpacity>
 

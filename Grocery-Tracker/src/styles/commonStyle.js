@@ -89,13 +89,13 @@ const commStyle = StyleSheet.create({
     },
 
     sideBlock: {
-        flex: 1, // prende lo spazio minimo necessario
         alignItems: 'flex-start',
+        width:'28%',
     },
 
     titleBlock: {
-        flex: 2, // il blocco centrale prende più spazio
         alignItems: 'center',
+        width:'44%',
     },
 
     homeTitle2: {
@@ -107,6 +107,12 @@ const commStyle = StyleSheet.create({
 
     gobackText: {
         color: '#C3E0E5',
+        fontSize: 18,
+        fontWeight: '500',
+    },
+
+    deleteText: {
+        color: '#e5c3c3',
         fontSize: 18,
         fontWeight: '500',
     },

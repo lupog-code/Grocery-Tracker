@@ -38,14 +38,14 @@ const btnStyle = StyleSheet.create({
         margin: "auto",
         height: 180,
         width: 370,
-        padding: 40,
+        padding: 23,
         backgroundColor: 'white',
         borderRadius: 35,
     },
 
     popUp_product: {
         margin: "auto",
-        height: 370,
+        height: 390,
         width: 370,
         padding: 30, // Ridotto per più spazio
         backgroundColor: 'white',
@@ -62,7 +62,7 @@ const btnStyle = StyleSheet.create({
 
     popUp_productEdit: {
         margin: "auto",
-        height: 430,
+        height: 460,
         width: 370,
         padding: 30, // Ridotto per più spazio
         backgroundColor: 'white',
@@ -152,6 +152,66 @@ const btnStyle = StyleSheet.create({
             size: 20
         }
     },
+
+    saveButton: {
+        backgroundColor: '#274472',
+        paddingVertical: 12,
+        paddingHorizontal: 24,
+        borderRadius: 25,
+        marginVertical: 10,
+        alignSelf: 'center',
+        minWidth: 150,
+        justifyContent: 'center',
+        alignItems: 'center',
+        elevation: 3,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+        borderWidth: 1,
+        borderColor: '#274472',
+        // Effetto hover per web
+        ':hover': {
+            backgroundColor: '#1a3152',
+            transform: [{ scale: 1.02 }]
+        }
+    },
+    saveButtonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: '600',
+        letterSpacing: 0.5
+    },
+
+    deleteButton: {
+        backgroundColor: '#ffebee', // Sfondo chiaro per il bottone di delete
+        paddingVertical: 12,
+        paddingHorizontal: 24,
+        borderRadius: 25,
+        marginVertical: 10,
+        alignSelf: 'center',
+        minWidth: 150,
+        justifyContent: 'center',
+        alignItems: 'center',
+        elevation: 2,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+        borderWidth: 1,
+        borderColor: '#d32f2f', // Bordo rosso
+        // Effetto hover per web
+        ':hover': {
+            backgroundColor: '#ffcdd2',
+            transform: [{ scale: 1.02 }]
+        }
+    },
+    deleteButtonText: {
+        color: '#d32f2f', // Testo rosso
+        fontSize: 16,
+        fontWeight: '600',
+        letterSpacing: 0.5
+    }
 
 
 });
