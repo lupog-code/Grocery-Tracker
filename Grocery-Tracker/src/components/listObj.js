@@ -159,6 +159,7 @@ export const ModifiableCategory = ({id , name}) => {
 export const FixedCategory = ({id , name}) => {
     return(
         <View style={compStyle.FixedCategoryContainer}>
+            <Text>{getEmoji({ name })}</Text>
             <Text style={compStyle.CategoryTitle}>{name}</Text>
         </View>
     );
