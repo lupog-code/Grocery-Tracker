@@ -397,7 +397,7 @@ export const addCategory = async (category) => {
   try {
     await db.runAsync(
       `INSERT INTO categories (name) VALUES (?);`,
-      [category.name]
+      [category]
     );
     console.log('Categoria aggiunta con successo');
   } catch (error) {
