@@ -53,6 +53,14 @@ export const SearchBar = ({setSearchText}) => {
             setModalVisible(false);
         };
 
+        const resetFilters = () => {
+            setCategory('');
+            setMinPrice(null);
+            setMaxPrice(null);
+            setFiltri({ category: '', minPrice: null, maxPrice: null });
+            setModalVisible(false);
+        };
+
         const [pickerItems, setPickerItems] = React.useState([
                 { label: 'Fruits', value: 'Fruits' },
                 { label: 'Vegetables', value: 'Vegetables' },
@@ -77,15 +85,17 @@ export const SearchBar = ({setSearchText}) => {
                             <Text style={styles.modalTitle}>Enter Filters</Text>
                             <TextInput
                                 style={styles.filterButton}
-                                placeholder="Max Price"
+                                placeholder="Min Price"
                                 value={minPrice}
                                 onChangeText={setMinPrice}
+                                keyboardType="numeric"
                             />
                             <TextInput
                                 style={styles.filterButton}
                                 placeholder="Max Price"
                                 value={maxPrice}
                                 onChangeText={setMaxPrice}
+                                keyboardType="numeric"
                             />
                             <View>
                                 <DropDownPicker
@@ -106,6 +116,7 @@ export const SearchBar = ({setSearchText}) => {
                                 />
                             </View>
                             <Button title="Apply Filters" onPress={applyFilters} />
+                            <Button title="Reset Filters" onPress={resetFilters} color="red"/>
                             <Button title="Close" onPress={() => setModalVisible(false)} />
                         </View>
                     </View>
@@ -137,12 +148,16 @@ export const SearchBar = ({setSearchText}) => {
             marginBottom: 20,
         },
         filterButton: {
-            padding: 10,
+            paddingVertical: 12,
+            paddingHorizontal: 10,
             marginVertical: 5,
-            backgroundColor: '#f0f0f0',
+            backgroundColor: 'white',
             borderRadius: 5,
+            borderWidth: 1,
+            borderColor: '#20385E',
             width: '100%',
-            alignItems: 'center',
+            fontSize: 16,
+            color: '#20385E',
         },
 });
 
