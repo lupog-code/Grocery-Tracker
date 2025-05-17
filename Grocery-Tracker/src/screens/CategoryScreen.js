@@ -3,24 +3,12 @@ import {View, Text, TouchableOpacity, ScrollView , FlatList} from 'react-native'
 import commStyle from '../styles/commonStyle';
 import {FixedCategory, ModifiableCategory} from "../components/listObj";
 import {getFixedCategorie, getModifiableCategorie} from '../data/db';
-
+import AddCategoryButton from '../components/AddCategoryButton';
+import { addCategory } from '../data/db';
 const ListsScreen = () => {
-    const [fixCategory, setFixCategory] = useState([]);
+
     const [modCategory, setModCategory] = useState([]);
 
-    useEffect(() => {
-            const fetchFixed = async () => {
-                try {
-                    const data = await getFixedCategorie();
-                    console.log("Fetched lists:", data);
-                    setFixCategory(data);
-                } catch (error) {
-                    console.error("Error fetching lists:", error);
-                }
-            };
-            fetchFixed();
-        }
-        , [])
 
     useEffect(() => {
             const fetchMod = async () => {
@@ -38,30 +26,30 @@ const ListsScreen = () => {
 
 
 
+        //Funzione per aggiungere una categoria
+        const handleAddCategory = async (categoryName) => {
+            try {
+                await addCategory(categoryName);
+                setModCategory((prevCategories) => [...prevCategories, { name: categoryName }]);
+            } catch (error) {
+                console.error("Error adding category:", error);
+            }
+        };
+
+
     return (
         <View style={commStyle.body}>
 
             <View style={commStyle.flexView2}>
                
 
-                <View style={commStyle.titleBlock}>
-                    <Text style={commStyle.homeTitle2}>Categories</Text>
-                </View>
+                <Text style={{fontSize: 24, fontWeight: 'bold', color: '#000'}}>Personalize your categories</Text>
 
                 <View style={commStyle.sideBlock} />
             </View>
 
 
-            <ScrollView showsVerticalScrollIndicator={false}>
-
-                <FlatList
-                    data={fixCategory}
-                    scrollEnabled={false}
-                    renderItem={({ item }) => (
-                        <FixedCategory name={item.name}  />
-                    )}
-                    keyExtractor={(item) => item.name.toString()}
-                />
+            <ScrollView style={{width: '100%'}}>
             <Text style={{marginTop: 20, marginBottom: 10, fontSize: 20, fontWeight: 'bold', color: '#000'}}>Lately added</Text>
                 <FlatList
                     data={modCategory}
@@ -74,7 +62,7 @@ const ListsScreen = () => {
 
             </ScrollView>
 
-
+                    <AddCategoryButton onAddCategory={handleAddCategory}/>
         </View>
     );
 }

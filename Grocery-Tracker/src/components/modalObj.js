@@ -163,25 +163,25 @@ export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, vis
 
     const deleteProduct = (idProduct) => {
         Alert.alert(
-            "Sei sicuro di voler eliminare questo prodotto?",
-            "Questa azione non può essere annullata",
+            "Are you sure you want to delete this product?",
+            "This action cannot be undone",
             [
-                {
-                    text: "Annulla",
-                    style: "cancel"
-                },
-                {
-                    text: "Elimina",
-                    onPress: async () => {
-                        try {
-                            await rimuoviItem(idProduct);
-                            setVisible(false);
-                            console.log("Deleted product with id: " + idProduct);
-                        } catch (error) {
-                            console.error("Error deleting product:", error);
-                        }
-                    }
+            {
+                text: "Cancel",
+                style: "cancel"
+            },
+            {
+                text: "Delete",
+                onPress: async () => {
+                try {
+                    await rimuoviItem(idProduct);
+                    setVisible(false);
+                    console.log("Deleted product with id: " + idProduct);
+                } catch (error) {
+                    console.error("Error deleting product:", error);
                 }
+                }
+            }
             ]
         );
     };

@@ -29,24 +29,24 @@ const ListsScreen = ({navigation , route}) => {
 
     const handleDeleteList = (listId) => {
         Alert.alert(
-            "Sei sicuro di voler eliminare questa lista?", 
-            "Questa azione non può essere annullata", 
+            "Are you sure you want to delete this list?",
+            "This action cannot be undone",
             [
-                {
-                    text: "Annulla",
-                    style: "cancel"
-                },
-                {
-                    text: "Elimina",
-                    onPress: async () => {
-                        try {
-                            await rimuoviLista(listId);
-                            navigation.goBack();
-                        } catch (error) {
-                            console.error("Error deleting product:", error);
-                        }
-                    }
+            {
+                text: "Cancel",
+                style: "cancel"
+            },
+            {
+                text: "Delete",
+                onPress: async () => {
+                try {
+                    await rimuoviLista(listId);
+                    navigation.goBack();
+                } catch (error) {
+                    console.error("Error deleting product:", error);
                 }
+                }
+            }
             ]
         );
     };

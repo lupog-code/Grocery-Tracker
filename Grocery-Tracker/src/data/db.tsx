@@ -379,3 +379,15 @@ export const buyItem = async (idItem) => {
     console.error('Errore nell\'acquisto dell\'item', error);
   }
 }  
+
+export const addCategory = async (category) => {
+  try {
+    await db.runAsync(
+      `INSERT INTO categories (name) VALUES (?);`,
+      [category.name]
+    );
+    console.log('Categoria aggiunta con successo');
+  } catch (error) {
+    console.error('Errore nell\'aggiunta della categoria', error);
+  }
+}

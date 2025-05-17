@@ -4,8 +4,8 @@ import { View, Text, StyleSheet } from 'react-native';
 const Fallback = () => {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Non ci sono liste disponibili</Text>
-            <Text style={styles.subText}>Crea una nuova lista per iniziare</Text>
+            <Text style={styles.text}>No lists available</Text>
+            <Text style={styles.subText}>Create a new list to get started</Text>
         </View>
     );
 };

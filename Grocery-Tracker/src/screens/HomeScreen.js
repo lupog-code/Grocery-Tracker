@@ -45,7 +45,7 @@ const HomeScreen = () => {
         <View style={commStyle.body}>
 
             <View style={commStyle.flexView}>
-                <Text style={commStyle.homeTitle}>Welcome back</Text>
+                <Text style={commStyle.homeTitle}>👋 Welcome back</Text>
                 <TouchableOpacity onPress={() => {goToRecentProducts()}} >
                     <View style={commStyle.recentButton}>
                         <Ionicons name="time" style={commStyle.recentButtonIcon}/>
@@ -64,7 +64,7 @@ const HomeScreen = () => {
             <ScrollView showsVerticalScrollIndicator={false}>
                
                 
-            <Text style={commStyle.subTitle}>Recent Lists</Text>
+            <Text style={commStyle.subTitle}>📝 Recent Lists</Text>
              {lists.length === 0 && <Fallback />}
                 <FlatList
                 scrollEnabled={false}
@@ -75,7 +75,7 @@ const HomeScreen = () => {
                 keyExtractor={(item) => item.id.toString()}
                 />
 
-            <Text style={commStyle.subTitle}>Recent Products</Text>
+            <Text style={commStyle.subTitle}>🛒 Recent Products</Text>
 
 
                     <FlatList
