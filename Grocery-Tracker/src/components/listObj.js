@@ -6,10 +6,6 @@ import {PopUp_editProduct} from "./modalObj";
 import { useNavigation } from '@react-navigation/native';
 import { buyItem } from '../data/db';
 
-const getDate = (data) => {
-    return data.split(' ')[0];
-};
-
 const getEmoji = ({ category }) => {
     if (category === "Fruits") {
         return "🍎";
@@ -112,7 +108,7 @@ export const OldProduct = ({id, name, quantity, price, category, data , onDelete
 
 
                 <View style={compStyle.Cont20}>
-                    <Text style={compStyle.data}>{getDate(data)}</Text>
+                    <Text style={compStyle.data}>{data}</Text>
                     <Text style={compStyle.price}>{price} $</Text>
                 </View>
             </View>
