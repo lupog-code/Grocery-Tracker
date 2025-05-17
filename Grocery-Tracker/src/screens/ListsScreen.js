@@ -20,8 +20,7 @@ const ListsScreen = () => {
             }
         };
         fetchLists();
-    }
-    , [])
+    });
 
     return (
         <View style={commStyle.body}>
