@@ -5,6 +5,7 @@ const db = SQLite.openDatabaseSync('grocery');
 export const createTables = async () => {
   try {
     await db.execAsync(`
+      PRAGMA foreign_keys = ON;
       CREATE TABLE IF NOT EXISTS lists (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL
