@@ -62,7 +62,7 @@ const ListsScreen = () => {
                     )}
                     keyExtractor={(item) => item.name.toString()}
                 />
-
+            <Text style={{marginTop: 20, marginBottom: 10, fontSize: 20, fontWeight: 'bold', color: '#000'}}>Lately added</Text>
                 <FlatList
                     data={modCategory}
                     scrollEnabled={false}

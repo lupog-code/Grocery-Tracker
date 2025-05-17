@@ -4,7 +4,7 @@ import compStyle from '../styles/componentStyle';
 import {Ionicons} from "@expo/vector-icons";
 import {PopUp_editProduct} from "./modalObj";
 import { useNavigation } from '@react-navigation/native';
-
+import { buyItem } from '../data/db';
 const getDate = (timestamp) => {
     const date = new Date(Number(timestamp));
 
@@ -80,7 +80,12 @@ export const Product = ({id, name, quantity, price, category ,onDelete}) => {
                 <Switch
                     style={compStyle.switch}
                     trackColor={{false: '#767577', true: '#35C758'}}
-                    onValueChange={() => setIsEnabled(previousState => !previousState)}
+                    onValueChange={(newValue) => {
+                        setIsEnabled(newValue);
+                        if (newValue) {
+                            buyItem(id);
+                        }
+                    }}
                     value={isEnabled}
                 />
                 <Text style={compStyle.price}>{price} $</Text>

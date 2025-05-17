@@ -366,3 +366,16 @@ export const DropTabelle = async () => {
     console.error('Errore nell\'eliminazione delle tabelle', error);
   }
 }
+
+
+export const buyItem = async (idItem) => {
+  try {
+    await db.runAsync(
+      `UPDATE items SET comprato = true, data_compera = CURRENT_TIMESTAMP WHERE id = ?;`,
+      [idItem]
+    );
+    console.log('Item comprato con successo');
+  } catch (error) {
+    console.error('Errore nell\'acquisto dell\'item', error);
+  }
+}  
