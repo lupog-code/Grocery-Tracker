@@ -4,7 +4,7 @@ import commStyle from '../styles/commonStyle';
 import {Ionicons} from "@expo/vector-icons";
 import {OldProduct , Product} from "../components/listObj";
 import { Button } from 'react-native';
-import { getItemsByListId ,getByName} from '../data/db';
+import { getItemsByListId ,getByName, modificaItem} from '../data/db';
 import { useState, useEffect } from 'react';
 import { SearchBar ,FilterBar} from '../components/search';
 import { AddProductBtn } from '../components/btnsObj';
@@ -27,32 +27,7 @@ const ListsScreen = ({navigation , route}) => {
 
     useEffect(() => {
         fetchProducts();
-    }, []);
-
-    const handleDelete = (idProd) => {
-        Alert.alert(
-            "Sei sicuro di voler eliminare questo prodotto?", 
-            "Questa azione non può essere annullata", 
-            [
-                {
-                    text: "Annulla",
-                    style: "cancel"
-                },
-                {
-                    text: "Elimina",
-                    onPress: async () => {
-                        try {
-                            await rimuoviItem(idProd);
-                            // Chiamiamo fetchProducts solo dopo che l'eliminazione è completata
-                            await fetchProducts();
-                        } catch (error) {
-                            console.error("Error deleting product:", error);
-                        }
-                    }
-                }
-            ]
-        );
-    };
+    }, [products]);
 
     const handleDeleteList = (listId) => {
         Alert.alert(
@@ -125,19 +100,29 @@ const ListsScreen = ({navigation , route}) => {
 
             <ScrollView showsVerticalScrollIndicator={false}>
             <FlatList
-            data={visualizableProducts}
-            keyExtractor={(item) => item.id.toString()}
-            scrollEnabled={false}
-            renderItem={({ item }) => (
-                //Se l'elemento è stato comprato, mostra OldProduct, altrimenti mostra Product
-                 item.comprato ?
-                <OldProduct onDelete={(id)=>handleDelete(id)} id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera} />
+              data={visualizableProducts}
+              keyExtractor={(item) => item.id.toString()}
+              scrollEnabled={false}
+              renderItem={({ item }) => (
+                item.comprato ?
+                <OldProduct
+                  id={item.id}
+                  name={item.name}
+                  quantity={item.quantity}
+                  price={item.price}
+                  category={item.category}
+                  data={item.data_compera}
+                />
                 :
-                <Product onDelete={(id)=>handleDelete(id)} id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} />
-            )}
-            >
-
-            </FlatList>
+                <Product
+                  id={item.id}
+                  name={item.name}
+                  quantity={item.quantity}
+                  price={item.price}
+                  category={item.category}
+                />
+              )}
+            />
 
             </ScrollView>
                 
