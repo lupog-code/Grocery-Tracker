@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PieChartItems from '../components/Graphs/PieChart';
@@ -7,6 +7,8 @@ import { Text, StyleSheet } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
 import { getItemsRecentiAcquistati } from '../data/db';
 import StatisticsCard from '../components/Stats';
+
+import { useFocusEffect } from '@react-navigation/native';
 
 const AnalysisScreen = () => {
   const [currentPeriod, setCurrentPeriod] = useState("3m");
@@ -35,22 +37,22 @@ const AnalysisScreen = () => {
     return newDate.toISOString().split('T')[0];
   };
 
-  useEffect(() => {
-
-    const fetchItems = async () => {
-      try {
-        setStartDate(getStartDate(currentPeriod));
-        console.log('Start date:', startDate);
-
-      } catch (error) {
-        console.error('Error fetching items:', error);
-      }
+  const fetchItems = async (period) => {
+    try {
+      const start = getStartDate(period);
+      setStartDate(start);
+      const data = await getItemsRecentiAcquistati(period);
+      setItems(data);
+    } catch (err) {
+      console.error("Error fetching data", err);
     }
+  };
 
-    fetchItems();
-    setItems(getItemsRecentiAcquistati(startDate));
-
-  }, [currentPeriod]);
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchItems(currentPeriod);
+    }, [currentPeriod])
+  );
 
     return (
         <SafeAreaView>
