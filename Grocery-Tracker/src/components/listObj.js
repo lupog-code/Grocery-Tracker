@@ -101,10 +101,6 @@ export const OldProduct = ({id, name, quantity, price, category, data , onDelete
 
                 <View style={compStyle.Cont20}>
                     <Text style={compStyle.categoryEmoji}>{getEmoji({ category })}</Text>
-
-                    <TouchableOpacity onPress={() => setVisible(true)}>
-                        <Ionicons style={compStyle.modifyProduct} name="pencil-outline" />
-                    </TouchableOpacity>
                 </View>
 
 
@@ -159,6 +155,7 @@ export const ModifiableCategory = ({id , name}) => {
 export const FixedCategory = ({id , name}) => {
     return(
         <View style={compStyle.FixedCategoryContainer}>
+            <Text>{getEmoji({ name })}</Text>
             <Text style={compStyle.CategoryTitle}>{name}</Text>
         </View>
     );
