@@ -299,7 +299,8 @@ export const PopUp_AddList = ({ visible, setVisible }) => {
     const [name, setName] = useState('');
 
     const inserisciNuovaLista = async () => {
-        if (name === '') {
+        if (name.trim() === '') {
+            Alert.alert("Please enter a name for the list");
             return;
         }
         try {
