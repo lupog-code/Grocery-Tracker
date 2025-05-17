@@ -8,7 +8,7 @@ import { getItemsByListId ,getByName} from '../data/db';
 import { useState, useEffect } from 'react';
 import { SearchBar ,FilterBar} from '../components/search';
 import { AddProductBtn } from '../components/btnsObj';
-import { rimuoviItem } from '../data/db';
+import { rimuoviItem, rimuoviLista } from '../data/db';
 
 const ListsScreen = ({navigation , route}) => {
     const listId = route.params.id; //Ricevo l'id della lista
@@ -54,6 +54,30 @@ const ListsScreen = ({navigation , route}) => {
         );
     };
 
+    const handleDeleteList = (listId) => {
+        Alert.alert(
+            "Sei sicuro di voler eliminare questa lista?", 
+            "Questa azione non può essere annullata", 
+            [
+                {
+                    text: "Annulla",
+                    style: "cancel"
+                },
+                {
+                    text: "Elimina",
+                    onPress: async () => {
+                        try {
+                            await rimuoviLista(listId);
+                            navigation.goBack();
+                        } catch (error) {
+                            console.error("Error deleting product:", error);
+                        }
+                    }
+                }
+            ]
+        );
+    };
+
     const [visualizableProducts, setVisualizableProducts] = useState(products);
     const [searchText, setSearchText] = useState('');
     const [filtri, setFiltri] = useState({ category: '', minPrice: null, maxPrice: null });
@@ -89,6 +113,10 @@ const ListsScreen = ({navigation , route}) => {
 
                 <View style={{width:'43%'}}>
                     <Text style={commStyle.homeTitle2} >{listName}</Text>
+                </View>
+
+                <View style={{width:'28%'}}>
+                    <Text onPress={() => handleDeleteList(listId)} >Delete List</Text>
                 </View>
 
                 <View style={{width:'28%'}}/>
