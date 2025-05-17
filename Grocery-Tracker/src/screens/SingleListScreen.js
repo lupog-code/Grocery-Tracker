@@ -81,8 +81,6 @@ const ListsScreen = ({navigation , route}) => {
     
     return (
         <View style={commStyle.body}>
-            <SearchBar setSearchText={setSearchText} />
-            <FilterBar setFiltri={setFiltri} />
             <View style={commStyle.flexView2}>
 
                 <TouchableOpacity style={{width:'28%'}} onPress={() => navigation.goBack()}>
@@ -96,6 +94,8 @@ const ListsScreen = ({navigation , route}) => {
                 <View style={{width:'28%'}}/>
             </View>
 
+            <SearchBar setSearchText={setSearchText} />
+            <FilterBar setFiltri={setFiltri} />
 
             <ScrollView showsVerticalScrollIndicator={false}>
             <FlatList

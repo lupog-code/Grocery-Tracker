@@ -73,7 +73,7 @@ export const SearchBar = ({setSearchText}) => {
 
         return (
             <View style={styles.container}>
-                <Button title="Open Filters" onPress={() => setModalVisible(true)} />
+                <Button title="Open Filters" onPress={() => setModalVisible(true)} color="white" />
                 <Modal
                     animationType="slide"
                     transparent={true}
@@ -117,7 +117,6 @@ export const SearchBar = ({setSearchText}) => {
                             </View>
                             <Button title="Apply Filters" onPress={applyFilters} />
                             <Button title="Reset Filters" onPress={resetFilters} color="red"/>
-                            <Button title="Close" onPress={() => setModalVisible(false)} />
                         </View>
                     </View>
                 </Modal>
