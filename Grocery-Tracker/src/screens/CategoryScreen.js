@@ -32,7 +32,7 @@ const ListsScreen = () => {
                 </TouchableOpacity>
 
                 <View style={commStyle.titleBlock}>
-                    <Text style={commStyle.homeTitle2}>Categorys Page</Text>
+                    <Text style={commStyle.homeTitle2}>Categories Page</Text>
                 </View>
 
                 <View style={commStyle.sideBlock} />
