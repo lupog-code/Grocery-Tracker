@@ -81,7 +81,7 @@ const ListsScreen = ({navigation , route}) => {
     
     return (
         <View style={commStyle.body}>
-            <SearchBar setSearchText={setSearchText} setFiltri={setFiltri}> </SearchBar>
+            <SearchBar setSearchText={setSearchText}> </SearchBar>
             <FilterBar setFiltri={setFiltri} />
             <View style={commStyle.flexView2}>
 

@@ -3,6 +3,7 @@ import {View, TextInput, SafeAreaView} from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 import { useState } from 'react';
 import {Button, Modal, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 export const SearchBar = ({setSearchText}) => {
     return (
@@ -43,11 +44,22 @@ export const SearchBar = ({setSearchText}) => {
         const [category, setCategory] = useState('');
         const [minPrice, setMinPrice] = useState(null);
         const [maxPrice, setMaxPrice] = useState(null);
+        const [open, setOpen] = React.useState(false);
 
         const applyFilters = () => {
             setFiltri({ category, minPrice, maxPrice });
             setModalVisible(false);
         };
+
+        const [pickerItems, setPickerItems] = React.useState([
+                { label: 'Fruits', value: 'Fruits' },
+                { label: 'Vegetables', value: 'Vegetables' },
+                { label: 'Meat', value: 'Meat' },
+                { label: 'Dairy', value: 'Dairy' },
+                { label: 'Snacks', value: 'Snacks' },
+                { label: 'Beverages', value: 'Beverages' },
+                { label: 'Other', value: 'Other' },
+            ]);
 
         return (
             <View style={styles.container}>
@@ -63,12 +75,6 @@ export const SearchBar = ({setSearchText}) => {
                             <Text style={styles.modalTitle}>Enter Filters</Text>
                             <TextInput
                                 style={styles.filterButton}
-                                placeholder="Category"
-                                value={category}
-                                onChangeText={setCategory}
-                            />
-                            <TextInput
-                                style={styles.filterButton}
                                 placeholder="Max Price"
                                 value={minPrice}
                                 onChangeText={setMinPrice}
@@ -79,6 +85,24 @@ export const SearchBar = ({setSearchText}) => {
                                 value={maxPrice}
                                 onChangeText={setMaxPrice}
                             />
+                            <View>
+                                <DropDownPicker
+                                    open={open}
+                                    value={category}
+                                    items={pickerItems}
+                                    setOpen={setOpen}
+                                    setValue={setCategory}
+                                    setItems={setPickerItems}
+                                    placeholder="Select a category..."
+                                    
+                                    dropDownContainerStyle={{ borderColor: '#20385E', marginTop: 20 }}
+                                    textStyle={{ fontSize: 20, color: '#20385E' }}
+                                    placeholderStyle={{ color: 'gray' }}
+                                    selectedItemLabelStyle={{ color: 'white' }}
+                                    selectedItemContainerStyle={{ backgroundColor: '#20385E'}}
+                                    selectedItemTextStyle={{ color: 'white' }}
+                                />
+                            </View>
                             <Button title="Apply Filters" onPress={applyFilters} />
                             <Button title="Close" onPress={() => setModalVisible(false)} />
                         </View>
