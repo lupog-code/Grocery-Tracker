@@ -1,124 +1,131 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, Image, Switch, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Switch, TouchableOpacity } from 'react-native';
 import compStyle from '../styles/componentStyle';
-import {Ionicons} from "@expo/vector-icons";
-import {PopUp_editProduct} from "./modalObj";
+import { Ionicons } from "@expo/vector-icons";
+import { PopUp_editProduct } from "./modalObj";
 import { useNavigation } from '@react-navigation/native';
-import {buyItem, rimuoviItemComprato} from '../data/db';
+import { buyItem, rimuoviItemComprato } from '../data/db';
 
 const getEmoji = ({ category }) => {
-    if (category === "Fruits") {
-        return "🍎";
-    } else if (category === "Vegetables") {
-        return "🥬";
-    } else if (category === "Dairy") {
-        return "🧈";
-    } else if (category === "Meat") {
-        return "🥩";
-    } else if (category === "Snacks") {
-        return "🍫";
-    } else if (category === "Beverages") {
-        return "🍶";
-    } else if (category === "Other") {
-        return "🍽️";
+    switch (category) {
+        case "Fruits": return "🍎";
+        case "Vegetables": return "🥬";
+        case "Dairy": return "🧈";
+        case "Meat": return "🥩";
+        case "Snacks": return "🍫";
+        case "Beverages": return "🍶";
+        case "Other": return "🍽️";
+        default: return "❓";
     }
-    return "❓"; // fallback se nessuna corrispondenza
 };
 
-export const List = ({id , name}) => {
+export const List = ({ id, name }) => {
     const navigation = useNavigation();
-    function goToDetailsOfList(id) {
-        navigation.navigate("SingleListScreen", { id , name });
-    }
 
+    const goToDetailsOfList = () => {
+        navigation.navigate("SingleListScreen", { id, name });
+    };
 
-    return(
-        <TouchableOpacity onPress={() => {goToDetailsOfList(id)}}>
-            <View style={[compStyle.listContainer, {backgroundColor: '#244B6E'}]}>
+    return (
+        <TouchableOpacity onPress={goToDetailsOfList}>
+            <View style={[compStyle.listContainer, { backgroundColor: '#244B6E' }]}>
                 <Text style={compStyle.listTitle}>{name}</Text>
                 <Ionicons name="caret-forward-outline" style={compStyle.arrow} />
             </View>
         </TouchableOpacity>
     );
-}
+};
 
-export const Product = ({id, name, quantity, price, category, state, onUpdate}) => {
-
+export const Product = ({ id, name, quantity, price, category, state, onUpdate }) => {
     const [isEnabled, setIsEnabled] = useState(state === 1);
     const [visible, setVisible] = useState(false);
 
-    return(
+    const handleSwitch = async (newValue) => {
+        try {
+            if (newValue) {
+                await buyItem(id);
+            } else {
+                await rimuoviItemComprato(id);
+            }
+            onUpdate();
+            setIsEnabled(newValue);
+        } catch (error) {
+            console.error("Errore durante l'acquisto:", error);
+        }
+    };
+
+    return (
         <>
-        <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} state={state} visible={visible} setVisible={setVisible} items={null} onUpdate={onUpdate} />
-
-        <View style={compStyle.ProductContainer}>
-
-            <View style={compStyle.Cont20}>
-                <Text style={compStyle.categoryEmoji}>{getEmoji({ category })}</Text>
-
-                <TouchableOpacity onPress={() => setVisible(true)}>
-                    <Ionicons style={compStyle.modifyProduct} name="pencil-outline" />
-                </TouchableOpacity>
+            <PopUp_editProduct
+                idProduct={id}
+                namein={name}
+                quantityin={quantity}
+                pricein={price}
+                categoryin={category}
+                state={state}
+                visible={visible}
+                setVisible={setVisible}
+                items={null}
+                onUpdate={onUpdate}
+            />
+            <View style={compStyle.ProductContainer}>
+                <View style={compStyle.Cont20}>
+                    <Text style={compStyle.categoryEmoji}>{getEmoji({ category })}</Text>
+                    <TouchableOpacity onPress={() => setVisible(true)}>
+                        <Ionicons style={compStyle.modifyProduct} name="pencil-outline" />
+                    </TouchableOpacity>
+                </View>
+                <View style={compStyle.Cont60}>
+                    <Text
+                        style={[
+                            compStyle.ProductTitle,
+                            isEnabled && { color: '#35C758' }
+                        ]}
+                    >
+                        {name}
+                    </Text>
+                    <Text style={compStyle.ProductSubTitle}>Quantity: {quantity}</Text>
+                    <Text style={compStyle.ProductSubTitle}>{category}</Text>
+                </View>
+                <View style={compStyle.Cont20}>
+                    <Switch
+                        style={compStyle.switch}
+                        trackColor={{ false: '#767577', true: '#35C758' }}
+                        onValueChange={handleSwitch}
+                        value={isEnabled}
+                    />
+                    <Text style={compStyle.price}>{price} $</Text>
+                </View>
             </View>
-
-            <View style={compStyle.Cont60}>
-                <Text style={[
-                    compStyle.ProductTitle,
-                    isEnabled && { color: '#35C758' }  // Aggiunge il colore verde se isEnabled è true
-                ]}>{name}</Text>
-                <Text style={compStyle.ProductSubTitle}>Quantity: {quantity}</Text>
-                <Text style={compStyle.ProductSubTitle}>{category}</Text>
-            </View>
-
-            <View style={compStyle.Cont20}>
-                <Switch
-                    style={compStyle.switch}
-                    trackColor={{false: '#767577', true: '#35C758'}}
-                    onValueChange={async (newValue) => {
-                        try {
-                            if (newValue) {
-                                await buyItem(id);
-                            } else {
-                                await rimuoviItemComprato(id);
-                            }
-                            onUpdate();
-                            setIsEnabled(newValue);
-                        } catch (error) {
-                            console.error("Errore durante l'acquisto:", error);
-                        }
-                    }}
-                    value={isEnabled}
-                />
-                <Text style={compStyle.price}>{price} $</Text>
-            </View>
-        </View>
         </>
     );
-}
+};
 
-export const SmallOldProduct = ({id , name, quantity, price, category, data}) => {
-    const [isEnabled, setIsEnabled] = useState(false);
+export const SmallOldProduct = ({ id, name, quantity, price, category }) => {
     const [visible, setVisible] = useState(false);
 
-    return(
+    return (
         <>
-            <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
-
+            <PopUp_editProduct
+                idProduct={id}
+                namein={name}
+                quantityin={quantity}
+                pricein={price}
+                categoryin={category}
+                visible={visible}
+                setVisible={setVisible}
+                items={null}
+            />
             <View style={compStyle.SmallProductContainer}>
-                <View style={{width: '100%'}}>
+                <View style={{ width: '100%' }}>
                     <Text style={compStyle.SmallCategoryEmoji}>{getEmoji({ category })}</Text>
                     <Text style={compStyle.SmallProductTitle}>{quantity}x {name}</Text>
                     <Text style={compStyle.SmallPrice}>{price} $</Text>
                 </View>
             </View>
-
         </>
     );
-}
-
-
-
-
+};
 
 export const ModifiableCategory = ({ onDelete, name }) => {
     const navigation = useNavigation();
@@ -128,7 +135,6 @@ export const ModifiableCategory = ({ onDelete, name }) => {
             <TouchableOpacity onPress={() => navigation.navigate("SingleCategoryScreen", { name })}>
                 <Text style={compStyle.CategoryTitle}>{name}</Text>
             </TouchableOpacity>
-
             <TouchableOpacity style={{ marginLeft: 'auto' }} onPress={() => onDelete(name)}>
                 <Ionicons style={compStyle.modifyCategory} name="trash-outline" />
             </TouchableOpacity>
@@ -136,37 +142,37 @@ export const ModifiableCategory = ({ onDelete, name }) => {
     );
 };
 
-export const FixedCategory = ({ name }) => {
-    return (
-        <View style={compStyle.FixedCategoryContainer}>
-            <Text style={compStyle.CategoryTitle}>{name}</Text>
-        </View>
-    );
-};
+export const FixedCategory = ({ name }) => (
+    <View style={compStyle.FixedCategoryContainer}>
+        <Text style={compStyle.CategoryTitle}>{name}</Text>
+    </View>
+);
 
-
-
-export const OldProduct = ({id, name, quantity, price, category, data , onDelete}) => {
-    const [isEnabled, setIsEnabled] = useState(false);
+export const OldProduct = ({ id, name, quantity, price, category, data, onDelete }) => {
     const [visible, setVisible] = useState(false);
 
-    return(
+    return (
         <>
-            <PopUp_editProduct onDelete={()=>onDelete(id)} idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
+            <PopUp_editProduct
+                onDelete={() => onDelete(id)}
+                idProduct={id}
+                namein={name}
+                quantityin={quantity}
+                pricein={price}
+                categoryin={category}
+                visible={visible}
+                setVisible={setVisible}
+                items={null}
+            />
             <View style={compStyle.ProductContainer}>
-
                 <View style={compStyle.Cont20}>
                     <Text style={compStyle.categoryEmoji}>{getEmoji({ category })}</Text>
                 </View>
-
-
-            <View style={compStyle.Cont60}>
-                <Text style={compStyle.ProductTitle}>{name}</Text>
-                <Text style={compStyle.ProductSubTitle}>Quantity: {quantity}</Text>
-                <Text style={compStyle.ProductSubTitle}>{category}</Text>
-            </View>
-
-
+                <View style={compStyle.Cont60}>
+                    <Text style={compStyle.ProductTitle}>{name}</Text>
+                    <Text style={compStyle.ProductSubTitle}>Quantity: {quantity}</Text>
+                    <Text style={compStyle.ProductSubTitle}>{category}</Text>
+                </View>
                 <View style={compStyle.Cont20}>
                     <Text style={compStyle.data}>{new Date(data).toLocaleDateString()}</Text>
                     <Text style={compStyle.price}>{price} $</Text>
@@ -174,4 +180,4 @@ export const OldProduct = ({id, name, quantity, price, category, data , onDelete
             </View>
         </>
     );
-}
+};
