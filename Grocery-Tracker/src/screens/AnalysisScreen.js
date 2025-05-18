@@ -9,6 +9,7 @@ import { getItemsRecentiAcquistati } from '../data/db';
 import StatisticsCard from '../components/Stats';
 
 import { useFocusEffect } from '@react-navigation/native';
+import commStyle from "../styles/commonStyle";
 
 const AnalysisScreen = () => {
   const [currentPeriod, setCurrentPeriod] = useState("3m");
@@ -55,12 +56,31 @@ const AnalysisScreen = () => {
   );
 
     return (
-        <SafeAreaView>
-          <ScrollView>
+
+        <View style={commStyle.body}>
+
+          <View style={commStyle.flexView2}>
+
+            <View style={{width:'20%'}}/>
+
+            <View style={{width:'60%'}}>
+              <Text style={commStyle.homeTitle2}>Analysis Screen</Text>
+            </View>
+
+            <View style={{width:'20%'}}/>
+          </View>
+
+        <ScrollView >
+          <>
           <View style={styles.card}>
             <Text style={styles.cardTitle}>Periodo di analisi</Text>
             <SegmentedButtons
-              buttons={periods.map(period => ({ value: period, label: period }))}
+                buttons={periods.map(period => ({
+                  value: period,
+                  label: period,
+                  style: currentPeriod === period ? styles.selectedButton : styles.unselectedButton,
+                  labelStyle: currentPeriod === period ? styles.selectedLabel : styles.unselectedLabel,
+                }))}
               value={currentPeriod}
               onValueChange={setCurrentPeriod}
               style={styles.periodSelector}
@@ -79,8 +99,9 @@ const AnalysisScreen = () => {
                 <LineChartItems startDate={startDate} items={items} />
           </View>
 
-          </ScrollView>
-        </SafeAreaView>
+          </>
+        </ScrollView>
+        </View>
     );
 }
 
@@ -120,15 +141,28 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     overflow: 'hidden'
   },
+
   periodSelector: {
-    marginTop: 10,
+    margin: 10,
   },
+  selectedButton: {
+    backgroundColor: 'rgba(81,241,91,0.38)', // Verde ad esempio
+  },
+  unselectedButton: {
+    backgroundColor: '#ffffff',
+  },
+  selectedLabel: {
+    color: '#000000', // Testo bianco
+  },
+  unselectedLabel: {
+    color: '#000000', // Testo nero
+  },
+
   chartCard: {
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 15,
     marginBottom: 20,
-    shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,

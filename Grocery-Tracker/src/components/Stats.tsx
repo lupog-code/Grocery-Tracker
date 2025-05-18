@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   statValue: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#4f46e5', // Indigo color
+    color: 'rgba(5,173,12,0.83)', // Indigo color
     marginBottom: 4,
   },
   statLabel: {
