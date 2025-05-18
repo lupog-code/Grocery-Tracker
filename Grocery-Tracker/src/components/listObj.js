@@ -42,14 +42,14 @@ export const List = ({id , name}) => {
     );
 }
 
-export const Product = ({id, name, quantity, price, category, state, onUpdate, onEdit}) => {
+export const Product = ({id, name, quantity, price, category, state, onUpdate}) => {
 
     const [isEnabled, setIsEnabled] = useState(state === 1);
     const [visible, setVisible] = useState(false);
 
     return(
         <>
-        <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} state={state} visible={visible} setVisible={setVisible} items={null} onUpdate={onUpdate} onEdit={onEdit} />
+        <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} state={state} visible={visible} setVisible={setVisible} items={null} onUpdate={onUpdate} />
 
         <View style={compStyle.ProductContainer}>
 
@@ -143,3 +143,35 @@ export const FixedCategory = ({ name }) => {
         </View>
     );
 };
+
+
+
+export const OldProduct = ({id, name, quantity, price, category, data , onDelete}) => {
+    const [isEnabled, setIsEnabled] = useState(false);
+    const [visible, setVisible] = useState(false);
+
+    return(
+        <>
+            <PopUp_editProduct onDelete={()=>onDelete(id)} idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} />
+            <View style={compStyle.ProductContainer}>
+
+                <View style={compStyle.Cont20}>
+                    <Text style={compStyle.categoryEmoji}>{getEmoji({ category })}</Text>
+                </View>
+
+
+            <View style={compStyle.Cont60}>
+                <Text style={compStyle.ProductTitle}>{name}</Text>
+                <Text style={compStyle.ProductSubTitle}>Quantity: {quantity}</Text>
+                <Text style={compStyle.ProductSubTitle}>{category}</Text>
+            </View>
+
+
+                <View style={compStyle.Cont20}>
+                    <Text style={compStyle.data}>{new Date(data).toLocaleDateString()}</Text>
+                    <Text style={compStyle.price}>{price} $</Text>
+                </View>
+            </View>
+        </>
+    );
+}

@@ -431,15 +431,47 @@ export const rimuoviItemComprato = async (idItem) => {
 
 //
 interface SumResult {
+  total_spent: number;
   sum: number;
 }
 
 export const getCostoTotalePerLista = async(idLista)=>{
   try{
     //Trovo la somma totale del costo per quella lista
-      const result = await db.getAllAsync<SumResult>(`select sum(price) as sum from items where comprato = true group by list_id having list_id = ?`,[idLista])
+      const result = await db.getAllAsync<SumResult>(`select sum(price * quantity) as sum from items where comprato = true group by list_id having list_id = ?`,[idLista])
       return result[0]?.sum || 0; 
   }catch(error){
     console.error("Errore "); 
+  }
+}
+
+
+export const getItemsCompratiPerCategoria = async (categoria) => {
+  try {
+    const result = await db.getAllAsync(`
+      SELECT * FROM items
+      WHERE comprato = true AND category = ?;
+    `, [categoria]);
+    return result;
+  } catch (error) {
+    console.error('Error fetching purchased items by category:', error);
+  }
+}
+
+
+
+export const getTotalSpentForCategory = async (category) => {
+  try {
+    const result = await db.getAllAsync<SumResult>(`
+      SELECT SUM(price * quantity) as total_spent
+      FROM items
+      WHERE  comprato = true
+      group by category
+      HAVING category = ?;
+    `, [category]);
+    return result[0]?.total_spent ?? 0;
+  } catch (error) {
+    console.error('Error fetching total spent for category:', error);
+    return null;
   }
 }
