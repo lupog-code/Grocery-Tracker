@@ -414,3 +414,19 @@ export const rimuoviItemComprato = async (idItem) => {
     console.error('Errore nella rimozione dell\'item', error);
   }
 };
+
+
+//
+interface SumResult {
+  sum: number;
+}
+
+export const getCostoTotalePerLista = async(idLista)=>{
+  try{
+    //Trovo la somma totale del costo per quella lista
+      const result = await db.getAllAsync<SumResult>(`select sum(price) as sum from items where comprato = true group by list_id having list_id = ?`,[idLista])
+      return result[0]?.sum || 0; 
+  }catch(error){
+    console.error("Errore "); 
+  }
+}

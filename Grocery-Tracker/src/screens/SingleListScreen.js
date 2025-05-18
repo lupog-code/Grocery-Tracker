@@ -7,12 +7,26 @@ import { useState, useEffect } from 'react';
 import { SearchBar ,FilterBar} from '../components/search';
 import { AddProductBtn } from '../components/btnsObj';
 import { rimuoviItem, rimuoviLista } from '../data/db';
+import { getCostoTotalePerLista } from '../data/db';
 
 const ListsScreen = ({navigation , route}) => {
     const listId = route.params.id;
     const listName = route.params.name; 
     const [products, setProducts] = useState([]); 
-   
+    const [costoTotale, setCostoTotale] = useState(0);
+   //Inizializza il costo totale 
+    useEffect(() => {
+        const fetchCostoTotale = async () => {
+            try {
+                const costo = await getCostoTotalePerLista(listId);
+                console.log("Costo totale:", costo);
+                setCostoTotale(costo || 0); // Imposta a 0 se il risultato è null
+            } catch (error) {
+                console.error("Error fetching total cost:", error);
+            }
+        };
+        fetchCostoTotale();
+    }, [listId, products]);
 
     const fetchProducts = async () => {
         try {
@@ -87,7 +101,7 @@ const ListsScreen = ({navigation , route}) => {
                 <View style={commStyle.titleBlock}>
                     <Text style={commStyle.homeTitle2}>{listName}</Text>
                 </View>
-
+                <Text>Total expenses: {costoTotale} $</Text>
                 <TouchableOpacity style={commStyle.sideBlock} onPress={() => handleDeleteList(listId)}>
                     <Text style={commStyle.deleteText}>Delete List</Text>
                 </TouchableOpacity>
