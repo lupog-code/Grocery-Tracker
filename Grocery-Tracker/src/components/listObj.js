@@ -4,7 +4,7 @@ import compStyle from '../styles/componentStyle';
 import {Ionicons} from "@expo/vector-icons";
 import {PopUp_editProduct} from "./modalObj";
 import { useNavigation } from '@react-navigation/native';
-import { buyItem } from '../data/db';
+import {buyItem, rimuoviCategoria} from '../data/db';
 
 const getEmoji = ({ category }) => {
     if (category === "Fruits") {
@@ -136,13 +136,23 @@ export const SmallOldProduct = ({id , name, quantity, price, category, data}) =>
     );
 }
 
+//Funzione per aggiungere una categoria
+const handledeleteCategory = async (categoryName) => {
+    try {
+        await rimuoviCategoria(categoryName);
+        print("Categoria eliminata con successo");
+    } catch (error) {
+        console.error("Error adding category:", error);
+    }
+};
+
 export const ModifiableCategory = ({id , name}) => {
     return(
         <View style={compStyle.ModCategoryContainer}>
             <Text style={compStyle.CategoryTitle}>{name}</Text>
 
-            <TouchableOpacity style={{marginLeft:'auto'}}>
-                <Ionicons style={compStyle.modifyCategory} name="pencil-outline" />
+            <TouchableOpacity style={{marginLeft:'auto'}} onPress={() => handledeleteCategory({name})}>
+                <Ionicons style={compStyle.modifyCategory} name="trash-outline" />
             </TouchableOpacity>
         </View>
     );

@@ -172,6 +172,7 @@ export const rimuoviLista = async (idLista) => {
     console.error('Errore nella rimozione della lista', error);
   }
 };
+
 // Rimuovi item
 export const rimuoviItem = async (idItem) => {
   try {
@@ -183,7 +184,7 @@ export const rimuoviItem = async (idItem) => {
 };
 
 // Rimuovi categoria
-export const rimuoviCategoria = async (categoria: string) => {
+export const rimuoviCategoria = async (categoria) => {
   try {
     await db.runAsync(`DELETE FROM categories WHERE name = ?;`, [categoria]);
 
