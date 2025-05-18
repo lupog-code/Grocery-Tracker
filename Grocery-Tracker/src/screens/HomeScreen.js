@@ -22,7 +22,7 @@ const HomeScreen = () => {
             }
         };
         fetchProducts();
-    })
+    }, [products])
 
     useEffect(() => {
         const fetchLists = async () => {
@@ -34,7 +34,7 @@ const HomeScreen = () => {
             }
         };
         fetchLists();
-    })
+    },[lists])
 
 
     const navigation = useNavigation();
