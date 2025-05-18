@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {View, Text, TouchableOpacity, ScrollView , FlatList} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView , FlatList, Alert} from 'react-native';
 import commStyle from '../styles/commonStyle';
 import {FixedCategory, ModifiableCategory} from "../components/listObj";
 import {getFixedCategorie, getModifiableCategorie} from '../data/db';
@@ -41,6 +41,8 @@ const ListsScreen = () => {
         //Funzione per aggiungere una categoria
         const handleAddCategory = async (categoryName) => {
             try {
+                
+                // Aggiungi la categoria al database
                 await addCategory(categoryName);
                 setModCategory((prevCategories) => [...prevCategories, { name: categoryName }]);
             } catch (error) {
@@ -72,18 +74,10 @@ const ListsScreen = () => {
                     keyExtractor={(item) => item.name.toString()}
                 />
 
-                <FlatList
-                    data={fixedCategory}
-                    scrollEnabled={false}
-                    renderItem={({ item }) => (
-                        <FixedCategory name={item.name}  />
-                    )}
-                    keyExtractor={(item) => item.name.toString()}
-                />
-
+              
             </ScrollView>
 
-                    <AddCategoryButton onAddCategory={handleAddCategory}/>
+                    <AddCategoryButton categories = {modCategory} onAddCategory={handleAddCategory}/>
         </View>
     );
 }

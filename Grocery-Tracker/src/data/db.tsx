@@ -102,18 +102,6 @@ export const getFixedCategorie = async () => {
   }
 };
 
-// cerca categoria esistente
-export const checkCategorie = async (nomeVerifca) => {
-  try {
-    const result = await db.getAllAsync(
-        `SELECT * FROM categories WHERE name = ?;`,
-        [nomeVerifca]
-    );
-    return result;
-  } catch (error) {
-    console.error('Errore nel recupero delle categorie', error);
-  }
-};
 
 // Ottieni categorie
 export const getModifiableCategorie = async () => {

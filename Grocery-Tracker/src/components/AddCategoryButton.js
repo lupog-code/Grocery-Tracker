@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
 import { Modal, TouchableOpacity, Text, TextInput, View, StyleSheet } from 'react-native';
-
-const AddCategoryButton = ({ onAddCategory }) => {
+import { Alert } from 'react-native';
+const AddCategoryButton = ({ categories, onAddCategory }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [categoryName, setCategoryName] = useState('');
 
     const handleSubmit = () => {
-        if (categoryName.trim()) {
-            onAddCategory(categoryName.trim());
-            setCategoryName('');
-            setModalVisible(false);
+        if (categoryName.trim() === '') {
+            Alert.alert('Error', 'Category name cannot be empty');
+            return;
         }
+
+        //Controlla se la categoria esiste già , occorre usare some perchè categories è un array di oggetti
+        if (categories.some(category => category.name.toLowerCase() === categoryName.trim().toLowerCase())) {
+            Alert.alert('Error', 'Category already exists');
+            return;
+        }
+        onAddCategory(categoryName.trim());
+        setCategoryName('');
+        setModalVisible(false);
     };
 
     return (
