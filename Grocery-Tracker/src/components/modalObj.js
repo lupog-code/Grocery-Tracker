@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import { View, Text, TextInput, Modal, TouchableOpacity, Button, Alert } from 'react-native';
 import btnStyle from '../styles/btnStyle';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { inserisciLista, inserisciItem, getItemsByListId, modificaItem, rimuoviItem } from '../data/db';
+import { getCategorie } from '../data/db';
 
 function checkFields(name, quantity, price, category) {
         if (name === '' || quantity === '' || price === '' || category === '') {
@@ -32,15 +33,22 @@ export const PopUp_AddProduct = ({ visible, setVisible, setItems, listID }) => {
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState('');
     const [open, setOpen] = useState(false);
-    const [pickerItems, setPickerItems] = useState([
-        { label: 'Fruits', value: 'Fruits' },
-        { label: 'Vegetables', value: 'Vegetables' },
-        { label: 'Meat', value: 'Meat' },
-        { label: 'Dairy', value: 'Dairy' },
-        { label: 'Snacks', value: 'Snacks' },
-        { label: 'Beverages', value: 'Beverages' },
-        { label: 'Other', value: 'Other' },
-    ]);
+    const [pickerItems, setPickerItems] = useState([]);
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const data = await getCategorie();
+                const formattedData = data.map(item => ({
+                    label: item.name,
+                    value: item.name
+                }));
+                setPickerItems(formattedData);
+            } catch (error) {
+                console.error("Error fetching categories:", error);
+            }
+        };
+        fetchCategories();
+    }, []);
 
     const addProduct = async () => {
         try {
