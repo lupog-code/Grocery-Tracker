@@ -326,6 +326,19 @@ export const getItemsByListId = async (listId) => {
   }
 };
 
+// Ottieni item comprati di una lista
+export const getItemsCompratiByListId = async (listId) => {
+  try {
+    const result = await db.getAllAsync(`
+      SELECT * FROM items
+      WHERE list_id = ? AND comprato = true;
+    `, [listId]);
+    return result;
+  } catch (error) {
+    console.error('Error fetching purchased items by list ID:', error);
+  }
+}
+
 // Spesa totale
 interface TotalSpendingResult {
   total_spending: number | null;

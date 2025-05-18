@@ -7,12 +7,13 @@ import { useState, useEffect } from 'react';
 import { SearchBar ,FilterBar} from '../components/search';
 import { AddProductBtn } from '../components/btnsObj';
 import { rimuoviItem, rimuoviLista } from '../data/db';
-import { getCostoTotalePerLista } from '../data/db';
+import { getCostoTotalePerLista, getItemsCompratiByListId } from '../data/db';
 
 const ListsScreen = ({navigation , route}) => {
     const listId = route.params.id;
     const listName = route.params.name; 
     const [products, setProducts] = useState([]); 
+    const [productsComprati, setProductsComprati] = useState([]);
     const [costoTotale, setCostoTotale] = useState(0);
    //Inizializza il costo totale 
     useEffect(() => {
@@ -26,18 +27,27 @@ const ListsScreen = ({navigation , route}) => {
             }
         };
         fetchCostoTotale();
-    }, [listId, products]);
+    }, [listId, productsComprati]);
 
-    const fetchProducts = async () => {
+    const refreshComprati = async () => {
+        try {
+            const data = await getItemsCompratiByListId(listId);
+            setProductsComprati(data);
+        } catch (error) {
+            console.error("Error refreshing comprati items:", error);
+        }
+    };
+
+    useEffect(() => {
+        const fetchProducts = async () => {
         try {
             const data = await getItemsByListId(listId);
+            if(JSON.stringify(data) === JSON.stringify(products)) return; 
             setProducts(data);
         } catch (error) {
             console.error("Error fetching products:", error);
         }
     };
-
-    useEffect(() => {
         fetchProducts();
     }, [products]);
 
@@ -123,6 +133,7 @@ const ListsScreen = ({navigation , route}) => {
                   price={item.price}
                   category={item.category}
                   state={item.comprato}
+                  onUpdate={refreshComprati}
                 />
               )}
             />

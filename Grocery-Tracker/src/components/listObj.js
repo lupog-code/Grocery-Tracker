@@ -42,14 +42,14 @@ export const List = ({id , name}) => {
     );
 }
 
-export const Product = ({id, name, quantity, price, category, state, onDelete}) => {
+export const Product = ({id, name, quantity, price, category, state, onUpdate}) => {
 
     const [isEnabled, setIsEnabled] = useState(state === 1);
     const [visible, setVisible] = useState(false);
 
     return(
         <>
-        <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} state={state} visible={visible} setVisible={setVisible} items={null} onDelete={()=>onDelete(id)} />
+        <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} state={state} visible={visible} setVisible={setVisible} items={null} onUpdate={onUpdate} />
 
         <View style={compStyle.ProductContainer}>
 
@@ -81,6 +81,7 @@ export const Product = ({id, name, quantity, price, category, state, onDelete}) 
                             } else {
                                 await rimuoviItemComprato(id);
                             }
+                            onUpdate();
                             setIsEnabled(newValue);
                         } catch (error) {
                             console.error("Errore durante l'acquisto:", error);
@@ -147,25 +148,28 @@ export const SmallOldProduct = ({id , name, quantity, price, category, data}) =>
 
 
 
-export const ModifiableCategory = ({onDelete , name}) => {
-   
 
-    return(
+
+export const ModifiableCategory = ({ onDelete, name }) => {
+    const navigation = useNavigation();
+
+    return (
         <View style={compStyle.ModCategoryContainer}>
-            <Text style={compStyle.CategoryTitle}>{name}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("SingleCategoryScreen", { name })}>
+                <Text style={compStyle.CategoryTitle}>{name}</Text>
+            </TouchableOpacity>
 
-            <TouchableOpacity style={{marginLeft:'auto'}} onPress={() => onDelete(name)}>
+            <TouchableOpacity style={{ marginLeft: 'auto' }} onPress={() => onDelete(name)}>
                 <Ionicons style={compStyle.modifyCategory} name="trash-outline" />
             </TouchableOpacity>
         </View>
     );
-}
+};
 
-export const FixedCategory = ({id , name}) => {
-    return(
+export const FixedCategory = ({ name }) => {
+    return (
         <View style={compStyle.FixedCategoryContainer}>
-            <Text>{getEmoji({ name })}</Text>
             <Text style={compStyle.CategoryTitle}>{name}</Text>
         </View>
     );
-}
+};
