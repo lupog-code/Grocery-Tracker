@@ -22,17 +22,18 @@ const ListsScreen = () => {
     });
 
     return (
+
         <View style={commStyle.body}>
 
             <View style={commStyle.flexView2}>
 
-              
+                <View style={{width:'20%'}}/>
 
-                <View style={{width:'43%'}}>
-                    <Text style={commStyle.homeTitle2}>Your Lists 📝</Text>
+                <View style={{width:'60%'}}>
+                    <Text style={commStyle.homeTitle2}>📋 Your Lists</Text>
                 </View>
 
-                <View style={{width:'28%'}}/>
+                <View style={{width:'20%'}}/>
             </View>
 
                 <FlatList
