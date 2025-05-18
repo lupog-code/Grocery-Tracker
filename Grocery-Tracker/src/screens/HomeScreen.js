@@ -16,6 +16,7 @@ const HomeScreen = () => {
         const fetchProducts = async () => {
             try {
                 const data = await getUltimiDieciItemComprati();
+                if(JSON.stringify(data) === JSON.stringify(products)) return;  //Controlla se i dati sono cambiati;
                 setProducts(data); //Inizializza le due liste 
             } catch (error) {
                 console.error("Error fetching products:", error);
@@ -28,6 +29,7 @@ const HomeScreen = () => {
         const fetchLists = async () => {
             try {
                 const data = await getUltimeDueListe();
+                if(JSON.stringify(data) === JSON.stringify(products)) return;  //Controlla se i dati sono cambiati;
                 setLists(data); //Inizializza le due liste 
             } catch (error) {
                 console.error("Error fetching lists:", error);
