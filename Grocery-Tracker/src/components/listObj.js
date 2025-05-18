@@ -62,7 +62,10 @@ export const Product = ({id, name, quantity, price, category, state, onDelete}) 
             </View>
 
             <View style={compStyle.Cont60}>
-                <Text style={compStyle.ProductTitle}>{name}</Text>
+                <Text style={[
+                    compStyle.ProductTitle,
+                    isEnabled && { color: '#35C758' }  // Aggiunge il colore verde se isEnabled è true
+                ]}>{name}</Text>
                 <Text style={compStyle.ProductSubTitle}>Quantity: {quantity}</Text>
                 <Text style={compStyle.ProductSubTitle}>{category}</Text>
             </View>
