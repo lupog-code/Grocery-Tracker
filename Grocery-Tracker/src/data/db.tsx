@@ -131,7 +131,7 @@ export const getModifiableCategorie = async () => {
 // Filtro categorie
 export const getFiltroCategorie = async (categoria) => {
   try {
-    const result = await db.getAllAsync(`SELECT * FROM items WHERE category LIKE ?;`, [`%${categoria}%`]);
+    const result = await db.getAllAsync(`SELECT * FROM items WHERE category =  ?;`, [categoria]);
     return result
   } catch (error) {
     console.error('Errore nel filtro per categorie', error);

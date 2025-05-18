@@ -5,14 +5,16 @@ import { getFiltroCategorie } from '../data/db';
 import commStyle from '../styles/commonStyle';
 
 const CategoryScreen = ({ navigation, route }) => {
-  const category = route.params.category;
+  const category = route.params.name;
 
   const [products, setProducts] = useState([]);
 
   const fetchProducts = async () => {
     try {
+    console.log("Category:", category);
       const data = await getFiltroCategorie(category);
       setProducts(data);
+      console.log("Fetched products per category:", data);
     } catch (error) {
       console.error('Error fetching products:', error);
     }

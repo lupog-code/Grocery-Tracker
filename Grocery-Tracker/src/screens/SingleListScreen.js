@@ -111,7 +111,7 @@ const ListsScreen = ({navigation , route}) => {
                 <View style={commStyle.titleBlock}>
                     <Text style={commStyle.homeTitle2}>{listName}</Text>
                 </View>
-                <Text>Total expenses: {costoTotale} $</Text>
+                
                 <TouchableOpacity style={commStyle.sideBlock} onPress={() => handleDeleteList(listId)}>
                     <Text style={commStyle.deleteText}>Delete List</Text>
                 </TouchableOpacity>
@@ -120,6 +120,7 @@ const ListsScreen = ({navigation , route}) => {
             <SearchBar setSearchText={setSearchText} />
             <FilterBar setFiltri={setFiltri} />
 
+            <Text>Total expenses: {costoTotale} $</Text>
             <ScrollView showsVerticalScrollIndicator={false}>
             <FlatList
               data={visualizableProducts}

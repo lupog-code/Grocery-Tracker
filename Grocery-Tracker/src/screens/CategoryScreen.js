@@ -6,7 +6,7 @@ import {getFixedCategorie, getModifiableCategorie} from '../data/db';
 import AddCategoryButton from '../components/AddCategoryButton';
 import { addCategory } from '../data/db';
 import { rimuoviCategoria } from '../data/db';
-const ListsScreen = () => {
+const CategoriesScreen = () => {
 
     const [modCategory, setModCategory] = useState([]);
     const [fixedCategory, setFixedCategory] = useState([]);
@@ -97,4 +97,4 @@ const ListsScreen = () => {
     );
 }
 
-export default ListsScreen;
+export default CategoriesScreen;
