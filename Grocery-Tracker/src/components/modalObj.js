@@ -2,7 +2,7 @@ import React, { useState, useEffect, use } from 'react';
 import { View, Text, TextInput, Modal, TouchableOpacity, Button, Alert } from 'react-native';
 import btnStyle from '../styles/btnStyle';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { inserisciLista, inserisciItem, getItemsByListId, modificaItem, rimuoviItem } from '../data/db';
+import {inserisciLista, inserisciItem, getItemsByListId, modificaItem, rimuoviItem, addCategory} from '../data/db';
 import { getCategorie } from '../data/db';
 
 function checkFields(name, quantity, price, category) {
@@ -347,6 +347,87 @@ export const PopUp_AddList = ({ visible, setVisible }) => {
                     />
 
                     <Button title="Add List" onPress={inserisciNuovaLista} />
+                </View>
+            </TouchableOpacity>
+        </Modal>
+    );
+};
+
+export const PopUp_addCategory = ({ namein, visible, setVisible ,onAddCategory,categories }) => {
+
+    const [name, setName] = useState(namein);
+    const [categoryName, setCategoryName] = useState('');
+
+    const handleSubmit =  () => {
+        if (categoryName === '') {
+            Alert.alert('Error', 'Category name cannot be empty');
+            return;
+        }
+
+        //Controlla se la categoria esiste già , occorre usare some perchè categories è un array di oggetti
+        if (categories.some(category => category.name.toLowerCase() === categoryName.trim().toLowerCase())) {
+            Alert.alert('Error', 'Category already exists');
+            return;
+        }
+
+        try {
+            onAddCategory(categoryName.trim());
+            setVisible(false);
+            setName('');
+        } catch (error) {
+            console.error("Error adding list:", error);
+        }
+
+        setCategoryName('');
+        setVisible(false);
+    };
+
+    return (
+        <Modal
+            visible={visible}
+            transparent={visible}
+            onRequestClose={() => setVisible(false)}
+            animationType="slide"
+        >
+            <TouchableOpacity
+                style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' }}
+                activeOpacity={1}
+                onPressOut={() => setVisible(false)}
+            >
+                <View style={btnStyle.popUp_productEdit}>
+                    <View style={btnStyle.topModal}>
+                        <Text style={btnStyle.TopModalTitle}>Add Cateogry</Text>
+                    </View>
+
+                    <TextInput
+                        style={btnStyle.textInput}
+                        placeholder="Category Name"
+                        value={categoryName}
+                        onChangeText={setCategoryName}
+                    />
+
+                    <View style={{
+                        flexDirection: 'row',
+                        width: '100%',
+                    }}>
+
+                    <TouchableOpacity
+                        style={btnStyle.saveButton}
+                        onPress={() => handleSubmit()}
+                        activeOpacity={0.7}
+                    >
+                        <Text style={btnStyle.saveButtonText}>Add Category</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={btnStyle.deleteButton}
+                        onPress={() => setVisible(false)}
+                        activeOpacity={0.7}
+                    >
+                        <Text style={btnStyle.deleteButtonText}>Cancel</Text>
+                    </TouchableOpacity>
+                    </View>
+
                 </View>
             </TouchableOpacity>
         </Modal>

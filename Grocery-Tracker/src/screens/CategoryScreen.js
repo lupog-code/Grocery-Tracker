@@ -6,6 +6,8 @@ import {getFixedCategorie, getModifiableCategorie} from '../data/db';
 import AddCategoryButton from '../components/AddCategoryButton';
 import { addCategory } from '../data/db';
 import { rimuoviCategoria } from '../data/db';
+import {AddCategoryBtn} from "../components/btnsObj";
+
 const CategoriesScreen = () => {
 
     const [modCategory, setModCategory] = useState([]);
@@ -70,16 +72,18 @@ const CategoriesScreen = () => {
         <View style={commStyle.body}>
 
             <View style={commStyle.flexView2}>
-               
 
-                <Text style={{fontSize: 24, fontWeight: 'bold', color: '#000'}}>Personalize your categories</Text>
+                <View style={{width:'20%'}}/>
 
-                <View style={commStyle.sideBlock} />
+                <View style={{width:'60%'}}>
+                    <Text style={commStyle.homeTitle2}>All Categories</Text>
+                </View>
+
+                <View style={{width:'20%'}}/>
             </View>
 
 
             <ScrollView style={{width: '100%'}}>
-            <Text style={{marginTop: 20, marginBottom: 10, fontSize: 20, fontWeight: 'bold', color: '#000'}}>Lately added</Text>
                 <FlatList
                     data={modCategory}
                     scrollEnabled={false}
@@ -92,7 +96,7 @@ const CategoriesScreen = () => {
               
             </ScrollView>
 
-                    <AddCategoryButton categories = {modCategory} onAddCategory={handleAddCategory}/>
+            <AddCategoryBtn categories={modCategory} onAddCategory={handleAddCategory} />
         </View>
     );
 }

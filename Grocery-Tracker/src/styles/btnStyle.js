@@ -26,6 +26,29 @@ const btnStyle = StyleSheet.create({
         }
     },
 
+    insertBtnCat: {
+        height: 50,
+        width: 165,
+        borderRadius: 25, // Più arrotondato per un look moderno
+        backgroundColor: '#274472',
+        justifyContent: 'center',
+        alignItems: 'center',
+        elevation: 3, // Per Android (sostituisce shadow*)
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 }, // Ombra più naturale
+        shadowOpacity: 0.2, // Più leggera
+        shadowRadius: 3,
+        position: 'absolute',
+        top: -70,
+        right: 5,
+        // Aggiungi transizione per hover/click
+        transition: 'all 0.3s ease',
+        ':hover': {
+            backgroundColor: '#1a3152',
+            transform: [{ scale: 1.03 }]
+        }
+    },
+
     insertBtnText: {
         fontSize: 17,
         color: '#C3E0E5',
@@ -207,13 +230,30 @@ const btnStyle = StyleSheet.create({
             transform: [{ scale: 1.02 }]
         }
     },
+
     deleteButtonText: {
         color: '#d32f2f', // Testo rosso
         fontSize: 16,
         fontWeight: '600',
         letterSpacing: 0.5
-    }
+    },
 
+    popUp_addCategory: {
+        margin: "auto",
+        height: 275,
+        width: 370,
+        padding: 30, // Ridotto per più spazio
+        backgroundColor: 'white',
+        borderRadius: 35,
+        // Ombra più pronunciata
+        elevation: 5,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.1,
+        shadowRadius: 6,
+        borderWidth: 1,
+        borderColor: '#f0f0f0' // Bordo sottile
+    },
 
 });
 
