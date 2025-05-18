@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, Image, Switch, TouchableOpacity} from 'react-native';
 import compStyle from '../styles/componentStyle';
 import {Ionicons} from "@expo/vector-icons";
 import {PopUp_editProduct} from "./modalObj";
 import { useNavigation } from '@react-navigation/native';
-import {buyItem, rimuoviCategoria} from '../data/db';
+import {buyItem, rimuoviItemComprato} from '../data/db';
 
 const getEmoji = ({ category }) => {
     if (category === "Fruits") {
@@ -42,14 +42,14 @@ export const List = ({id , name}) => {
     );
 }
 
-export const Product = ({id, name, quantity, price, category ,onDelete}) => {
-   
-    const [isEnabled, setIsEnabled] = useState(false);
+export const Product = ({id, name, quantity, price, category, state, onDelete}) => {
+
+    const [isEnabled, setIsEnabled] = useState(state === 1);
     const [visible, setVisible] = useState(false);
 
     return(
         <>
-        <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} visible={visible} setVisible={setVisible} items={null} onDelete={()=>onDelete(id)} />
+        <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} state={state} visible={visible} setVisible={setVisible} items={null} onDelete={()=>onDelete(id)} />
 
         <View style={compStyle.ProductContainer}>
 
@@ -73,10 +73,15 @@ export const Product = ({id, name, quantity, price, category ,onDelete}) => {
                     trackColor={{false: '#767577', true: '#35C758'}}
                     onValueChange={async (newValue) => {
                         try {
-                            await buyItem(id);
-                            } catch (error) {
-                            console.error('Errore durante l\'acquisto:', error);
+                            if (newValue) {
+                                await buyItem(id);
+                            } else {
+                                await rimuoviItemComprato(id);
                             }
+                            setIsEnabled(newValue);
+                        } catch (error) {
+                            console.error("Errore durante l'acquisto:", error);
+                        }
                     }}
                     value={isEnabled}
                 />

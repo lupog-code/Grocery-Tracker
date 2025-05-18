@@ -404,3 +404,13 @@ export const addCategory = async (category) => {
     console.error('Errore nell\'aggiunta della categoria', error);
   }
 }
+
+// Rimuovi item comprato 
+export const rimuoviItemComprato = async (idItem) => {
+  try {
+    await db.runAsync(`UPDATE items SET comprato = false, data_compera = null WHERE id = ?;`, [idItem]);
+    console.log('Item rimosso con successo');
+  } catch (error) {
+    console.error('Errore nella rimozione dell\'item', error);
+  }
+};

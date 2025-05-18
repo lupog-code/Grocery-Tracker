@@ -102,22 +102,13 @@ const ListsScreen = ({navigation , route}) => {
               keyExtractor={(item) => item.id.toString()}
               scrollEnabled={false}
               renderItem={({ item }) => (
-                item.comprato ?
-                <OldProduct
-                  id={item.id}
-                  name={item.name}
-                  quantity={item.quantity}
-                  price={item.price}
-                  category={item.category}
-                  data={item.data_compera}
-                />
-                :
                 <Product
                   id={item.id}
                   name={item.name}
                   quantity={item.quantity}
                   price={item.price}
                   category={item.category}
+                  state={item.comprato}
                 />
               )}
             />
