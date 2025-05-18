@@ -42,14 +42,14 @@ export const List = ({id , name}) => {
     );
 }
 
-export const Product = ({id, name, quantity, price, category, state, onUpdate}) => {
+export const Product = ({id, name, quantity, price, category, state, onUpdate, onEdit}) => {
 
     const [isEnabled, setIsEnabled] = useState(state === 1);
     const [visible, setVisible] = useState(false);
 
     return(
         <>
-        <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} state={state} visible={visible} setVisible={setVisible} items={null} onUpdate={onUpdate} />
+        <PopUp_editProduct idProduct={id} namein={name} quantityin={quantity} pricein={price} categoryin={category} state={state} visible={visible} setVisible={setVisible} items={null} onUpdate={onUpdate} onEdit={onEdit} />
 
         <View style={compStyle.ProductContainer}>
 

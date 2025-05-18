@@ -38,8 +38,7 @@ const ListsScreen = ({navigation , route}) => {
         }
     };
 
-    useEffect(() => {
-        const fetchProducts = async () => {
+    const fetchProducts = async () => {
         try {
             const data = await getItemsByListId(listId);
             if(JSON.stringify(data) === JSON.stringify(products)) return; 
@@ -48,6 +47,9 @@ const ListsScreen = ({navigation , route}) => {
             console.error("Error fetching products:", error);
         }
     };
+
+    useEffect(() => {
+        
         fetchProducts();
     }, [products]);
 
@@ -135,6 +137,7 @@ const ListsScreen = ({navigation , route}) => {
                   category={item.category}
                   state={item.comprato}
                   onUpdate={refreshComprati}
+                  onEdit={fetchProducts}
                 />
               )}
             />

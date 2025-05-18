@@ -143,7 +143,7 @@ export const PopUp_AddProduct = ({ visible, setVisible, setItems, listID }) => {
     );
 };
 
-export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, visible, setVisible, idProduct }) => {
+export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, visible, setVisible, idProduct, onEdit }) => {
 
     const [name, setName] = useState(namein);
     const [quantity, setQuantity] = useState(quantityin);
@@ -184,6 +184,7 @@ export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, vis
                 try {
                     await rimuoviItem(idProduct);
                     setVisible(false);
+                    onEdit();
                     console.log("Deleted product with id: " + idProduct);
                 } catch (error) {
                     console.error("Error deleting product:", error);
@@ -213,6 +214,7 @@ export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, vis
                         try {
                             await modificaItem(idProduct, name, quantity, price, category);
                             setVisible(false);
+                            onEdit();
                             console.log("Saved product with id: " + idProduct);
                         } catch (error) {
                             console.error("Error saving product:", error);
