@@ -71,11 +71,12 @@ export const Product = ({id, name, quantity, price, category ,onDelete}) => {
                 <Switch
                     style={compStyle.switch}
                     trackColor={{false: '#767577', true: '#35C758'}}
-                    onValueChange={(newValue) => {
-                        setIsEnabled(newValue);
-                        if (newValue) {
-                            buyItem(id);
-                        }
+                    onValueChange={async (newValue) => {
+                        try {
+                            await buyItem(id);
+                            } catch (error) {
+                            console.error('Errore durante l\'acquisto:', error);
+                            }
                     }}
                     value={isEnabled}
                 />
