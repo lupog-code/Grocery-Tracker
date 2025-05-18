@@ -5,6 +5,7 @@ import {FixedCategory, ModifiableCategory} from "../components/listObj";
 import {getFixedCategorie, getModifiableCategorie} from '../data/db';
 import AddCategoryButton from '../components/AddCategoryButton';
 import { addCategory } from '../data/db';
+import { rimuoviCategoria } from '../data/db';
 const ListsScreen = () => {
 
     const [modCategory, setModCategory] = useState([]);
@@ -51,6 +52,20 @@ const ListsScreen = () => {
         };
 
 
+
+        //Funzione per eliminare una categoria
+         //Funzione per eliminare una categoria
+    const handledeleteCategory = async (categoryName) => {
+    try {
+        await rimuoviCategoria(categoryName);
+        //Refresha la lista delle categorie
+        const data = await getModifiableCategorie();
+        setModCategory(data);
+    } catch (error) {
+        console.error("Error deleting category:", error);
+    }
+};
+
     return (
         <View style={commStyle.body}>
 
@@ -69,7 +84,7 @@ const ListsScreen = () => {
                     data={modCategory}
                     scrollEnabled={false}
                     renderItem={({ item }) => (
-                        <ModifiableCategory name={item.name}  />
+                        <ModifiableCategory name={item.name} onDelete={handledeleteCategory} />
                     )}
                     keyExtractor={(item) => item.name.toString()}
                 />

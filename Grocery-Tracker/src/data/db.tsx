@@ -3,10 +3,21 @@ import {ModifiableCategory} from "../components/listObj";
 
 const db = SQLite.openDatabaseSync('grocery');
 
+
+const enableForeignKeys = async () => {
+  try {
+    await db.execAsync('PRAGMA foreign_keys = ON;');
+    console.log('Foreign keys enabled');
+  } catch (error) {
+    console.error('Error enabling foreign keys:', error);
+  }
+};
+
 export const createTables = async () => {
   try {
+    await enableForeignKeys();
+    // Create tables if they don't exist
     await db.execAsync(`
-      PRAGMA foreign_keys = ON;
       CREATE TABLE IF NOT EXISTS lists (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL
@@ -25,7 +36,7 @@ export const createTables = async () => {
         comprato boolean DEFAULT false,
         data_compera TIMESTAMP DEFAULT null,
         FOREIGN KEY (list_id) REFERENCES lists(id) ON DELETE CASCADE,
-        FOREIGN KEY (category) REFERENCES categories(name)
+        FOREIGN KEY (category) REFERENCES categories(name) ON DELETE CASCADE
       );
       INSERT OR IGNORE INTO categories (name) VALUES
         ('Fruits'),
@@ -186,8 +197,8 @@ export const rimuoviItem = async (idItem) => {
 // Rimuovi categoria
 export const rimuoviCategoria = async (categoria) => {
   try {
+    await enableForeignKeys
     await db.runAsync(`DELETE FROM categories WHERE name = ?;`, [categoria]);
-
   } catch (error) {
     console.error('Errore nella rimozione della categoria', error);
   }

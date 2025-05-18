@@ -136,22 +136,16 @@ export const SmallOldProduct = ({id , name, quantity, price, category, data}) =>
     );
 }
 
-//Funzione per aggiungere una categoria
-const handledeleteCategory = async (categoryName) => {
-    try {
-        await rimuoviCategoria(categoryName);
-        print("Categoria eliminata con successo");
-    } catch (error) {
-        console.error("Error adding category:", error);
-    }
-};
 
-export const ModifiableCategory = ({id , name}) => {
+
+export const ModifiableCategory = ({onDelete , name}) => {
+   
+
     return(
         <View style={compStyle.ModCategoryContainer}>
             <Text style={compStyle.CategoryTitle}>{name}</Text>
 
-            <TouchableOpacity style={{marginLeft:'auto'}} onPress={() => handledeleteCategory({name})}>
+            <TouchableOpacity style={{marginLeft:'auto'}} onPress={() => onDelete(name)}>
                 <Ionicons style={compStyle.modifyCategory} name="trash-outline" />
             </TouchableOpacity>
         </View>
