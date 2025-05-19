@@ -33,7 +33,6 @@ const AnalysisScreen = () => {
         newDate.setFullYear(now.getFullYear() - 1);
         break;
     }
-    console.log("Start date:", newDate);
     return newDate.toISOString().split('T')[0]; // Formato YYYY-MM-DD
   };
 

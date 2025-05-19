@@ -357,29 +357,6 @@ export const getSpesaTotale = async (startDate: string) => {
   }
 };
 
-// Media giornaliera
-interface AverageResult {
-  daily_average: number | null;
-}
-
-export const getMediaGiornaliera = async (startDate: string) => {
-  try {
-    const result = await db.getAllAsync<AverageResult>(`
-      SELECT AVG(daily_total) as daily_average
-      FROM (
-        SELECT DATE(data_compera) as giorno, SUM(price * quantity) as daily_total
-        FROM items
-        WHERE data_compera > ? AND comprato = true
-        GROUP BY giorno
-      );
-    `, [startDate]);
-    return result[0]?.daily_average ?? 0;
-  } catch (error) {
-    console.error('Error fetching daily average:', error);
-    return null;
-  }
-}
-
 export const DropTabelle = async () => {
   try {
     await db.runAsync(`

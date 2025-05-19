@@ -1,20 +1,29 @@
+import { useFocusEffect } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { getSpesaTotale, getMediaGiornaliera } from '../data/db';
+import { getSpesaTotale } from '../data/db';
 
-const StatisticsCard = ({ startDate, items }) => {
+const StatisticsCard = ({ startDate }) => {
   const [totalSpending, setTotalSpending] = useState(0);
   const [dailyAverage, setDailyAverage] = useState(0);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const total = await getSpesaTotale(startDate);
-      const average = await getMediaGiornaliera(startDate);
-      setTotalSpending(total);
-      setDailyAverage(average);
-    };
-    fetchData();
-  }, [startDate, items]);
+  const fetchData = React.useCallback(async () => {
+    const total = await getSpesaTotale(startDate);
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+    const start = new Date(startDate);
+    start.setHours(0, 0, 0, 0);
+    const days = Math.ceil((currentDate.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+    const average = days > 0 ? total / days : 0;
+    setTotalSpending(total);
+    setDailyAverage(average);
+  }, [startDate]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchData();
+    }, [fetchData])
+  );
 
   return (
     <View style={styles.card}>
