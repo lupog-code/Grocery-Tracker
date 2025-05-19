@@ -56,7 +56,7 @@ export const PopUp_AddProduct = ({ visible, setVisible, setItems, listID }) => {
                 return;
             }
 
-            await inserisciItem(name, quantity, price, category, listID);
+            await inserisciItem(name.trim(), quantity, price, category, listID);
             const data = await getItemsByListId(listID);
             setItems(data);
 
@@ -212,7 +212,7 @@ export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, vis
                         }
 
                         try {
-                            await modificaItem(idProduct, name, quantity, price, category);
+                            await modificaItem(idProduct, name.trim(), quantity, price, category);
                             setVisible(false);
                             onEdit();
                             console.log("Saved product with id: " + idProduct);
@@ -314,7 +314,7 @@ export const PopUp_AddList = ({ visible, setVisible }) => {
             return;
         }
         try {
-            await inserisciLista(name);
+            await inserisciLista(name.trim());
             setVisible(false);
             setName('');
         } catch (error) {
