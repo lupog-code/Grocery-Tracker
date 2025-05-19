@@ -18,7 +18,7 @@ const HomeScreen = () => {
         useCallback(() => {
             const fetchLists = async () => {
                 try {
-                    const data = await getListe();
+                    const data = await getUltimeDueListe();
                     setLists(data);
                 } catch (error) {
                     console.error("Error fetching lists:", error);

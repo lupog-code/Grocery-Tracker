@@ -30,7 +30,7 @@ export const SearchBar = ({setSearchText}) => {
                 />
                 <View style={{ marginLeft: 10 }}>
                     <Text>
-                        <Ionicons name="search" size={20} color="gray" /> {/* ✅ Icona corretta */}
+                        <Ionicons name="search" size={20} color="gray" /> 
                     </Text>
                 </View>
             </View>
@@ -79,6 +79,7 @@ export const SearchBar = ({setSearchText}) => {
                     transparent={true}
                     visible={modalVisible}
                     onRequestClose={() => setModalVisible(false)}
+                    
                 >
                     <View style={styles.modalContainer}>
                         <View style={styles.modalContent}>

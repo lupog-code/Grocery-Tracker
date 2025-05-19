@@ -8,6 +8,15 @@ import { SearchBar ,FilterBar} from '../components/search';
 import { AddProductBtn } from '../components/btnsObj';
 import { rimuoviItem, rimuoviLista } from '../data/db';
 import { getCostoTotalePerLista, getItemsCompratiByListId, modificaLista } from '../data/db';
+import FallbackSingleList from '../components/FallbackSingleList';
+import * as Animatable from 'react-native-animatable'; 
+
+
+
+
+
+
+
 
 const ListsScreen = ({navigation , route}) => {
     const listId = route.params.id;
@@ -125,7 +134,6 @@ const ListsScreen = ({navigation , route}) => {
     
     return (
         <View style={commStyle.body}>
-
             <View style={commStyle.flexView2}>
                 <TouchableOpacity style={commStyle.sideBlock} onPress={() => navigation.goBack()}>
                     <Text style={commStyle.gobackText}>Home</Text>
@@ -152,34 +160,58 @@ const ListsScreen = ({navigation , route}) => {
                     <Text style={commStyle.deleteText}>Delete List</Text>
                 </TouchableOpacity>
             </View>
+            {/* Se non ci sono prodotti nella lista , mettiamo un componente di fallback */}
+            
+           {products.length !== 0 ? (
+                <>
+                    {/* Se ci sono prodotti nella lista , mostriamo i prodotti */}
+                    <SearchBar setSearchText={setSearchText} />
+                    <FilterBar setFiltri={setFiltri} />
 
-            <SearchBar setSearchText={setSearchText} />
-            <FilterBar setFiltri={setFiltri} />
+                    <View style={commStyle.totalCostContainer}>
+                        <Text style={commStyle.totalCostText}>Total spent: ${costoTotale.toFixed(2)}</Text>
+                    </View>
 
-            <Text>Total expenses: {costoTotale} $</Text>
-            <ScrollView showsVerticalScrollIndicator={false}>
-            <FlatList
-              data={visualizableProducts}
-              keyExtractor={(item) => item.id.toString()}
-              scrollEnabled={false}
-              renderItem={({ item }) => (
-                <Product
-                  id={item.id}
-                  name={item.name}
-                  quantity={item.quantity}
-                  price={item.price}
-                  category={item.category}
-                  state={item.comprato}
-                  onUpdate={refreshComprati}
-                  onEdit={() => { fetchProducts(); fetchCostoTotale(); }}
-                />
-              )}
-            />
-
-            </ScrollView>
-                
-           <AddProductBtn setItems={setProducts} listID={listId} /> 
-
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        <FlatList
+                          data={visualizableProducts}
+                          keyExtractor={(item) => item.id.toString()}
+                          scrollEnabled={false}
+                          renderItem={({ item }) => (
+                            <Product
+                              id={item.id}
+                              name={item.name}
+                              quantity={item.quantity}
+                              price={item.price}
+                              category={item.category}
+                              state={item.comprato}
+                              onUpdate={refreshComprati}
+                              onEdit={() => { fetchProducts(); fetchCostoTotale(); }}
+                            />
+                          )}
+                        />
+                    </ScrollView>
+                        
+                    <AddProductBtn setItems={setProducts} listID={listId} /> 
+                </>
+            ) : (
+                <View style={{ flex: 1 }}>
+                    <FallbackSingleList />
+                    <View style={{ position: 'absolute', bottom: 20, right: 20 }}>
+                        <Animatable.View 
+                            animation="swing" 
+                            easing="ease-in-out" 
+                            duration={1000} 
+                            iterationCount="infinite" 
+                            useNativeDriver={true}
+                            delay={300}
+                            style={{ alignSelf: 'flex-end', borderRadius: 30, padding: 4 }}
+                        >
+                            <AddProductBtn setItems={setProducts} listID={listId} /> 
+                        </Animatable.View>
+                    </View>
+                </View>
+            )}
         </View>
     );
 }

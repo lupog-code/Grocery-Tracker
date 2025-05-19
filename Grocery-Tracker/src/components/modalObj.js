@@ -231,6 +231,7 @@ export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, vis
             transparent={true}
             onRequestClose={() => setVisible(false)}
             animationType="slide"
+            
         >
             <TouchableOpacity
                 style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' }}
