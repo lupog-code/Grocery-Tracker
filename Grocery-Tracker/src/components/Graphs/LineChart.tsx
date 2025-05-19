@@ -13,7 +13,10 @@ const LineChartItems = ({startDate}) => {
       },
     ],
   });
+  
+  // Dimensioni corrette per il grafico
   const screenWidth = Dimensions.get('window').width;
+  const chartWidth = screenWidth - 64; // Ridotto per adattarsi al contenitore con padding
 
   useFocusEffect(
     React.useCallback(() => {
@@ -47,8 +50,7 @@ const LineChartItems = ({startDate}) => {
       return () => {
         isActive = false;
       };
-    }
-    , [startDate])
+    }, [startDate])
   );
 
   // Configurazione del grafico
@@ -58,7 +60,7 @@ const LineChartItems = ({startDate}) => {
     backgroundGradientTo: '#ffffff',
     decimalPlaces: 0,
     color: (opacity = 1) => `rgba(79, 70, 229, ${opacity})`, // Colore indigo (#4f46e5)
-    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+    labelColor: (opacity = 1) => `rgba(55, 65, 81, ${opacity})`, // Colore leggermente più scuro
     style: {
       borderRadius: 16,
     },
@@ -88,7 +90,7 @@ const LineChartItems = ({startDate}) => {
               },
             ],
           }}
-          width={screenWidth}
+          width={chartWidth}
           height={220}
           chartConfig={chartConfig}
           bezier
@@ -109,34 +111,41 @@ const LineChartItems = ({startDate}) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ffffff',
-    borderRadius: 12,
+    borderRadius: 16, // Bordi più arrotondati
     padding: 16,
-    marginVertical: 8,
+    marginVertical: 10,
+    marginHorizontal: 10,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 3,
   },
   cardTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#1f2937',
-    marginBottom: 12,
-    marginLeft: 8,
+    fontSize: 18, // Font leggermente più grande
+    fontWeight: '700', // Più bold
+    color: '#1f2937', // Colore più scuro per contrasto
+    marginBottom: 16,
+    marginLeft: 4,
   },
   chart: {
     marginVertical: 8,
     borderRadius: 16,
+    alignSelf: 'center', // Centra il grafico
   },
   emptyContainer: {
     height: 220,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#f8f9fa', // Sfondo grigio chiaro
+    borderRadius: 12,
   },
   emptyText: {
-    color: '#6b7280', // gray-500
+    color: '#6b7280',
     fontSize: 14,
+    fontWeight: '500', // Leggermente più bold
+    textAlign: 'center',
+    paddingHorizontal: 20,
   }
 });
 
