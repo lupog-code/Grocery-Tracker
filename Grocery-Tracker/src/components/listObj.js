@@ -36,7 +36,7 @@ export const List = ({ id, name }) => {
     );
 };
 
-export const Product = ({ id, name, quantity, price, category, state, onUpdate , onEdit }) => {
+export const Product = ({ id, name, quantity, price, category, state, onUpdate, onEdit }) => {
     const [isEnabled, setIsEnabled] = useState(state === 1);
     const [visible, setVisible] = useState(false);
 
@@ -143,11 +143,17 @@ export const ModifiableCategory = ({ onDelete, name }) => {
     );
 };
 
-export const FixedCategory = ({ name }) => (
-    <View style={compStyle.FixedCategoryContainer}>
-        <Text style={compStyle.CategoryTitle}>{name}</Text>
-    </View>
-);
+export const FixedCategory = ({ name }) => {
+    const navigation = useNavigation();
+
+    return (
+        <View style={compStyle.FixedCategoryContainer}>
+            <TouchableOpacity onPress={() => navigation.navigate("SingleCategoryScreen", { name })}>
+                <Text style={compStyle.CategoryTitle}>{name}</Text>
+            </TouchableOpacity>
+        </View>
+    );
+};
 
 export const OldProduct = ({ id, name, quantity, price, category, data, onDelete }) => {
     const [visible, setVisible] = useState(false);

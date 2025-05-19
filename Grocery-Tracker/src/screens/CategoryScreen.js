@@ -85,6 +85,15 @@ const CategoriesScreen = () => {
 
             <ScrollView style={{width: '100%'}}>
                 <FlatList
+                    data={fixedCategory}
+                    scrollEnabled={false}
+                    renderItem={({ item }) => (
+                        <FixedCategory name={item.name} />
+                    )}
+                    keyExtractor={(item) => item.name.toString()}
+                />
+
+                <FlatList
                     data={modCategory}
                     scrollEnabled={false}
                     renderItem={({ item }) => (
