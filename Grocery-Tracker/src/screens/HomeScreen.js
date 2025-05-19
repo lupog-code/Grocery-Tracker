@@ -59,11 +59,25 @@ const HomeScreen = () => {
     const goToRecentProducts = () => {
         navigation.navigate("RecentProducts", {products: products});
     }
+
+
+    const saluto = () => {
+        const data = new Date();
+        const ora = data.getHours();
+        if (ora < 12) {
+            return "Good morning 🌅";
+        } else if (ora < 18) {
+            return "Good afternoon 🌞";
+        } else {
+            return "Good evening 🌙";
+        }
+    }
+
     return (
         <View style={commStyle.body}>
 
             <View style={commStyle.flexView}>
-                <Text style={commStyle.homeTitle}>👋 Welcome back</Text>
+                <Text style={commStyle.homeTitle}>{saluto()}</Text>
                 <TouchableOpacity onPress={() => {goToRecentProducts()}} >
                     <View style={commStyle.recentButton}>
                         <Ionicons name="time" style={commStyle.recentButtonIcon}/>
