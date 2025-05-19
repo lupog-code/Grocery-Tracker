@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text, Image, Touchable, TouchableOpacity, ScrollView, SafeAreaView, FlatList, Alert} from 'react-native';
+import React, { use } from 'react';
+import {View, Text, Image, Touchable, TouchableOpacity, ScrollView, SafeAreaView, FlatList, Alert, TextInput} from 'react-native';
 import commStyle from '../styles/commonStyle';
 import {OldProduct , Product} from "../components/listObj";
 import { getItemsByListId ,getByName, modificaItem} from '../data/db';
@@ -7,11 +7,13 @@ import { useState, useEffect } from 'react';
 import { SearchBar ,FilterBar} from '../components/search';
 import { AddProductBtn } from '../components/btnsObj';
 import { rimuoviItem, rimuoviLista } from '../data/db';
-import { getCostoTotalePerLista, getItemsCompratiByListId } from '../data/db';
+import { getCostoTotalePerLista, getItemsCompratiByListId, modificaLista } from '../data/db';
 
 const ListsScreen = ({navigation , route}) => {
     const listId = route.params.id;
     const listName = route.params.name; 
+    const [isEditingName, setIsEditingName] = useState(false);
+    const [editableName, setEditableName] = useState(listName);
     const [products, setProducts] = useState([]); 
     const [productsComprati, setProductsComprati] = useState([]);
     const [costoTotale, setCostoTotale] = useState(0);
@@ -77,6 +79,23 @@ const ListsScreen = ({navigation , route}) => {
         );
     };
 
+    useEffect(() => {
+        const updateListName = async () => {
+            try {
+                if (editableName == listName && editableName.trim() == '') {
+                    return;
+                }
+                await modificaLista(listId, editableName);
+                console.log("List name updated to:", editableName);
+            } catch (error) {
+                console.error("Error updating list name:", error);
+            }
+        };
+        updateListName();
+    }, [isEditingName]);
+
+
+
     const [visualizableProducts, setVisualizableProducts] = useState(products);
     const [searchText, setSearchText] = useState('');
     const [filtri, setFiltri] = useState({ category: '', minPrice: null, maxPrice: null });
@@ -111,7 +130,20 @@ const ListsScreen = ({navigation , route}) => {
                 </TouchableOpacity>
 
                 <View style={commStyle.titleBlock}>
-                    <Text style={commStyle.homeTitle2}>{listName}</Text>
+                  {isEditingName ? (
+                    <TextInput
+                      style={[commStyle.homeTitle2, { borderBottomWidth: 1 }]}
+                      value={editableName}
+                      onChangeText={setEditableName}
+                      autoFocus
+                      onBlur={() => setIsEditingName(false)}
+                      onSubmitEditing={() => setIsEditingName(false)}
+                    />
+                  ) : (
+                    <TouchableOpacity onPress={() => setIsEditingName(true)}>
+                      <Text style={commStyle.homeTitle2}>{editableName}</Text>
+                    </TouchableOpacity>
+                  )}
                 </View>
                 
                 <TouchableOpacity style={commStyle.sideBlock} onPress={() => handleDeleteList(listId)}>
