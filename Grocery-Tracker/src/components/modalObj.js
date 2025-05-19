@@ -150,24 +150,32 @@ export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, vis
     const [price, setPrice] = useState(pricein);
     const [category, setCategory] = useState(categoryin);
     const [open, setOpen] = useState(false);
-    const [pickerItems, setPickerItems] = useState([
-        { label: 'Fruits', value: 'Fruits' },
-        { label: 'Vegetables', value: 'Vegetables' },
-        { label: 'Meat', value: 'Meat' },
-        { label: 'Dairy', value: 'Dairy' },
-        { label: 'Snacks', value: 'Snacks' },
-        { label: 'Beverages', value: 'Beverages' },
-        { label: 'Other', value: 'Other' },
-    ]);
+    const [pickerItems, setPickerItems] = useState([]);
 
     useEffect(() => {
-        if (visible) {
-            setName(namein);
-            setQuantity(quantityin);
-            setPrice(pricein);
-            setCategory(categoryin);
-        }
-    }, [visible, namein, quantityin, pricein, categoryin]);
+        const fetchCategories = async () => {
+            try {
+                const data = await getCategorie();
+                const formattedData = data.map(item => ({
+                    label: item.name,
+                    value: item.name
+                }));
+                setPickerItems(formattedData);
+            } catch (error) {
+                console.error("Error fetching categories:", error);
+            }
+        };
+        fetchCategories();
+    }, []);
+
+  useEffect(() => {
+    if (visible) {
+        setName(namein || '');
+        setQuantity(String(quantityin || ''));
+        setPrice(String(pricein || ''));
+        setCategory(categoryin || '');
+    }
+}, [visible, namein, quantityin, pricein, categoryin]);
 
     const deleteProduct = (idProduct) => {
         Alert.alert(

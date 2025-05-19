@@ -4,7 +4,7 @@ import { getUltimiDieciItemComprati } from '../data/db';
 import {FlatList} from 'react-native';
 import commStyle from "../styles/commonStyle";
 import {OldProduct} from "../components/listObj";
-
+import { FallbackRecents } from '../components/fallback';
 
 const RecentProducts = ({navigation , route}) => {
     const [prodotti , setProdotti] = useState([]);
@@ -37,19 +37,27 @@ const RecentProducts = ({navigation , route}) => {
                 <View style={commStyle.sideBlock} />
             </View>
 
-            <ScrollView showsVerticalScrollIndicator={false}>
-
-            <FlatList
-                data={prodotti}
-                scrollEnabled={false}
-                renderItem={({ item }) => (
-                    <OldProduct id={item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera}
+            {prodotti.length > 0 ? (
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    <FlatList
+                        data={prodotti}
+                        scrollEnabled={false}
+                        renderItem={({ item }) => (
+                            <OldProduct
+                                id={item.id}
+                                name={item.name}
+                                quantity={item.quantity}
+                                price={item.price}
+                                category={item.category}
+                                data={item.data_compera}
+                            />
+                        )}
+                        keyExtractor={(item) => item.id.toString()}
                     />
-                )}
-                keyExtractor={(item) => item.id.toString()}
-            />
-            
-        </ScrollView>
+                </ScrollView>
+            ) : (
+                <FallbackRecents />
+            )}
 
 
         </View>

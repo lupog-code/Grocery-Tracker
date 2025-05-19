@@ -26,4 +26,16 @@ export const FallbackSingleList = () => {
     );
 };
 
-export default FallbackSingleList;
+
+export const FallbackRecents = ()=>{
+    return (
+        <View style={styles.container2}>
+            <MaterialIcons name="history" size={80} color="#fff" />
+            <Text style={styles.mainText}>No recent items</Text>
+            <Text style={styles.subText2}>
+                Start adding items to see your recent activity
+            </Text>
+        </View>
+    );
+};
+

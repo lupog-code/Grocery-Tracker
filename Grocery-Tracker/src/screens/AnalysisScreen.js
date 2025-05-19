@@ -52,7 +52,7 @@ const AnalysisScreen = () => {
             <View style={{width:'20%'}}/>
 
             <View style={{width:'60%'}}>
-              <Text style={commStyle.homeTitle2}>Analysis Screen</Text>
+              <Text style={commStyle.homeTitle2}> </Text>
             </View>
 
             <View style={{width:'20%'}}/>
@@ -61,7 +61,7 @@ const AnalysisScreen = () => {
         <ScrollView >
           <>
           <View style={styles.card}>
-            <Text style={styles.cardTitle}>Periodo di analisi</Text>
+            <Text style={styles.cardTitle}>Analysis Period</Text>
             <SegmentedButtons
                 buttons={periods.map(period => ({
                   value: period,

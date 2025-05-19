@@ -8,7 +8,8 @@ import { getListe } from '../data/db';
 import { getUltimeDueListe } from '../data/db';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback } from 'react';
-import Fallback, {FallbackList} from '../components/fallback';
+import { FallbackList  } from '../components/fallback';
+
 import * as Animatable from 'react-native-animatable';
 
 const ListsScreen = () => {

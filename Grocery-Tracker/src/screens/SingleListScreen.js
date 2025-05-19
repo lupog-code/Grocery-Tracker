@@ -8,7 +8,7 @@ import { SearchBar ,FilterBar} from '../components/search';
 import { AddProductBtn } from '../components/btnsObj';
 import { rimuoviItem, rimuoviLista } from '../data/db';
 import { getCostoTotalePerLista, getItemsCompratiByListId, modificaLista } from '../data/db';
-import FallbackSingleList from '../components/fallback';
+import { FallbackSingleList } from '../components/fallback';
 import * as Animatable from 'react-native-animatable'; 
 
 

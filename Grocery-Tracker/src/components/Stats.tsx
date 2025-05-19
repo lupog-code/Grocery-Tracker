@@ -27,19 +27,19 @@ const StatisticsCard = ({ startDate }) => {
 
   return (
     <View style={styles.card}>
-      <Text style={styles.cardTitle}>Statistiche spesa</Text>
-      
+      <Text style={styles.cardTitle}>Overview</Text>
+
       <View style={styles.statsContainer}>
         <View style={styles.statItem}>
           <Text style={styles.statValue}>€ {totalSpending.toFixed(2)}</Text>
-          <Text style={styles.statLabel}>Spesa totale</Text>
+          <Text style={styles.statLabel}>Total Spending</Text>
         </View>
         
         <View style={styles.divider} />
         
         <View style={styles.statItem}>
           <Text style={styles.statValue}>€ {dailyAverage.toFixed(2)}</Text>
-          <Text style={styles.statLabel}>Media giornaliera</Text>
+          <Text style={styles.statLabel}>Daily Average</Text>
         </View>
       </View>
     </View>

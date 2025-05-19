@@ -93,7 +93,7 @@ const PieChartItems = ({ startDate }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.title}>Panoramica Prodotti</Text>
+        <Text style={styles.title}>Expenses by category</Text>
         
         {chartData.length > 0 ? (
           <View>
