@@ -5,53 +5,41 @@ import PieChartItems from '../components/Graphs/PieChart';
 import LineChartItems from '../components/Graphs/LineChart';
 import { Text, StyleSheet } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
-import { getItemsRecentiAcquistati } from '../data/db';
 import StatisticsCard from '../components/Stats';
 
 import { useFocusEffect } from '@react-navigation/native';
 import commStyle from "../styles/commonStyle";
 
 const AnalysisScreen = () => {
-  const [currentPeriod, setCurrentPeriod] = useState("3m");
-  const [items, setItems] = useState([]);
+  const [currentPeriod, setCurrentPeriod] = useState("3 mesi");
   const [startDate, setStartDate] = useState("");
 
-  const periods = ["1m", "3m", "6m", "1y"];
+  const periods = ["1 mese", "3 mesi", "6 mesi", "1 anno"];
 
   const getStartDate = (period) => {
     const now = new Date();
     const newDate = new Date(now);
     switch (period) {
-      case '1m':
+      case '1 mese':
         newDate.setMonth(now.getMonth() - 1);
         break;
-      case '3m':
+      case '3 mesi':
         newDate.setMonth(now.getMonth() - 3);
         break;
-      case '6m':
+      case '6 mesi':
         newDate.setMonth(now.getMonth() - 6);
         break;
-      case '1y':
+      case '1 anno':
         newDate.setFullYear(now.getFullYear() - 1);
         break;
     }
-    return newDate.toISOString().split('T')[0];
-  };
-
-  const fetchItems = async (period) => {
-    try {
-      const start = getStartDate(period);
-      setStartDate(start);
-      const data = await getItemsRecentiAcquistati(period);
-      setItems(data);
-    } catch (err) {
-      console.error("Error fetching data", err);
-    }
+    return newDate;
   };
 
   useFocusEffect(
     React.useCallback(() => {
-      fetchItems(currentPeriod);
+      const start = getStartDate(currentPeriod);
+      setStartDate(start);
     }, [currentPeriod])
   );
 
@@ -88,15 +76,15 @@ const AnalysisScreen = () => {
           </View>
 
           <View>
-            <StatisticsCard startDate={startDate} items={items}/>
+            <StatisticsCard startDate={startDate} />
           </View>
 
           <View style={styles.chartCard}>
-                <PieChartItems startDate={startDate} items={items} />
+                <PieChartItems startDate={startDate} />
           </View>
 
         <View style={styles.chartCard}>
-                <LineChartItems startDate={startDate} items={items} />
+                <LineChartItems startDate={startDate} />
           </View>
 
           </>
