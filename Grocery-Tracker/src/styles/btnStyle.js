@@ -26,6 +26,29 @@ const btnStyle = StyleSheet.create({
         }
     },
 
+    insertBtnSqrt: {
+        height: 70,
+        width: 70,
+        borderRadius: 45, // Più arrotondato per un look moderno
+        backgroundColor: '#274472',
+        justifyContent: 'center',
+        alignItems: 'center',
+        elevation: 3, // Per Android (sostituisce shadow*)
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 }, // Ombra più naturale
+        shadowOpacity: 0.2, // Più leggera
+        shadowRadius: 3,
+        position: 'absolute',
+        top: -80,
+        right: 5,
+        // Aggiungi transizione per hover/click
+        transition: 'all 0.3s ease',
+        ':hover': {
+            backgroundColor: '#1a3152',
+            transform: [{ scale: 1.03 }]
+        }
+    },
+
     insertBtnCat: {
         height: 50,
         width: 165,

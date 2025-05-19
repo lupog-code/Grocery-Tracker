@@ -6,13 +6,10 @@ import {List, Product, OldProduct, SmallOldProduct} from "../components/listObj"
 import {AddListBtn} from "../components/btnsObj";
 import { getUltimeDueListe } from '../data/db';
 import { useState, useEffect, useCallback } from 'react';
-import Fallback from '../components/fallback';
+import Fallback, {FallbackList} from '../components/fallback';
 import { getUltimiDieciItemComprati } from '../data/db';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { getListe } from '../data/db';
-
-
-
 
 
 
@@ -103,7 +100,7 @@ const HomeScreen = () => {
                
                 
             <Text style={commStyle.subTitle}>📝 Recent Lists</Text>
-             {lists.length === 0 && <Fallback />}
+             {lists.length === 0 && <FallbackList />}
                 <FlatList
                 scrollEnabled={false}
                 data={lists}

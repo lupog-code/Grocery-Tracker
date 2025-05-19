@@ -84,14 +84,6 @@ const CategoriesScreen = () => {
 
 
             <ScrollView style={{width: '100%'}}>
-                <FlatList
-                    data={fixedCategory}
-                    scrollEnabled={false}
-                    renderItem={({ item }) => (
-                        <FixedCategory name={item.name} />
-                    )}
-                    keyExtractor={(item) => item.name.toString()}
-                />
 
                 <FlatList
                     data={modCategory}
@@ -101,11 +93,22 @@ const CategoriesScreen = () => {
                     )}
                     keyExtractor={(item) => item.name.toString()}
                 />
+                
+                <FlatList
+                    data={fixedCategory}
+                    scrollEnabled={false}
+                    renderItem={({ item }) => (
+                        <FixedCategory name={item.name} />
+                    )}
+                    keyExtractor={(item) => item.name.toString()}
+                />
 
+                <View style={{height:150}}/>
               
             </ScrollView>
 
             <AddCategoryBtn categories={modCategory} onAddCategory={handleAddCategory} />
+
         </View>
     );
 }

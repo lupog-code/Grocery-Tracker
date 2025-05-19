@@ -31,8 +31,8 @@ export const AddProductBtn = ({setItems,listID}) => {
 
             {/* Bottone */}
             <TouchableOpacity onPress={() => setVisible(true)}>
-                <View style={btnStyle.insertBtnView}>
-                    <Text style={btnStyle.insertBtnText}>+</Text>
+                <View style={btnStyle.insertBtnSqrt}>
+                    <Text style={[btnStyle.insertBtnText, {fontSize: 30, fontWeight: 300}]}>+</Text>
                 </View>
             </TouchableOpacity>
         </>
