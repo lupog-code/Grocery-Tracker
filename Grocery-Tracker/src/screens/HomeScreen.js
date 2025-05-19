@@ -93,19 +93,7 @@ const HomeScreen = () => {
                 keyExtractor={(item) => item.id.toString()}
                 />
 
-            <Text style={commStyle.subTitle}>🛒 Recent Products</Text>
-
-
-                    <FlatList
-                    scrollEnabled={false}
-                    data={products}
-                    numColumns={2}
-                    columnWrapperStyle={{ justifyContent: 'space-between', marginBottom: 10 }}
-                    renderItem={({ item }) => (
-                        <SmallOldProduct id = {item.id} name={item.name} quantity={item.quantity} price={item.price} category={item.category} data={item.data_compera}/>
-                    )}
-                    keyExtractor={(item) => item.id.toString()}
-                />
+           
 
 
 
