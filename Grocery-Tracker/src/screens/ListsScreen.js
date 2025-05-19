@@ -8,6 +8,8 @@ import { getListe } from '../data/db';
 import { getUltimeDueListe } from '../data/db';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback } from 'react';
+import Fallback from '../components/fallback';
+import * as Animatable from 'react-native-animatable';
 
 const ListsScreen = () => {
     const [lists, setLists] = useState([]);
@@ -50,13 +52,39 @@ useFocusEffect(
                 <View style={{width:'20%'}}/>
             </View>
 
-            <FlatList
-                data={lists}
-                renderItem={({ item }) => <List id={item.id} name={item.name} />}
-                keyExtractor={(item) => item.id.toString()}
-                showsVerticalScrollIndicator={false}/>
-
-            <AddListBtn onAdd={handleAddList} />
+            {lists.length === 0 ? (
+                <>
+                    <Fallback />
+                    <View style={{ position: 'absolute', bottom: 20, right: 20 }}>
+                        <Animatable.View
+                            animation="swing"
+                            easing="ease-in-out"
+                            duration={1000}
+                            iterationCount="infinite"
+                            useNativeDriver={true}
+                            delay={300}
+                            style={{ alignSelf: 'flex-end', borderRadius: 30, padding: 4 }}
+                        >
+                            <AddListBtn onAdd={handleAddList} />
+                        </Animatable.View>
+                    </View>
+                </>
+            ) : (
+                <>
+                    <FlatList
+                        data={lists}
+                        renderItem={({ item }) => <List id={item.id} name={item.name} />}
+                        keyExtractor={(item) => item.id.toString()}
+                        showsVerticalScrollIndicator={false}
+                    />
+                     <View style={{ position: 'absolute', bottom: 20, right: 20 }}>
+                        
+                             <AddListBtn onAdd={handleAddList} />
+                         
+                     </View>
+                   
+                </>
+            )}
         </View>
     );
 }

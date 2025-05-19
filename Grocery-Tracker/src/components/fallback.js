@@ -4,8 +4,8 @@ import { View, Text, StyleSheet } from 'react-native';
 const Fallback = () => {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>No lists available</Text>
-            <Text style={styles.subText}>Create a new list to get started</Text>
+            <Text style={styles.text}>🗒️ No Lists Yet</Text>
+            <Text style={styles.subText}>Tap the button below to create your first list!</Text>
         </View>
     );
 };
@@ -18,14 +18,16 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     text: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: '#666',
-        marginBottom: 10,
+        fontSize: 22,
+        fontWeight: '600',
+        color: '#20385E',
+        marginBottom: 12,
+        textAlign: 'center',
     },
     subText: {
-        fontSize: 16,
-        color: '#999',
+        fontSize: 17,
+        color: '#506680',
+        textAlign: 'center',
     },
 });
 

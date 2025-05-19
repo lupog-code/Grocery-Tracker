@@ -10,6 +10,12 @@ import Fallback from '../components/fallback';
 import { getUltimiDieciItemComprati } from '../data/db';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { getListe } from '../data/db';
+
+
+
+
+
+
 const HomeScreen = () => {
     const [lists, setLists] = useState([]);
     const [products, setProducts] = useState([]);
