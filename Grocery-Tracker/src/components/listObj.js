@@ -15,7 +15,7 @@ const getEmoji = ( category ) => {
         case "Snacks": return "🍫";
         case "Beverages": return "🍶";
         case "Other": return "🍽️";
-        default: return "❓";
+        default: return "";
     }
 };
 
@@ -71,7 +71,7 @@ export const Product = ({ id, name, quantity, price, category, state, onUpdate, 
             />
             <View style={compStyle.ProductContainer}>
                 <View style={compStyle.Cont20}>
-                    <Text style={compStyle.categoryEmoji}>{getEmoji({ category })}</Text>
+                    <Text style={compStyle.categoryEmoji}>{getEmoji(category)}</Text>
                     <TouchableOpacity onPress={() => setVisible(true)}>
                         <Ionicons style={compStyle.modifyProduct} name="pencil-outline" />
                     </TouchableOpacity>
@@ -119,7 +119,7 @@ export const SmallOldProduct = ({ id, name, quantity, price, category }) => {
             />
             <View style={compStyle.SmallProductContainer}>
                 <View style={{ width: '100%' }}>
-                    <Text style={compStyle.SmallCategoryEmoji}>{getEmoji({ category })}</Text>
+                    <Text style={compStyle.SmallCategoryEmoji}>{getEmoji(category)}</Text>
                     <Text style={compStyle.SmallProductTitle}>{quantity}x {name}</Text>
                     <Text style={compStyle.SmallPrice}>{price} $</Text>
                 </View>
@@ -173,7 +173,7 @@ export const OldProduct = ({ id, name, quantity, price, category, data, onDelete
             />
             <View style={compStyle.ProductContainer}>
                 <View style={compStyle.Cont20}>
-                    <Text style={compStyle.categoryEmoji}>{getEmoji({ category })}</Text>
+                    <Text style={compStyle.categoryEmoji}>{getEmoji(category)}</Text>
                 </View>
                 <View style={compStyle.Cont60}>
                     <Text style={compStyle.ProductTitle}>{name}</Text>
