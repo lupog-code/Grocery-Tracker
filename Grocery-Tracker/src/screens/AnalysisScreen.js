@@ -45,7 +45,7 @@ const AnalysisScreen = () => {
 
     return (
 
-        <View style={commStyle.body}>
+        <View style={[commStyle.body, {paddingLeft: 15, paddingRight: 15}]}>
 
           <View style={commStyle.flexView2}>
 

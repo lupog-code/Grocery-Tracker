@@ -3,7 +3,6 @@ import {View, Text, TouchableOpacity, ScrollView , FlatList, Alert} from 'react-
 import commStyle from '../styles/commonStyle';
 import {FixedCategory, ModifiableCategory} from "../components/listObj";
 import {getFixedCategorie, getModifiableCategorie} from '../data/db';
-import AddCategoryButton from '../components/AddCategoryButton';
 import { addCategory } from '../data/db';
 import { rimuoviCategoria } from '../data/db';
 import {AddCategoryBtn} from "../components/btnsObj";
@@ -93,7 +92,7 @@ const CategoriesScreen = () => {
                     )}
                     keyExtractor={(item) => item.name.toString()}
                 />
-                
+
                 <FlatList
                     data={fixedCategory}
                     scrollEnabled={false}

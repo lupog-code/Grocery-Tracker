@@ -97,9 +97,9 @@ const HomeScreen = () => {
             </SafeAreaView>
 
             <ScrollView showsVerticalScrollIndicator={false}>
-               
-                
-            <Text style={commStyle.subTitle}>📝 Recent Lists</Text>
+
+
+             {lists.length !== 0 && <Text style={commStyle.subTitle}>📝 Recent Lists</Text>}
              {lists.length === 0 && <FallbackList />}
                 <FlatList
                 scrollEnabled={false}

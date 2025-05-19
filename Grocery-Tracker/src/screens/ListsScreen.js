@@ -8,7 +8,7 @@ import { getListe } from '../data/db';
 import { getUltimeDueListe } from '../data/db';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback } from 'react';
-import Fallback from '../components/fallback';
+import Fallback, {FallbackList} from '../components/fallback';
 import * as Animatable from 'react-native-animatable';
 
 const ListsScreen = () => {
@@ -54,7 +54,7 @@ useFocusEffect(
 
             {lists.length === 0 ? (
                 <>
-                    <Fallback />
+                    <FallbackList />
                     <View style={{ position: 'absolute', bottom: 20, right: 20 }}>
                         <Animatable.View
                             animation="swing"
