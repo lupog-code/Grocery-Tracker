@@ -87,7 +87,8 @@ const ListsScreen = ({navigation , route}) => {
                     return;
                 }
                 await modificaLista(listId, editableName.trim());
-                console.log("List name updated to:", editableName);
+                setEditableName(editableName.trim());
+                console.log("List name updated to:", editableName.trim());
             } catch (error) {
                 console.error("Error updating list name:", error);
             }
