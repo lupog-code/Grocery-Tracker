@@ -105,7 +105,7 @@ export const PopUp_AddProduct = ({ visible, setVisible, setItems, listID }) => {
 
                     <TextInput
                         style={btnStyle.textInput}
-                        placeholder="Price"
+                        placeholder="Price per unit"
                         keyboardType="numeric"
                         onChangeText={val => setPrice(val)}
                         value={price}

@@ -18,16 +18,17 @@ const ListsScreen = ({navigation , route}) => {
     const [productsComprati, setProductsComprati] = useState([]);
     const [costoTotale, setCostoTotale] = useState(0);
    //Inizializza il costo totale 
+    const fetchCostoTotale = async () => {
+        try {
+            const costo = await getCostoTotalePerLista(listId);
+            console.log("Costo totale:", costo);
+            setCostoTotale(costo || 0); // Imposta a 0 se il risultato è null
+        } catch (error) {
+            console.error("Error fetching total cost:", error);
+        }
+    };
+
     useEffect(() => {
-        const fetchCostoTotale = async () => {
-            try {
-                const costo = await getCostoTotalePerLista(listId);
-                console.log("Costo totale:", costo);
-                setCostoTotale(costo || 0); // Imposta a 0 se il risultato è null
-            } catch (error) {
-                console.error("Error fetching total cost:", error);
-            }
-        };
         fetchCostoTotale();
     }, [listId, productsComprati]);
 
@@ -169,7 +170,7 @@ const ListsScreen = ({navigation , route}) => {
                   category={item.category}
                   state={item.comprato}
                   onUpdate={refreshComprati}
-                  onEdit={fetchProducts}
+                  onEdit={() => { fetchProducts(); fetchCostoTotale(); }}
                 />
               )}
             />
