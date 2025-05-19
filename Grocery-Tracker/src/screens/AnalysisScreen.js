@@ -33,7 +33,8 @@ const AnalysisScreen = () => {
         newDate.setFullYear(now.getFullYear() - 1);
         break;
     }
-    return newDate;
+    console.log("Start date:", newDate);
+    return newDate.toISOString().split('T')[0]; // Formato YYYY-MM-DD
   };
 
   useFocusEffect(
@@ -77,14 +78,6 @@ const AnalysisScreen = () => {
 
           <View>
             <StatisticsCard startDate={startDate} />
-          </View>
-
-          <View style={styles.chartCard}>
-                <PieChartItems startDate={startDate} />
-          </View>
-
-        <View style={styles.chartCard}>
-                <LineChartItems startDate={startDate} />
           </View>
 
           </>
