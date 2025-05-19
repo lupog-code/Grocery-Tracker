@@ -32,7 +32,7 @@ export const AddProductBtn = ({setItems,listID}) => {
             {/* Bottone */}
             <TouchableOpacity onPress={() => setVisible(true)}>
                 <View style={btnStyle.insertBtnView}>
-                    <Text style={btnStyle.insertBtnText}>+ Add Product</Text>
+                    <Text style={btnStyle.insertBtnText}>+</Text>
                 </View>
             </TouchableOpacity>
         </>
