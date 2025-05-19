@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import Fallback from '../components/fallback';
 import { getUltimiDieciItemComprati } from '../data/db';
 import { useNavigation } from '@react-navigation/native';
+import { getListe } from '../data/db';
 const HomeScreen = () => {
     const [lists, setLists] = useState([]);
     const [products, setProducts] = useState([]);
@@ -38,6 +39,19 @@ const HomeScreen = () => {
         fetchLists();
     },[lists])
 
+    const handleAddList = () => {
+        const fetchLists = async () => {
+            try {
+                const data = await getUltimeDueListe(); //Aggiorna le ultime due liste
+                await getListe(); //Refresh delle liste totali 
+               
+                setLists(data);
+            } catch (error) {
+                console.error("Error fetching lists:", error);
+            }
+        };
+        fetchLists();
+    }
 
     const navigation = useNavigation();
     const goToRecentProducts = () => {
@@ -96,7 +110,7 @@ const HomeScreen = () => {
 
             </ScrollView>
 
-            <AddListBtn />
+            <AddListBtn onAdd={handleAddList} />
 
         </View>
     );

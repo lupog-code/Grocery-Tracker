@@ -304,7 +304,7 @@ export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, vis
     );
 };
 
-export const PopUp_AddList = ({ visible, setVisible }) => {
+export const PopUp_AddList = ({ onAdd, visible, setVisible }) => {
 
     const [name, setName] = useState('');
 
@@ -346,7 +346,7 @@ export const PopUp_AddList = ({ visible, setVisible }) => {
                         value={name}
                     />
 
-                    <Button title="Add List" onPress={inserisciNuovaLista} />
+                    <Button title="Add List" onPress={() => { inserisciNuovaLista(); onAdd(name); }} />
                 </View>
             </TouchableOpacity>
         </Modal>

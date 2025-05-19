@@ -3,13 +3,13 @@ import {View, Text, Image, Switch, TouchableOpacity, Touchable} from 'react-nati
 import btnStyle from '../styles/btnStyle';
 import {PopUp_addCategory, PopUp_AddList, PopUp_AddProduct} from "./modalObj";
 
-export const AddListBtn = () => {
+export const AddListBtn = ({onAdd}) => {
     const [visible, setVisible] = useState(false);
 
     return (
         <>
             {/* Modal separato dal bottone */}
-            <PopUp_AddList visible={visible} setVisible={setVisible} items={null} />
+            <PopUp_AddList onAdd={onAdd} visible={visible} setVisible={setVisible} items={null} />
 
             {/* Bottone */}
             <TouchableOpacity onPress={() => setVisible(true)}>

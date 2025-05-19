@@ -15,7 +15,9 @@ const BottomNavigation = ()=>{
 
 
 
-        <Tab.Navigator screenOptions={commStyle.bottomBar}>
+        <Tab.Navigator screenOptions={commStyle.bottomBar}
+        initialRouteName="Home"
+        >
         <Tab.Screen name="Home" component={HomeScreen} 
         options={{
             tabBarIcon: ({color, size}) => (
