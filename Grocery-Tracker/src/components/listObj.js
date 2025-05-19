@@ -6,7 +6,7 @@ import { PopUp_editProduct } from "./modalObj";
 import { useNavigation } from '@react-navigation/native';
 import { buyItem, rimuoviItemComprato } from '../data/db';
 
-const getEmoji = ({ category }) => {
+const getEmoji = ( category ) => {
     switch (category) {
         case "Fruits": return "🍎";
         case "Vegetables": return "🥬";
@@ -134,7 +134,7 @@ export const ModifiableCategory = ({ onDelete, name }) => {
     return (
         <View style={compStyle.ModCategoryContainer}>
             <TouchableOpacity onPress={() => navigation.navigate("SingleCategoryScreen", { name })}>
-                <Text style={compStyle.CategoryTitle}>{name}</Text>
+                <Text style={compStyle.CategoryTitle}>{getEmoji(name)} {name}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{ marginLeft: 'auto' }} onPress={() => onDelete(name)}>
                 <Ionicons style={compStyle.modifyCategory} name="trash-outline" />
@@ -149,7 +149,7 @@ export const FixedCategory = ({ name }) => {
     return (
         <View style={compStyle.FixedCategoryContainer}>
             <TouchableOpacity onPress={() => navigation.navigate("SingleCategoryScreen", { name })}>
-                <Text style={compStyle.CategoryTitle}>{name}</Text>
+                <Text style={compStyle.CategoryTitle}>{getEmoji(name)} {name}</Text>
             </TouchableOpacity>
         </View>
     );
