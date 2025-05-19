@@ -80,6 +80,9 @@ const AnalysisScreen = () => {
           </View>
             <PieChartItems startDate={startDate} />      
           </>
+          <View>
+            <LineChartItems startDate={startDate} />
+          </View>
         </ScrollView>
         </View>
     );

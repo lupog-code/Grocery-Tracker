@@ -159,12 +159,17 @@ export const getItemsRecentiAcquistati = async (time) => {
 }
 
 // Costi mensili
+interface CostiMensili {
+  mese: string;
+  totale: number;
+}
+
 export const getCostiMensili = async () => {
   try {
-    const result = await db.getAllAsync(`
+    const result = await db.getAllAsync<CostiMensili>(`
       SELECT strftime('%Y-%m', data_compera) as mese, SUM(price * quantity) as totale
       FROM items
-      WHERE data_compera > date('now', '-6 months') AND comprato = true
+      WHERE strftime('%Y', data_compera) = strftime('%Y', 'now') AND comprato = true
       GROUP BY mese
       ORDER BY mese DESC;
     `);

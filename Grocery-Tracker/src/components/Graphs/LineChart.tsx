@@ -1,57 +1,56 @@
 import React, { useState, useEffect } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { getCostiMensili } from '../../data/db';
 
-const LineChartItems = ({startDate, items}) => {
-
-    const [data, setData] = useState([]);
-
+const LineChartItems = ({startDate}) => {
   const [chartData, setChartData] = useState({
     labels: [],
-    datasets: [{ data: [] }]
+    datasets: [
+      {
+        data: [],
+      },
+    ],
   });
-  
-  const screenWidth = Dimensions.get('window').width - 32; // Larghezza dello schermo meno padding
-  
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const fetchedData = await getCostiMensili();
-        setData(fetchedData);
-      } catch (error) {
-        console.error('Error fetching items:', error);
-      }
-    };
-    getData();
-  }, []);
+  const screenWidth = Dimensions.get('window').width;
 
-  useEffect(() => {
-    if (!data || data.length === 0) return;
+  useFocusEffect(
+    React.useCallback(() => {
+      let isActive = true;
+      const fetchData = async () => {
+        try {
+          const data = await getCostiMensili();
+          console.log('Data fetched for line chart:', data);
+          if (isActive) {
+            const labels = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'];
+            const values = data.map(item => item.totale);
+            for (let i = 0; i < labels.length; i++) {
+              values[i] = values[i] || 0; // Assicurati che i valori siano definiti
+            }
+            setChartData({
+              labels,
+              datasets: [
+                {
+                  data: values,
+                },
+              ],
+            });
+          }
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
 
-    const dataPoints = [];
-    const labelPoints = [];
+      fetchData();
 
-    for (let i = 0; i < 6; i++) {
-      const pointDate = new Date();
-      pointDate.setMonth(pointDate.getMonth() - (6 - i));
-
-      const months = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'];
-      const monthLabel = months[pointDate.getMonth()];
-      labelPoints.push(monthLabel);
-
-      const currentMonthStr = `${pointDate.getFullYear()}-${String(pointDate.getMonth() + 1).padStart(2, '0')}`;
-      const monthData = data.find(d => d.mese === currentMonthStr);
-      const total = monthData ? Number(monthData.totale) : 0;
-      dataPoints.push(Number(total.toFixed(2)));
+      return () => {
+        isActive = false;
+      };
     }
+    , [startDate])
+  );
 
-    setChartData({
-      labels: labelPoints,
-      datasets: [{ data: dataPoints }]
-    });
-  }, [data, startDate, items]);
-  
   // Configurazione del grafico
   const chartConfig = {
     backgroundColor: '#ffffff',
@@ -75,7 +74,7 @@ const LineChartItems = ({startDate, items}) => {
   
   return (
     <View style={styles.container}>
-      <Text style={styles.cardTitle}>Ultimi 6 mesi</Text>
+      <Text style={styles.cardTitle}>Spese Annuali</Text>
       
       {chartData.datasets[0].data.length > 0 ? (
         <LineChart
