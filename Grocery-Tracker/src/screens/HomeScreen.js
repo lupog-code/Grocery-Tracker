@@ -5,14 +5,29 @@ import {Ionicons} from "@expo/vector-icons";
 import {List, Product, OldProduct, SmallOldProduct} from "../components/listObj";
 import {AddListBtn} from "../components/btnsObj";
 import { getUltimeDueListe } from '../data/db';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Fallback from '../components/fallback';
 import { getUltimiDieciItemComprati } from '../data/db';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { getListe } from '../data/db';
 const HomeScreen = () => {
     const [lists, setLists] = useState([]);
     const [products, setProducts] = useState([]);
+
+    useFocusEffect(
+        useCallback(() => {
+            const fetchLists = async () => {
+                try {
+                    const data = await getListe();
+                    setLists(data);
+                } catch (error) {
+                    console.error("Error fetching lists:", error);
+                }
+            };
+            fetchLists();
+        }, [])
+    );
+
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -25,19 +40,6 @@ const HomeScreen = () => {
         };
         fetchProducts();
     }, [products])
-
-    useEffect(() => {
-        const fetchLists = async () => {
-            try {
-                const data = await getUltimeDueListe();
-                if(JSON.stringify(data) === JSON.stringify(products)) return;  //Controlla se i dati sono cambiati;
-                setLists(data); //Inizializza le due liste 
-            } catch (error) {
-                console.error("Error fetching lists:", error);
-            }
-        };
-        fetchLists();
-    },[lists])
 
     const handleAddList = () => {
         const fetchLists = async () => {
