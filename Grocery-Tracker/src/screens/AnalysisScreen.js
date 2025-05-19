@@ -78,7 +78,7 @@ const AnalysisScreen = () => {
           <View>
             <StatisticsCard startDate={startDate} />
           </View>
-
+            <PieChartItems startDate={startDate} />      
           </>
         </ScrollView>
         </View>
