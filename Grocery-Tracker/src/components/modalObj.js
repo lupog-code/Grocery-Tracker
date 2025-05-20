@@ -405,7 +405,7 @@ export const PopUp_addCategory = ({ namein, visible, setVisible ,onAddCategory,c
             >
                 <View style={btnStyle.popUp_productEdit}>
                     <View style={btnStyle.topModal}>
-                        <Text style={btnStyle.TopModalTitle}>Add Cateogry</Text>
+                        <Text style={btnStyle.TopModalTitle}>Add Category</Text>
                     </View>
 
                     <TextInput

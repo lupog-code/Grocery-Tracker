@@ -57,15 +57,31 @@ const CategoriesScreen = () => {
         //Funzione per eliminare una categoria
          //Funzione per eliminare una categoria
     const handledeleteCategory = async (categoryName) => {
-    try {
-        await rimuoviCategoria(categoryName);
-        //Refresha la lista delle categorie
-        const data = await getModifiableCategorie();
-        setModCategory(data);
-    } catch (error) {
-        console.error("Error deleting category:", error);
-    }
-};
+        Alert.alert(
+            "Delete Category",
+            `Are you sure you want to delete ${categoryName}?\nAll tasks associated with this category will be deleted.`,
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel"
+                },
+                {
+                    text: "Delete",
+                    onPress: async () => {
+                        try {
+                            await rimuoviCategoria(categoryName);
+                            //Refresha la lista delle categorie
+                            const data = await getModifiableCategorie();
+                            setModCategory(data);
+                        } catch (error) {
+                            console.error("Error deleting category:", error);
+                        }
+                    },
+                    style: "destructive"
+                }
+            ]
+        );
+    };
 
     return (
         <View style={commStyle.body}>

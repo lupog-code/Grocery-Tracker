@@ -63,25 +63,36 @@ const ListsScreen = ({navigation , route}) => {
 
     const handleDeleteList = (listId) => {
         Alert.alert(
-            "Are you sure you want to delete this list?",
-            "This action cannot be undone",
+            "Delete List",  // More concise title
+            "Are you sure you want to delete this list? This action cannot be undone.",
             [
-            {
-                text: "Cancel",
-                style: "cancel"
-            },
-            {
-                text: "Delete",
-                onPress: async () => {
-                try {
-                    await rimuoviLista(listId);
-                    navigation.goBack();
-                } catch (error) {
-                    console.error("Error deleting product:", error);
+                {
+                    text: "Cancel",
+                    style: "cancel",
+                
+                },
+                {
+                    text: "Delete",
+                    style: "destructive",
+                    onPress: async () => {
+                        try {
+                            await rimuoviLista(listId);
+                            navigation.goBack();
+                        } catch (error) {
+                            console.error("Error deleting list:", error);
+                            Alert.alert(
+                                "Error",
+                                "Could not delete the list. Please try again."
+                            );
+                        }
+                    }
                 }
-                }
+            ],
+            // Additional options
+            {
+                cancelable: true,
+                onDismiss: () => {}
             }
-            ]
         );
     };
 
