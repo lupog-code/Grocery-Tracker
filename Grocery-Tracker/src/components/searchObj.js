@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import {Button, Modal, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
+import btnStyle from "../styles/btnStyle";
 
 export const SearchBar = ({setSearchText}) => {
     return (
@@ -12,25 +13,29 @@ export const SearchBar = ({setSearchText}) => {
                 style={{
                     flexDirection: 'row',
                     alignItems: 'center',
-                    borderColor: 'gray',
-                    borderWidth: 1,
-                    borderRadius: 5,
-                    paddingHorizontal: 10,
+                    borderColor: 'white',
+                    borderWidth: 1.5,
+                    borderRadius: 25,
+                    paddingHorizontal: 19,
                     margin: 10,
-                    backgroundColor: 'white', // Aggiunto per lo sfondo bianco
+                    backgroundColor: '(0,0,0,0)',
                 }}
             >
                 <TextInput
                     style={{
                         flex: 1,
                         height: 40,
+                        color: 'white',
+                        fontColor: 'white',
+                        fontWeight: 'bold',
+                        fontSize: 15,
                     }}
                     onChangeText={setSearchText}
                     placeholder="Search..."
                 />
                 <View style={{ marginLeft: 10 }}>
                     <Text>
-                        <Ionicons name="search" size={20} color="gray" /> 
+                        <Ionicons name="search" size={20} color="white" />
                     </Text>
                 </View>
             </View>
@@ -39,9 +44,7 @@ export const SearchBar = ({setSearchText}) => {
 
 }
 
-
-
-    export const FilterBar = ({ setFiltri }) => {
+export const FilterBar = ({ setFiltri }) => {
         const [modalVisible, setModalVisible] = useState(false);
         const [category, setCategory] = useState('');
         const [minPrice, setMinPrice] = useState(null);
@@ -72,7 +75,7 @@ export const SearchBar = ({setSearchText}) => {
             ]);
 
         return (
-            <View style={styles.container}>
+            <View>
                 <Button title="Open Filters" onPress={() => setModalVisible(true)} color="white" />
                 <Modal
                     animationType="slide"
@@ -81,18 +84,22 @@ export const SearchBar = ({setSearchText}) => {
                     onRequestClose={() => setModalVisible(false)}
                     
                 >
-                    <View style={styles.modalContainer}>
-                        <View style={styles.modalContent}>
-                            <Text style={styles.modalTitle}>Enter Filters</Text>
+                    <TouchableOpacity
+                        style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)' }}
+                        activeOpacity={1}
+                        onPressOut={() => setModalVisible(false)}
+                    >
+                    <View style={btnStyle.popUp_product}>
+                            <Text style={btnStyle.TopModalTitle}>Enter Filters</Text>
                             <TextInput
-                                style={styles.filterButton}
+                                style={btnStyle.textInput}
                                 placeholder="Min Price"
                                 value={minPrice}
                                 onChangeText={setMinPrice}
                                 keyboardType="numeric"
                             />
                             <TextInput
-                                style={styles.filterButton}
+                                style={btnStyle.textInput}
                                 placeholder="Max Price"
                                 value={maxPrice}
                                 onChangeText={setMaxPrice}
@@ -106,59 +113,38 @@ export const SearchBar = ({setSearchText}) => {
                                     setOpen={setOpen}
                                     setValue={setCategory}
                                     setItems={setPickerItems}
-                                    placeholder="Select a category..."
-                                    
+                                    placeholder="Category"
+
+                                    style={btnStyle.pickerInput}
                                     dropDownContainerStyle={{ borderColor: '#20385E', marginTop: 20 }}
                                     textStyle={{ fontSize: 20, color: '#20385E' }}
                                     placeholderStyle={{ color: 'gray' }}
                                     selectedItemLabelStyle={{ color: 'white' }}
-                                    selectedItemContainerStyle={{ backgroundColor: '#20385E'}}
+                                    selectedItemContainerStyle={{ backgroundColor: '#20385E' }}
                                     selectedItemTextStyle={{ color: 'white' }}
                                 />
                             </View>
-                            <Button title="Apply Filters" onPress={applyFilters} />
-                            <Button title="Reset Filters" onPress={resetFilters} color="red"/>
-                        </View>
+
+                        <TouchableOpacity
+                            style={btnStyle.saveButton}
+                            onPress={applyFilters}
+                            activeOpacity={0.7}
+                        >
+                            <Text style={btnStyle.saveButtonText}>Apply Filter</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={btnStyle.deleteButton}
+                            onPress={resetFilters}
+                            activeOpacity={0.7}
+                        >
+                            <Text style={btnStyle.deleteButtonText}>Reset Filter</Text>
+                        </TouchableOpacity>
+
                     </View>
+                    </TouchableOpacity>
                 </Modal>
             </View>
         );
     };
-
-    const styles = StyleSheet.create({
-        container: {
-            margin: 10,
-        },
-        modalContainer: {
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        },
-        modalContent: {
-            width: '80%',
-            backgroundColor: 'white',
-            borderRadius: 10,
-            padding: 20,
-            alignItems: 'center',
-        },
-        modalTitle: {
-            fontSize: 18,
-            fontWeight: 'bold',
-            marginBottom: 20,
-        },
-        filterButton: {
-            paddingVertical: 12,
-            paddingHorizontal: 10,
-            marginVertical: 5,
-            backgroundColor: 'white',
-            borderRadius: 5,
-            borderWidth: 1,
-            borderColor: '#20385E',
-            width: '100%',
-            fontSize: 16,
-            color: '#20385E',
-        },
-});
-
 

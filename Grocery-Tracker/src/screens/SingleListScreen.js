@@ -4,14 +4,12 @@ import commStyle from '../styles/commonStyle';
 import {OldProduct , Product} from "../components/listObj";
 import { getItemsByListId ,getByName, modificaItem} from '../data/db';
 import { useState, useEffect } from 'react';
-import { SearchBar ,FilterBar} from '../components/search';
+import { SearchBar ,FilterBar} from '../components/searchObj';
 import { AddProductBtn } from '../components/btnsObj';
 import { rimuoviItem, rimuoviLista } from '../data/db';
 import { getCostoTotalePerLista, getItemsCompratiByListId, modificaLista } from '../data/db';
-import { FallbackSingleList } from '../components/fallback';
-import * as Animatable from 'react-native-animatable'; 
-
-
+import FallbackSingleList from '../components/fallback';
+import * as Animatable from 'react-native-animatable';
 
 
 const ListsScreen = ({navigation , route}) => {
