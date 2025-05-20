@@ -52,7 +52,7 @@ const AnalysisScreen = () => {
             <View style={{width:'20%'}}/>
 
             <View style={{width:'60%'}}>
-              <Text style={commStyle.homeTitle2}> </Text>
+              <Text style={commStyle.homeTitle2}>Analysis</Text>
             </View>
 
             <View style={{width:'20%'}}/>

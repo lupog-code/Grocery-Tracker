@@ -181,7 +181,15 @@ export const OldProduct = ({ id, name, quantity, price, category, data, onDelete
                     <Text style={compStyle.ProductSubTitle}>{category}</Text>
                 </View>
                 <View style={compStyle.Cont20}>
-                    <Text style={compStyle.data}>{new Date(data).toLocaleDateString()}</Text>
+                    <Text style={compStyle.data}>
+                        {(() => {
+                            const date = new Date(data);
+                            const day = String(date.getDate()).padStart(2, '0');
+                            const month = String(date.getMonth() + 1).padStart(2, '0');
+                            const year = String(date.getFullYear()).slice(-2);
+                            return `${day}/${month}/${year}`;
+                        })()}
+                    </Text>
                     <Text style={compStyle.price}>{price} $</Text>
                 </View>
             </View>

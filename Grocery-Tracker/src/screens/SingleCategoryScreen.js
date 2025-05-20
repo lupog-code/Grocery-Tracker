@@ -37,30 +37,37 @@ const CategoryScreen = ({ navigation, route }) => {
   return (
     <View style={commStyle.body}>
       <View style={commStyle.flexView2}>
-        <TouchableOpacity style={commStyle.sideBlock} onPress={() => navigation.goBack()}>
-          <Text style={commStyle.gobackText}>Categorie</Text>
-        </TouchableOpacity>
 
-        <View style={commStyle.titleBlock}>
+        <View style={{width:'25%'}}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text style={commStyle.gobackText}>Categorie</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={{width:'50%'}}>
           <Text style={commStyle.homeTitle2}>{category}</Text>
         </View>
+
+        <View style={{width:'25%'}}/>
       </View>
       
       <View style={{
-        backgroundColor: '#f0f0f0',
+        backgroundColor: 'rgba(23,124,239,0.5)',
         padding: 15,
+        borderWidth: 0.3,
+        borderColor: 'white',
         marginVertical: 10,
-        borderRadius: 10,
+        borderRadius: 25,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,
-        shadowRadius: 3.84,
+        shadowRadius: 5,
         elevation: 5,
       }}>
         <Text style={{
           fontSize: 18,
           fontWeight: '600',
-          color: '#2c3e50',
+          color: 'white',
           textAlign: 'center',
         }}>
           Total spent: ${totalSpent.toFixed(2)}
