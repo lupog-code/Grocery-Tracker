@@ -77,7 +77,10 @@ const btnStyle = StyleSheet.create({
     },
 
     popUp_product: {
-        margin: "auto",
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginTop: '25%',
+        marginBottom: 'auto',
         height: 410,
         width: 370,
         padding: 30, // Ridotto per più spazio
@@ -94,7 +97,10 @@ const btnStyle = StyleSheet.create({
     },
 
     popUp_productEdit: {
-        margin: "auto",
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginTop: '25%',
+        marginBottom: 'auto',
         height: 475,
         width: 370,
         padding: 30, // Ridotto per più spazio
