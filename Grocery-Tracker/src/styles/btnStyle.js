@@ -20,12 +20,6 @@ const btnStyle = StyleSheet.create({
         borderColor: 'white',
         top: -70,
         right: 5,
-        // Aggiungi transizione per hover/click
-        transition: 'all 0.3s ease',
-        ':hover': {
-            backgroundColor: '#1a3152',
-            transform: [{ scale: 1.03 }]
-        }
     },
 
     insertBtnSqrt: {
@@ -61,12 +55,8 @@ const btnStyle = StyleSheet.create({
         position: 'absolute',
         top: -70,
         right: 5,
-        // Aggiungi transizione per hover/click
-        transition: 'all 0.3s ease',
-        ':hover': {
-            backgroundColor: '#1a3152',
-            transform: [{ scale: 1.03 }]
-        }
+        borderWidth: 0.3,
+        borderColor: 'white',
     },
 
     insertBtnText: {
@@ -147,7 +137,7 @@ const btnStyle = StyleSheet.create({
     },
 
     addBtn: {
-        backgroundColor: '#274472', // Sfondo invece di solo testo
+        backgroundColor: '#274472',
         color: 'white',
         paddingVertical: 12,
         paddingHorizontal: 30,
@@ -156,10 +146,6 @@ const btnStyle = StyleSheet.create({
         fontWeight: '500',
         marginTop: 25,
         alignSelf: 'center',
-        // Effetto hover
-        ':hover': {
-            backgroundColor: '#1a3152'
-        }
     },
 
     deleteBtn: {
@@ -213,11 +199,6 @@ const btnStyle = StyleSheet.create({
         shadowRadius: 3,
         borderWidth: 1,
         borderColor: '#274472',
-        // Effetto hover per web
-        ':hover': {
-            backgroundColor: '#1a3152',
-            transform: [{ scale: 1.02 }]
-        }
     },
 
     saveButtonText: {
