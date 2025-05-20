@@ -85,7 +85,7 @@ const PieChartItems = ({ startDate }) => {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#4ECDC4" />
-        <Text style={styles.loadingText}>Caricamento dati...</Text>
+        <Text style={styles.loadingText}>Loading data...</Text>
       </View>
     );
   }
@@ -126,8 +126,8 @@ const PieChartItems = ({ startDate }) => {
           </View>
         ) : (
           <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>Nessun dato disponibile</Text>
-            <Text style={styles.emptySubText}>per il periodo selezionato</Text>
+            <Text style={styles.emptyText}>No data available</Text>
+            <Text style={styles.emptySubText}>for the selected period</Text>
           </View>
         )}
       </View>

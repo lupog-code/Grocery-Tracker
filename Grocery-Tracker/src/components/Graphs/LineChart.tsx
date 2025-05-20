@@ -67,7 +67,7 @@ const LineChartItems = ({startDate}) => {
   
   return (
     <View style={styles.container}>
-      <Text style={styles.cardTitle}>Spese Annuali</Text>
+      <Text style={styles.cardTitle}>Annual Expenses</Text>
       {chartData.datasets[0].data.length > 0 ? (
         <LineChart
           data={{
