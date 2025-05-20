@@ -51,25 +51,8 @@ const CategoryScreen = ({ navigation, route }) => {
         <View style={{width:'25%'}}/>
       </View>
       
-      <View style={{
-        backgroundColor: 'rgba(23,124,239,0.5)',
-        padding: 15,
-        borderWidth: 0.3,
-        borderColor: 'white',
-        marginVertical: 10,
-        borderRadius: 25,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.25,
-        shadowRadius: 5,
-        elevation: 5,
-      }}>
-        <Text style={{
-          fontSize: 18,
-          fontWeight: '600',
-          color: 'white',
-          textAlign: 'center',
-        }}>
+      <View style={commStyle.categoryCounterBar}>
+        <Text style={commStyle.categoryCounterText}>
           Total spent: ${totalSpent.toFixed(2)}
         </Text>
       </View>
