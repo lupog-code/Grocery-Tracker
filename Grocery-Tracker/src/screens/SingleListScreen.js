@@ -173,10 +173,6 @@ const ListsScreen = ({navigation , route}) => {
                     <SearchBar setSearchText={setSearchText} />
                     <FilterBar setFiltri={setFiltri} />
 
-                    <View style={commStyle.totalCostContainer}>
-                        <Text style={commStyle.totalCostText}>Total spent: ${costoTotale.toFixed(2)}</Text>
-                    </View>
-
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <FlatList
                           data={visualizableProducts}
@@ -195,9 +191,18 @@ const ListsScreen = ({navigation , route}) => {
                             />
                           )}
                         />
+
+                        <View style={{height: 150}} />
                     </ScrollView>
-                        
-                    <AddProductBtn setItems={setProducts} listID={listId} /> 
+
+                    <View style={commStyle.bottomInfoBar}>
+                        <AddProductBtn setItems={setProducts} listID={listId} />
+
+                        <View style={commStyle.totalCostContainer}>
+                            <Text style={commStyle.totalCostText}>${costoTotale.toFixed(2)}</Text>
+                        </View>
+                    </View>
+
                 </>
             ) : (
                 <View style={{ flex: 1 }}>

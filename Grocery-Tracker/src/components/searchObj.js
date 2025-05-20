@@ -2,7 +2,7 @@ import React from 'react';
 import {View, TextInput, SafeAreaView} from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 import { useState } from 'react';
-import {Button, Modal, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {Button, Modal, Text, TouchableOpacity } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import btnStyle from "../styles/btnStyle";
 

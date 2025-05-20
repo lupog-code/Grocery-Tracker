@@ -118,6 +118,40 @@ const commStyle = StyleSheet.create({
         marginLeft: "auto",
     },
 
+    totalCostText: {
+        margin: "auto",
+        color: "white",
+        fontWeight: 700,
+        fontSize: 18,
+    },
+
+    totalCostContainer: {
+            height: 50,
+            width: 100,
+            borderRadius: 45,
+            backgroundColor: 'rgba(23,124,239,0.5)',
+            justifyContent: 'center',
+            alignItems: 'center',
+            elevation: 3, // Per Android
+            borderWidth: 0.3,
+            borderColor: 'white',
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.1, // Più leggera
+            shadowRadius: 3,
+            position: 'absolute',
+
+            top: -30,
+            marginLeft: '7.5%',
+    },
+
+    bottomInfoBar: {
+        flexDirection: 'row',
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+    },
+
 
 });
 
