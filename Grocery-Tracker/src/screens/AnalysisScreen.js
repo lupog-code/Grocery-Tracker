@@ -58,7 +58,7 @@ const AnalysisScreen = () => {
             <View style={{width:'20%'}}/>
           </View>
 
-        <ScrollView >
+        <ScrollView showsVerticalScrollIndicator={false}>
           <>
           <View style={styles.card}>
             <Text style={styles.cardTitle}>Analysis Period</Text>
