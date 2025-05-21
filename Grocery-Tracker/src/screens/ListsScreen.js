@@ -77,6 +77,7 @@ useFocusEffect(
                         renderItem={({ item }) => <List id={item.id} name={item.name} />}
                         keyExtractor={(item) => item.id.toString()}
                         showsVerticalScrollIndicator={false}
+                        initialNumToRender={8}
                     />
                      <View style={{ position: 'absolute', bottom: 20, right: 20 }}>
                         
