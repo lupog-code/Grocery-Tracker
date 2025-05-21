@@ -61,7 +61,7 @@ const AnalysisScreen = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <>
           <View style={styles.card}>
-            <Text style={styles.cardTitle}>Analysis Period</Text>
+            <Text style={[styles.cardTitle, {marginLeft:'auto', marginRight:'auto'}]}>Analysis Period</Text>
             <SegmentedButtons
                 buttons={periods.map(period => ({
                   value: period,

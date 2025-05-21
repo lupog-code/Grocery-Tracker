@@ -27,7 +27,7 @@ const StatisticsCard = ({ startDate }) => {
 
   return (
     <View style={styles.card}>
-      <Text style={styles.cardTitle}>Overview</Text>
+      <Text style={[styles.cardTitle, {marginLeft:'auto', marginRight:'auto'}]}>Overview</Text>
 
       <View style={styles.statsContainer}>
         <View style={styles.statItem}>
