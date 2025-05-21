@@ -11,7 +11,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import commStyle from "../styles/commonStyle";
 
 const AnalysisScreen = () => {
-  const [currentPeriod, setCurrentPeriod] = useState("3 mesi");
+  const [currentPeriod, setCurrentPeriod] = useState("3 months");
   const [startDate, setStartDate] = useState("");
 
   const periods = ["1 month", "3 months", "6 months", "1 year"];
