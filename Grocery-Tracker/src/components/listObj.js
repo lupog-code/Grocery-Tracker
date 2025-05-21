@@ -134,7 +134,7 @@ export const ModifiableCategory = ({ onDelete, name }) => {
     return (
         <View style={compStyle.ModCategoryContainer}>
             <TouchableOpacity onPress={() => navigation.navigate("SingleCategoryScreen", { name })}>
-                <Text style={compStyle.CategoryTitle}>{getEmoji(name)} {name}</Text>
+                <Text style={compStyle.CategoryTitle}>{name}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{ marginLeft: 'auto' }} onPress={() => onDelete(name)}>
                 <Ionicons style={compStyle.modifyCategory} name="trash-outline" />
