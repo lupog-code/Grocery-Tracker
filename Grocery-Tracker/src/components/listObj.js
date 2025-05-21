@@ -15,7 +15,7 @@ const getEmoji = ( category ) => {
         case "Snacks": return "🍫";
         case "Beverages": return "🍶";
         case "Other": return "🍽️";
-        default: return "";
+        default: return "🛍️";
     }
 };
 

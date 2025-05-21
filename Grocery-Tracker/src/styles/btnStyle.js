@@ -169,15 +169,9 @@ const btnStyle = StyleSheet.create({
         borderColor: '#d0d0d0',
         borderRadius: 8,
         fontSize: 12,
-        height: 50,
         paddingHorizontal: 12,
         backgroundColor: '#fafafa',
         color: '#20385E',
-        // Icona personalizzata
-        icon: {
-            color: '#274472',
-            size: 20
-        }
     },
 
     saveButton: {

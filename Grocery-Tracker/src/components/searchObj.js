@@ -118,8 +118,8 @@ export const FilterBar = ({ setFiltri }) => {
 
                                     style={btnStyle.pickerInput}
                                     dropDownContainerStyle={{ borderColor: '#20385E', marginTop: 20 }}
-                                    textStyle={{ fontSize: 20, color: '#20385E' }}
-                                    placeholderStyle={{ color: 'gray' }}
+                                    textStyle={{ fontSize: 15, color: '#20385E' }}
+                                    placeholderStyle={{ color: '#d0d0d0' }}
                                     selectedItemLabelStyle={{ color: 'white' }}
                                     selectedItemContainerStyle={{ backgroundColor: '#20385E' }}
                                     selectedItemTextStyle={{ color: 'white' }}
