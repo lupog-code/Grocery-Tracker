@@ -69,8 +69,8 @@ const btnStyle = StyleSheet.create({
 
     popUp_list:{
         margin: "auto",
-        height: 180,
-        width: 370,
+        height: 160,
+        width: 310,
         padding: 23,
         backgroundColor: 'white',
         borderRadius: 35,
@@ -81,8 +81,8 @@ const btnStyle = StyleSheet.create({
         marginRight: 'auto',
         marginTop: '25%',
         marginBottom: 'auto',
-        height: 410,
-        width: 370,
+        height: 390,
+        width: 310,
         padding: 30, // Ridotto per più spazio
         backgroundColor: 'white',
         borderRadius: 35,
@@ -101,8 +101,8 @@ const btnStyle = StyleSheet.create({
         marginRight: 'auto',
         marginTop: '25%',
         marginBottom: 'auto',
-        height: 475,
-        width: 370,
+        height: 445,
+        width: 310,
         padding: 30, // Ridotto per più spazio
         backgroundColor: 'white',
         borderRadius: 35,
@@ -113,28 +113,24 @@ const btnStyle = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 6,
         borderWidth: 1,
-        borderColor: '#f0f0f0' // Bordo sottile
+        borderColor: '#f0f0f0',
     },
 
 
     textInput: {
-        marginTop: 17,
-        marginBottom: 5,
+        marginTop: 14,
+        marginBottom: 7,
         borderWidth: 1,
         borderColor: '#d0d0d0',
         color: '#20385E',
         borderRadius: 8,
-        fontSize: 19,
+        fontSize: 15,
         padding: 12,
         backgroundColor: '#fafafa',
-        ':focus': {
-            borderColor: '#274472',
-            backgroundColor: '#fff'
-        }
     },
 
     TopModalTitle: {
-        fontSize: 25, // Leggermente più piccolo
+        fontSize: 20, // Leggermente più piccolo
         margin: 'auto',
         fontWeight: '600',
         color: '#1D86FF',
@@ -155,7 +151,7 @@ const btnStyle = StyleSheet.create({
     },
 
     deleteBtn: {
-        color: '#d32f2f', // Rosso più moderno
+        color: '#d32f2f',
         marginLeft: 'auto',
         marginRight: 'auto',
         fontSize: 16,
@@ -163,11 +159,7 @@ const btnStyle = StyleSheet.create({
         marginTop: 15,
         padding: 8,
         borderRadius: 20,
-        backgroundColor: '#ffebee', // Sfondo chiaro
-        // Effetto hover
-        ':hover': {
-            backgroundColor: '#ffcdd2'
-        }
+        backgroundColor: '#ffebee',
     },
 
     pickerInput: {
@@ -195,7 +187,7 @@ const btnStyle = StyleSheet.create({
         borderRadius: 25,
         marginVertical: 10,
         alignSelf: 'center',
-        minWidth: 150,
+        minWidth: 120,
         justifyContent: 'center',
         alignItems: 'center',
         elevation: 3,
@@ -209,7 +201,7 @@ const btnStyle = StyleSheet.create({
 
     saveButtonText: {
         color: 'white',
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: '600',
         letterSpacing: 0.5
     },
@@ -219,12 +211,12 @@ const btnStyle = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 24,
         borderRadius: 25,
-        marginVertical: 10,
+        marginVertical: 5,
         alignSelf: 'center',
-        minWidth: 150,
+        minWidth: 120,
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 2,
+        elevation: 3,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.1,
@@ -240,7 +232,7 @@ const btnStyle = StyleSheet.create({
 
     deleteButtonText: {
         color: '#d32f2f', // Testo rosso
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: '600',
         letterSpacing: 0.5
     },

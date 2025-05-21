@@ -63,8 +63,11 @@ const commStyle = StyleSheet.create({
 
         shadowColor: '#000',
         shadowOffset: { width: 1, height: 2 },
-        shadowOpacity: 0.6,
+        shadowOpacity: 0.3,
         shadowRadius: 4,
+
+        borderWidth: 0.3,
+        borderColor: 'white',
     },
 
     recentButtonIcon:{

@@ -52,9 +52,6 @@ const CategoriesScreen = () => {
             }
         };
 
-
-
-        //Funzione per eliminare una categoria
          //Funzione per eliminare una categoria
     const handledeleteCategory = async (categoryName) => {
         Alert.alert(
@@ -98,7 +95,10 @@ const CategoriesScreen = () => {
             </View>
 
 
-            <ScrollView style={{width: '100%'}}>
+            <ScrollView
+                style={{width: '100%'}}
+                showsVerticalScrollIndicator={false}
+            >
 
                 <FlatList
                     data={modCategory}

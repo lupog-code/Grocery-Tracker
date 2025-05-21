@@ -14,7 +14,7 @@ export const SearchBar = ({setSearchText}) => {
                     flexDirection: 'row',
                     alignItems: 'center',
                     borderColor: 'white',
-                    borderWidth: 1.5,
+                    borderWidth: 1,
                     borderRadius: 25,
                     paddingHorizontal: 19,
                     margin: 10,
@@ -32,6 +32,7 @@ export const SearchBar = ({setSearchText}) => {
                     }}
                     onChangeText={setSearchText}
                     placeholder="Search..."
+                    placeholderTextColor="#C3E0E5"
                 />
                 <View style={{ marginLeft: 10 }}>
                     <Text>

@@ -137,7 +137,7 @@ const ListsScreen = ({navigation , route}) => {
         <View style={commStyle.body}>
             <View style={commStyle.flexView2}>
                 <TouchableOpacity style={commStyle.sideBlock} onPress={() => navigation.goBack()}>
-                    <Text style={commStyle.gobackText}>Home</Text>
+                    <Text style={commStyle.gobackText}>Back</Text>
                 </TouchableOpacity>
 
                 <View style={commStyle.titleBlock}>
@@ -158,7 +158,7 @@ const ListsScreen = ({navigation , route}) => {
                 </View>
                 
                 <TouchableOpacity style={commStyle.sideBlock} onPress={() => handleDeleteList(listId)}>
-                    <Text style={commStyle.deleteText}>Delete List</Text>
+                    <Text style={commStyle.deleteText}>Delete</Text>
                 </TouchableOpacity>
             </View>
             {/* Se non ci sono prodotti nella lista , mettiamo un componente di fallback */}

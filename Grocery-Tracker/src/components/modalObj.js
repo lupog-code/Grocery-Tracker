@@ -93,6 +93,7 @@ export const PopUp_AddProduct = ({ visible, setVisible, setItems, listID }) => {
                         placeholder="Name"
                         onChangeText={val => setName(val)}
                         value={name}
+                        placeholderTextColor="#d0d0d0"
                     />
 
                     <TextInput
@@ -101,6 +102,7 @@ export const PopUp_AddProduct = ({ visible, setVisible, setItems, listID }) => {
                         keyboardType="numeric"
                         onChangeText={val => setQuantity(val)}
                         value={quantity}
+                        placeholderTextColor="#d0d0d0"
                     />
 
                     <TextInput
@@ -109,6 +111,7 @@ export const PopUp_AddProduct = ({ visible, setVisible, setItems, listID }) => {
                         keyboardType="numeric"
                         onChangeText={val => setPrice(val)}
                         value={price}
+                        placeholderTextColor="#d0d0d0"
                     />
 
                     <View>
@@ -122,11 +125,12 @@ export const PopUp_AddProduct = ({ visible, setVisible, setItems, listID }) => {
                             placeholder="Select a category..."
                             style={[btnStyle.pickerInput]}
                             dropDownContainerStyle={{ borderColor: '#20385E', marginTop: 20 }}
-                            textStyle={{ fontSize: 20, color: '#20385E' }}
-                            placeholderStyle={{ color: 'gray' }}
+                            textStyle={{ fontSize: 15, color: '#20385E' }}
+                            placeholderStyle={{ color: '#d0d0d0' }}
                             selectedItemLabelStyle={{ color: 'white' }}
                             selectedItemContainerStyle={{ backgroundColor: '#20385E' }}
                             selectedItemTextStyle={{ color: 'white' }}
+                            placeholderTextColor="#d0d0d0"
                         />
                     </View>
 
@@ -256,6 +260,7 @@ export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, vis
                         placeholder="Name"
                         value={name}
                         onChangeText={val => setName(val)}
+                        placeholderTextColor="#d0d0d0"
                     />
 
                     <TextInput
@@ -264,6 +269,7 @@ export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, vis
                         keyboardType="numeric"
                         value={quantity}
                         onChangeText={val => setQuantity(val)}
+                        placeholderTextColor="#d0d0d0"
                     />
 
                     <TextInput
@@ -272,6 +278,7 @@ export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, vis
                         keyboardType="numeric"
                         value={price}
                         onChangeText={val => setPrice(val)}
+                        placeholderTextColor="#d0d0d0"
                     />
 
                     <View>
@@ -285,10 +292,12 @@ export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, vis
                             placeholder="Select a category..."
                             style={[btnStyle.pickerInput]}
                             dropDownContainerStyle={{ borderColor: '#20385E', marginTop: 20 }}
-                            textStyle={{ fontSize: 20, color: '#20385E' }}
+                            textStyle={{ fontSize: 15, color: '#20385E' }}
+                            placeholderStyle={{ color: '#d0d0d0' }}
                             selectedItemLabelStyle={{ color: 'white' }}
                             selectedItemContainerStyle={{ backgroundColor: '#20385E' }}
                             selectedItemTextStyle={{ color: 'white' }}
+                            placeholderTextColor="#d0d0d0"
                         />
                     </View>
 
@@ -353,9 +362,10 @@ export const PopUp_AddList = ({ onAdd, visible, setVisible }) => {
                         placeholder="Name"
                         onChangeText={val => setName(val)}
                         value={name}
+                        placeholderTextColor="#d0d0d0"
                     />
 
-                    <Button title="Add List" onPress={() => { inserisciNuovaLista(); onAdd(name); }} />
+                    <Button style={{fontSize: 10}} title="Add List" onPress={() => { inserisciNuovaLista(); onAdd(name); }} />
                 </View>
             </TouchableOpacity>
         </Modal>
@@ -403,7 +413,7 @@ export const PopUp_addCategory = ({ namein, visible, setVisible ,onAddCategory,c
                 activeOpacity={1}
                 onPressOut={() => setVisible(false)}
             >
-                <View style={btnStyle.popUp_productEdit}>
+                <View style={btnStyle.popUp_list}>
                     <View style={btnStyle.topModal}>
                         <Text style={btnStyle.TopModalTitle}>Add Category</Text>
                     </View>
@@ -413,29 +423,11 @@ export const PopUp_addCategory = ({ namein, visible, setVisible ,onAddCategory,c
                         placeholder="Category Name"
                         value={categoryName}
                         onChangeText={setCategoryName}
+                        placeholderTextColor="#d0d0d0"
                     />
 
-                    <View style={{
-                        flexDirection: 'row',
-                        width: '100%',
-                    }}>
+                    <Button title="Add Cateogry" style={{fontSize: 10}} onPress={() => handleSubmit()} />
 
-                    <TouchableOpacity
-                        style={btnStyle.saveButton}
-                        onPress={() => handleSubmit()}
-                        activeOpacity={0.7}
-                    >
-                        <Text style={btnStyle.saveButtonText}>Add Category</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        style={btnStyle.deleteButton}
-                        onPress={() => setVisible(false)}
-                        activeOpacity={0.7}
-                    >
-                        <Text style={btnStyle.deleteButtonText}>Cancel</Text>
-                    </TouchableOpacity>
-                    </View>
 
                 </View>
             </TouchableOpacity>
