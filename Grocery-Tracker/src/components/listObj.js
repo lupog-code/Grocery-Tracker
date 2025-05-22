@@ -31,34 +31,26 @@ export const List = ({onSwipeableOpen, id, name, onDelete }) => {
   const renderRightActions = () => {
     return (
       <TouchableOpacity
-        style={{
-          backgroundColor: '#dc3545',
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: 80,
-          minHeight: 60, // Altezza minima fissa
-          maxHeight: 80, // Altezza massima
-          alignSelf: 'center' // Centra verticalmente
-        }}
+        style={compStyle.listSwipDelete}
         onPress={() => { 
           ref.current.close(); 
           onDelete(id); 
         }}
       >
-        <Ionicons name="trash" size={26} color="#fff" />
+        <Ionicons name="trash" size={22} color="#fff" />
       </TouchableOpacity>
     );
   };
   
   return (
-    <Swipeable 
-      ref={ref} 
-      renderRightActions={renderRightActions} //Cosa deve comparire a destra
-      friction={1} 
-      overshootRight={false} 
-      rightThreshold={80} 
-      onSwipeableOpen={() => onSwipeableOpen(ref.current)}
-    >
+      <Swipeable
+          ref={ref}
+          renderRightActions={renderRightActions}
+          friction={1}
+          overshootRight={false}
+          onSwipeableOpen={() => onSwipeableOpen(ref.current)}
+      >
+
       <TouchableOpacity onPress={goToDetailsOfList}>
         <View style={[compStyle.listContainer, { 
           backgroundColor: '#244B6E'
@@ -67,6 +59,7 @@ export const List = ({onSwipeableOpen, id, name, onDelete }) => {
           <Ionicons name="caret-forward-outline" style={compStyle.arrow} />
         </View>
       </TouchableOpacity>
+
     </Swipeable>
   );
 };

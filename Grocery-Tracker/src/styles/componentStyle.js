@@ -10,6 +10,21 @@ const compStyle = StyleSheet.create({
         padding: 20,
     },
 
+    listSwipDelete: {
+        backgroundColor: 'rgba(224,36,37,0.78)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 70,
+        marginLeft: 10,
+        minHeight: 98,
+        marginTop: 20,
+        marginVertical: 'auto',
+        alignSelf: 'center',
+        borderRadius: 15,
+        borderWidth: 0.5,
+        borderColor: 'white',
+    },
+
     listTitle:{
         fontSize: 22,
         fontWeight: 600,
