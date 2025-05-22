@@ -5,7 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import BottomNavigation from './src/navigation/BottomNavigation';
 import { createTables , DropTabelle} from './src/data/db';
 import MainStackNavigator from './src/navigation/MainStackNavigator';
-
+import { Gesture } from 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
   const [dbReady, setDbReady] = useState(false);
@@ -31,8 +32,10 @@ export default function App() {
   }
 
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <NavigationContainer>
      <MainStackNavigator />
     </NavigationContainer>
+  </GestureHandlerRootView>
   );
 }

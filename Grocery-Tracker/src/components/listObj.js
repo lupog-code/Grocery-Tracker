@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { View, Text, Switch, TouchableOpacity } from 'react-native';
 import compStyle from '../styles/componentStyle';
 import { Ionicons } from "@expo/vector-icons";
 import { PopUp_editProduct } from "./modalObj";
 import { useNavigation } from '@react-navigation/native';
 import { buyItem, rimuoviItemComprato } from '../data/db';
+import  Swipeable  from 'react-native-gesture-handler/ReanimatedSwipeable';
+import { useRef } from 'react';
 
 const getEmoji = ( category ) => {
     switch (category) {
@@ -19,21 +21,38 @@ const getEmoji = ( category ) => {
     }
 };
 
-export const List = ({ id, name }) => {
-    const navigation = useNavigation();
+export const List = ({onSwipeableOpen, id, name, onDelete }) => {
+  const navigation = useNavigation();
+  const ref = useRef(null);
+  const goToDetailsOfList = () => {
+    navigation.navigate("SingleListScreen", { id, name });
+  };
 
-    const goToDetailsOfList = () => {
-        navigation.navigate("SingleListScreen", { id, name });
-    };
+  const renderRightActions = () => (
+    <TouchableOpacity
+      style={{
+        backgroundColor: '#dc3545',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 80,
+        alignSelf: 'stretch'
+      }}
+      onPress={() => { ref.current.close(); onDelete(id); }}
+    >
+      <Ionicons name="trash" size={26} color="#fff" />
+    </TouchableOpacity>
+  );
 
-    return (
-        <TouchableOpacity onPress={goToDetailsOfList}>
-            <View style={[compStyle.listContainer, { backgroundColor: '#244B6E' }]}>
-                <Text style={compStyle.listTitle}>{name}</Text>
-                <Ionicons name="caret-forward-outline" style={compStyle.arrow} />
-            </View>
-        </TouchableOpacity>
-    );
+  return (
+    <Swipeable ref={ref} renderRightActions={renderRightActions} friction={1} overshootRight={false} rightThreshold={80} onSwipeableOpen={()=>onSwipeableOpen(ref.current)}>
+      <TouchableOpacity onPress={goToDetailsOfList}>
+        <View style={[compStyle.listContainer, { backgroundColor: '#244B6E' }]}>
+          <Text style={compStyle.listTitle}>{name}</Text>
+          <Ionicons name="caret-forward-outline" style={compStyle.arrow} />
+        </View>
+      </TouchableOpacity>
+    </Swipeable>
+  );
 };
 
 export const Product = ({ id, name, quantity, price, category, state, onUpdate, onEdit }) => {

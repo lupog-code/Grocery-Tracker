@@ -10,12 +10,45 @@ import Fallback, {FallbackList} from '../components/fallback';
 import { getUltimiDieciItemComprati } from '../data/db';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { getListe } from '../data/db';
-
-
+import { rimuoviLista } from '../data/db';
+import { Alert } from 'react-native';
+import { useRef } from 'react';
 
 const HomeScreen = () => {
+    const openRef = useRef(null);
+    //Riceve il riferimento corrente 
+   const onSwipeableOpen = (ref) => {
+  if (openRef.current && openRef.current !== ref) {
+    openRef.current.close();
+  }
+  openRef.current = ref; //Sposta il riferimento aperto a quello passato come corrente
+};
     const [lists, setLists] = useState([]);
     const [products, setProducts] = useState([]);
+
+    const handleDeleteList = async (id) => {
+        try {
+            Alert.alert(
+                "Are you sure?",
+                "This action cannot be undone.",
+                [
+                    { text: "Cancel", style: "cancel" },
+                    {
+                        text: "Delete",
+                        onPress: async () => {
+                            await rimuoviLista(id);
+                            //Refresha le liste dopo l'eliminazione
+                            const data = await getUltimeDueListe();
+                            setLists(data);
+                        },
+                    },
+                ],
+                { cancelable: false }
+            );
+        } catch (error) {
+            console.error("Error deleting list:", error);
+        }
+    }
 
     useFocusEffect(
         useCallback(() => {
@@ -49,7 +82,6 @@ const HomeScreen = () => {
             try {
                 const data = await getUltimeDueListe(); //Aggiorna le ultime due liste
                 await getListe(); //Refresh delle liste totali 
-               
                 setLists(data);
             } catch (error) {
                 console.error("Error fetching lists:", error);
@@ -105,7 +137,7 @@ const HomeScreen = () => {
                 scrollEnabled={false}
                 data={lists}
                 renderItem={({ item }) => (
-                    <List id={item.id} name={item.name} />
+                    <List onSwipeableOpen={onSwipeableOpen} id={item.id} name={item.name} onDelete={handleDeleteList} />
                 )}
                 keyExtractor={(item) => item.id.toString()}
                 />
