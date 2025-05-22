@@ -20,33 +20,49 @@ const getEmoji = ( category ) => {
         default: return "🛍️";
     }
 };
-
 export const List = ({onSwipeableOpen, id, name, onDelete }) => {
   const navigation = useNavigation();
   const ref = useRef(null);
+  
   const goToDetailsOfList = () => {
     navigation.navigate("SingleListScreen", { id, name });
   };
-
-  const renderRightActions = () => (
-    <TouchableOpacity
-      style={{
-        backgroundColor: '#dc3545',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: 80,
-        alignSelf: 'stretch'
-      }}
-      onPress={() => { ref.current.close(); onDelete(id); }}
-    >
-      <Ionicons name="trash" size={26} color="#fff" />
-    </TouchableOpacity>
-  );
-
+  
+  const renderRightActions = () => {
+    return (
+      <TouchableOpacity
+        style={{
+          backgroundColor: '#dc3545',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: 80,
+          minHeight: 60, // Altezza minima fissa
+          maxHeight: 80, // Altezza massima
+          alignSelf: 'center' // Centra verticalmente
+        }}
+        onPress={() => { 
+          ref.current.close(); 
+          onDelete(id); 
+        }}
+      >
+        <Ionicons name="trash" size={26} color="#fff" />
+      </TouchableOpacity>
+    );
+  };
+  
   return (
-    <Swipeable ref={ref} renderRightActions={renderRightActions} friction={1} overshootRight={false} rightThreshold={80} onSwipeableOpen={()=>onSwipeableOpen(ref.current)}>
+    <Swipeable 
+      ref={ref} 
+      renderRightActions={renderRightActions} //Cosa deve comparire a destra
+      friction={1} 
+      overshootRight={false} 
+      rightThreshold={80} 
+      onSwipeableOpen={() => onSwipeableOpen(ref.current)}
+    >
       <TouchableOpacity onPress={goToDetailsOfList}>
-        <View style={[compStyle.listContainer, { backgroundColor: '#244B6E' }]}>
+        <View style={[compStyle.listContainer, { 
+          backgroundColor: '#244B6E'
+        }]}>
           <Text style={compStyle.listTitle}>{name}</Text>
           <Ionicons name="caret-forward-outline" style={compStyle.arrow} />
         </View>
@@ -54,7 +70,6 @@ export const List = ({onSwipeableOpen, id, name, onDelete }) => {
     </Swipeable>
   );
 };
-
 export const Product = ({ id, name, quantity, price, category, state, onUpdate, onEdit }) => {
     const [isEnabled, setIsEnabled] = useState(state === 1);
     const [visible, setVisible] = useState(false);
