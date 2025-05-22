@@ -62,6 +62,7 @@ useFocusEffect(
                             easing="ease-in-out"
                             duration={1000}
                             iterationCount="infinite"
+                            iterationDelay={1000}
                             useNativeDriver={true}
                             delay={300}
                             style={{ alignSelf: 'flex-end', borderRadius: 30, padding: 4 }}
