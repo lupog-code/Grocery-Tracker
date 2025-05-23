@@ -51,7 +51,6 @@ const PieChartItems = ({ startDate }) => {
         setLoading(true);
         try {
           const data = await getItemsCompratiPerDataECategoria(startDate);
-          console.log('Data fetched for pie chart:', data);
           const formattedData = formatData(data);
           if (isActive) {
             setChartData(formattedData);
