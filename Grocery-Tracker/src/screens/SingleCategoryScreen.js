@@ -40,7 +40,7 @@ const CategoryScreen = ({ navigation, route }) => {
 
         <View style={{width:'25%'}}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text style={commStyle.gobackText}>Categorie</Text>
+            <Text style={commStyle.gobackText}>Categories</Text>
           </TouchableOpacity>
         </View>
 
