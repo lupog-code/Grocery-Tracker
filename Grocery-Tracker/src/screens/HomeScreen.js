@@ -26,6 +26,15 @@ const HomeScreen = () => {
     const [lists, setLists] = useState([]);
     const [products, setProducts] = useState([]);
 
+    const fetchLists = async () => {
+                try {
+                    const data = await getUltimeDueListe();
+                    setLists(data);
+                } catch (error) {
+                    console.error("Error fetching lists:", error);
+                }
+            };
+
     const handleDeleteList = async (id) => {
         try {
             Alert.alert(
@@ -52,14 +61,6 @@ const HomeScreen = () => {
 
     useFocusEffect(
         useCallback(() => {
-            const fetchLists = async () => {
-                try {
-                    const data = await getUltimeDueListe();
-                    setLists(data);
-                } catch (error) {
-                    console.error("Error fetching lists:", error);
-                }
-            };
             fetchLists();
         }, [])
     );
@@ -83,6 +84,7 @@ const HomeScreen = () => {
                 const data = await getUltimeDueListe(); //Aggiorna le ultime due liste
                 await getListe(); //Refresh delle liste totali 
                 setLists(data);
+                await fetchLists();
             } catch (error) {
                 console.error("Error fetching lists:", error);
             }

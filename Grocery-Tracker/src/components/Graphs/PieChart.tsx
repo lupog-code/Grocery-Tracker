@@ -1,5 +1,5 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { getItemsCompratiPerDataECategoria } from "../../data/db";
 import { PieChart } from "react-native-chart-kit";
 import { View, Text, StyleSheet, Dimensions, ActivityIndicator } from "react-native";
