@@ -167,7 +167,7 @@ interface CostiMensili {
 export const getCostiMensili = async () => {
   try {
     const result = await db.getAllAsync<CostiMensili>(`
-      SELECT strftime('%Y-%m', data_compera) as mese, SUM(price * quantity) as totale
+      SELECT strftime('%Y-%m', data_compera) as mese, COALESCE(SUM(price * quantity), 0) as totale
       FROM items
       WHERE strftime('%Y', data_compera) = strftime('%Y', 'now') AND comprato = true
       GROUP BY mese

@@ -22,11 +22,13 @@ const LineChartItems = ({startDate}) => {
       const fetchData = async () => {
         try {
           const data = await getCostiMensili();
+          console.log('Fetched data per linechart:', data);
             const labels = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'];
-            const values = data.map(item => item.totale);
-            for (let i = 0; i < labels.length; i++) {
-              values[i] = values[i] || 0; 
-            }
+            const values = Array(12).fill(0);
+            data.forEach(item => {
+              const monthIndex = parseInt(item.mese.split('-')[1], 10) - 1; 
+              values[monthIndex] = item.totale;
+            });
             setChartData({
               labels,
               datasets: [
