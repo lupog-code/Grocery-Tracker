@@ -5,26 +5,26 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import {inserisciLista, inserisciItem, getItemsByListId, modificaItem, rimuoviItem, addCategory} from '../data/db';
 import { getCategorie } from '../data/db';
 
+
 function checkFields(name, quantity, price, category) {
-        if (name === '' || quantity === '' || price === '' || category === '') {
-            alert("Please fill in all fields");
-            return false;
-        }
-        if (isNaN(quantity) || isNaN(price)) {
-            alert("Quantity and Price must be numbers");
-            return false;
-        }
-        if (parseInt(quantity) <= 0 || parseFloat(price) <= 0) {
-            alert("Quantity and Price must be greater than 0");
-            return false;
-        }
-        if (category === '') {
-            alert("Please select a category");
-            return false;
-        }
-        
-        return true;
+    if (name === '' || quantity === '' || price === '' || category === '') {
+        Alert.alert("Error", "Please fill in all fields");
+        return false;
     }
+    if (isNaN(quantity) || isNaN(price)) {
+        Alert.alert("Error", "Quantity and Price must be numbers");
+        return false;
+    }
+    if (parseInt(quantity) <= 0 || parseFloat(price) <= 0) {
+        Alert.alert("Error", "Quantity and Price must be greater than 0");
+        return false;
+    }
+    if (category === '') {
+        Alert.alert("Error", "Please select a category");
+        return false;
+    }
+    return true;
+}
 
 export const PopUp_AddProduct = ({ visible, setVisible, setItems, listID }) => {
 
@@ -183,8 +183,8 @@ export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, vis
 
     const deleteProduct = (idProduct) => {
         Alert.alert(
-            "Are you sure you want to delete this product?",
-            "This action cannot be undone",
+            "Confirm Deletion",
+            "Are you sure you want to delete this product? This action cannot be undone.",
             [
             {
                 text: "Cancel",
@@ -209,15 +209,15 @@ export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, vis
 
     const saveEdits = (idProduct) => {
         Alert.alert(
-            "Salvare le modifiche?",
-            "Sei sicuro di voler aggiornare questo prodotto?",
+            "Confirm Edit",
+            "Are you sure you want to update this product?",
             [
                 {
-                    text: "Annulla",
+                    text: "Cancel",
                     style: "cancel"
                 },
                 {
-                    text: "Salva",
+                    text: "Save",
                     onPress: async () => {
                         if (!checkFields(name, quantity, price, category)) {
                             return;
@@ -383,7 +383,7 @@ export const PopUp_addCategory = ({ namein, visible, setVisible ,onAddCategory,c
             return;
         }
 
-        //Controlla se la categoria esiste già , occorre usare some perchè categories è un array di oggetti
+        // Check if the category already exists
         if (categories.some(category => category.name.toLowerCase() === categoryName.trim().toLowerCase())) {
             Alert.alert('Error', 'Category already exists');
             return;
