@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, ScrollView, SafeAreaView, FlatList, Alert, TextInput} from 'react-native';
+import {View, Text, TouchableOpacity, ScrollView, FlatList, Alert, TextInput} from 'react-native';
 import commStyle from '../styles/commonStyle';
 import { Product} from "../components/listObj";
 import { getItemsByListId } from '../data/db';
@@ -20,12 +20,12 @@ const ListsScreen = ({navigation , route}) => {
     const [products, setProducts] = useState([]); 
     const [productsComprati, setProductsComprati] = useState([]);
     const [costoTotale, setCostoTotale] = useState(0);
-   //Inizializza il costo totale 
+
     const fetchCostoTotale = async () => {
         try {
             const costo = await getCostoTotalePerLista(listId);
             console.log("Costo totale:", costo);
-            setCostoTotale(costo || 0); // Imposta a 0 se il risultato è null
+            setCostoTotale(costo || 0); 
         } catch (error) {
             console.error("Error fetching total cost:", error);
         }
@@ -61,7 +61,7 @@ const ListsScreen = ({navigation , route}) => {
 
     const handleDeleteList = (listId) => {
         Alert.alert(
-            "Delete List",  // More concise title
+            "Delete List",  
             "Are you sure you want to delete this list? This action cannot be undone.",
             [
                 {
@@ -161,11 +161,9 @@ const ListsScreen = ({navigation , route}) => {
                     <Text style={commStyle.deleteText}>Delete</Text>
                 </TouchableOpacity>
             </View>
-            {/* Se non ci sono prodotti nella lista , mettiamo un componente di fallback */}
             
            {products.length !== 0 ? (
                 <>
-                    {/* Se ci sono prodotti nella lista , mostriamo i prodotti */}
                     <SearchBar setSearchText={setSearchText} />
                     <FilterBar setFiltri={setFiltri} />
 

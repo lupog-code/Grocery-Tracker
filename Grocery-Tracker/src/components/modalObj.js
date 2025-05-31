@@ -1,8 +1,8 @@
-import React, { useState, useEffect, use } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Modal, TouchableOpacity, Button, Alert } from 'react-native';
 import btnStyle from '../styles/btnStyle';
 import DropDownPicker from 'react-native-dropdown-picker';
-import {inserisciLista, inserisciItem, getItemsByListId, modificaItem, rimuoviItem, addCategory} from '../data/db';
+import {inserisciLista, inserisciItem, getItemsByListId, modificaItem, rimuoviItem} from '../data/db';
 import { getCategorie } from '../data/db';
 
 

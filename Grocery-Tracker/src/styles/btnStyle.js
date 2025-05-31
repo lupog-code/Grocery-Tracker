@@ -6,14 +6,14 @@ const btnStyle = StyleSheet.create({
     insertBtnView: {
         height: 50,
         width: 145,
-        borderRadius: 25, // Più arrotondato per un look moderno
+        borderRadius: 25,
         backgroundColor: '#274472',
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 3, // Per Android (sostituisce shadow*)
+        elevation: 3,
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 }, // Ombra più naturale
-        shadowOpacity: 0.2, // Più leggera
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
         shadowRadius: 3,
         position: 'absolute',
         borderWidth: 0.3,
@@ -29,10 +29,10 @@ const btnStyle = StyleSheet.create({
         backgroundColor: '#274472',
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 3, // Per Android
+        elevation: 3,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.4, // Più leggera
+        shadowOpacity: 0.4,
         shadowRadius: 3,
         top: -45,
         marginLeft: '85%',
@@ -43,14 +43,14 @@ const btnStyle = StyleSheet.create({
     insertBtnCat: {
         height: 50,
         width: 165,
-        borderRadius: 25, // Più arrotondato per un look moderno
+        borderRadius: 25,
         backgroundColor: '#274472',
         justifyContent: 'center',
         alignItems: 'center',
-        elevation: 3, // Per Android (sostituisce shadow*)
+        elevation: 3,
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 }, // Ombra più naturale
-        shadowOpacity: 0.2, // Più leggera
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
         shadowRadius: 3,
         position: 'absolute',
         top: -70,
@@ -62,8 +62,8 @@ const btnStyle = StyleSheet.create({
     insertBtnText: {
         fontSize: 17,
         color: '#C3E0E5',
-        fontWeight: '600', // Stringa invece di numero per compatibilità
-        letterSpacing: 0.5 // Migliora la leggibilità
+        fontWeight: '600',
+        letterSpacing: 0.5
     },
 
 
@@ -83,17 +83,16 @@ const btnStyle = StyleSheet.create({
         marginBottom: 'auto',
         height: 390,
         width: 310,
-        padding: 30, // Ridotto per più spazio
+        padding: 30,
         backgroundColor: 'white',
         borderRadius: 35,
-        // Ombra più pronunciata
         elevation: 5,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.1,
         shadowRadius: 6,
         borderWidth: 1,
-        borderColor: '#f0f0f0' // Bordo sottile
+        borderColor: '#f0f0f0'
     },
 
     popUp_productEdit: {
@@ -103,10 +102,9 @@ const btnStyle = StyleSheet.create({
         marginBottom: 'auto',
         height: 445,
         width: 310,
-        padding: 30, // Ridotto per più spazio
+        padding: 30,
         backgroundColor: 'white',
         borderRadius: 35,
-        // Ombra più pronunciata
         elevation: 5,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 4 },
@@ -130,12 +128,12 @@ const btnStyle = StyleSheet.create({
     },
 
     TopModalTitle: {
-        fontSize: 20, // Leggermente più piccolo
+        fontSize: 20,
         margin: 'auto',
         fontWeight: '600',
         color: '#1D86FF',
         textAlign: 'center',
-        paddingHorizontal: 20 // Previene tagli
+        paddingHorizontal: 20
     },
 
     addBtn: {
@@ -201,7 +199,7 @@ const btnStyle = StyleSheet.create({
     },
 
     deleteButton: {
-        backgroundColor: '#ffebee', // Sfondo chiaro per il bottone di delete
+        backgroundColor: '#ffebee',
         paddingVertical: 12,
         paddingHorizontal: 24,
         borderRadius: 25,
@@ -216,8 +214,7 @@ const btnStyle = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 2,
         borderWidth: 1,
-        borderColor: '#d32f2f', // Bordo rosso
-        // Effetto hover per web
+        borderColor: '#d32f2f',
         ':hover': {
             backgroundColor: '#ffcdd2',
             transform: [{ scale: 1.02 }]
@@ -225,7 +222,7 @@ const btnStyle = StyleSheet.create({
     },
 
     deleteButtonText: {
-        color: '#d32f2f', // Testo rosso
+        color: '#d32f2f',
         fontSize: 14,
         fontWeight: '600',
         letterSpacing: 0.5
@@ -235,17 +232,16 @@ const btnStyle = StyleSheet.create({
         margin: "auto",
         height: 275,
         width: 370,
-        padding: 30, // Ridotto per più spazio
+        padding: 30,
         backgroundColor: 'white',
         borderRadius: 35,
-        // Ombra più pronunciata
         elevation: 5,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.1,
         shadowRadius: 6,
         borderWidth: 1,
-        borderColor: '#f0f0f0' // Bordo sottile
+        borderColor: '#f0f0f0'
     },
 
 });

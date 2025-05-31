@@ -1,5 +1,4 @@
 import * as SQLite from 'expo-sqlite';
-import {ModifiableCategory} from "../components/listObj";
 
 const db = SQLite.openDatabaseSync('grocery');
 
@@ -158,14 +157,10 @@ export const getItemsRecentiAcquistati = async (time) => {
 }
 
 // Costi mensili
-interface CostiMensili {
-  mese: string;
-  totale: number;
-}
 
 export const getCostiMensili = async () => {
   try {
-    const result = await db.getAllAsync<CostiMensili>(`
+    const result = await db.getAllAsync(`
       SELECT strftime('%Y-%m', data_compera) as mese, COALESCE(SUM(price * quantity), 0) as totale
       FROM items
       WHERE strftime('%Y', data_compera) = strftime('%Y', 'now') AND comprato = true
@@ -232,14 +227,10 @@ export const modificaLista = async (idLista, nome) => {
 };
 
 //Ottieni il numero di item per categoria 
-interface CategoryCount {
-  category: string;
-  count: number;
-}
 
 export const getNumeroItemPerCategoria = async () => {
   try {
-    const allRows = await db.getAllAsync<CategoryCount>(`
+    const allRows = await db.getAllAsync(`
       SELECT category, COUNT(*) as count
       FROM items
       GROUP BY category;
@@ -253,9 +244,9 @@ export const getNumeroItemPerCategoria = async () => {
 };
 
 // Ottieni gli item comprati per data e categoria
-export  const getItemsCompratiPerDataECategoria = async (startDate: string) => {
+export  const getItemsCompratiPerDataECategoria = async (startDate) => {
   try {
-    const result = await db.getAllAsync<CategoryCount>(`
+    const result = await db.getAllAsync(`
       SELECT category, COUNT(*) as count
       FROM items
       WHERE data_compera > ? AND comprato = true
@@ -344,13 +335,11 @@ export const getItemsCompratiByListId = async (listId) => {
 }
 
 // Spesa totale
-interface TotalSpendingResult {
-  total_spending: number | null;
-}
 
-export const getSpesaTotale = async (startDate: string) => {
+
+export const getSpesaTotale = async (startDate) => {
   try {
-    const result = await db.getAllAsync<TotalSpendingResult>(`
+    const result = await db.getAllAsync(`
       SELECT SUM(price * quantity) as total_spending
       FROM items
       WHERE data_compera > ? AND comprato = true;`, [startDate]);
@@ -411,15 +400,12 @@ export const rimuoviItemComprato = async (idItem) => {
 
 
 //
-interface SumResult {
-  total_spent: number;
-  sum: number;
-}
+
 
 export const getCostoTotalePerLista = async(idLista)=>{
   try{
     //Trovo la somma totale del costo per quella lista
-      const result = await db.getAllAsync<SumResult>(`select sum(price * quantity) as sum from items where comprato = true group by list_id having list_id = ?`,[idLista])
+      const result = await db.getAllAsync(`select sum(price * quantity) as sum from items where comprato = true group by list_id having list_id = ?`,[idLista])
       return result[0]?.sum || 0; 
   }catch(error){
     console.error("Errore "); 
@@ -443,7 +429,7 @@ export const getItemsCompratiPerCategoria = async (categoria) => {
 
 export const getTotalSpentForCategory = async (category) => {
   try {
-    const result = await db.getAllAsync<SumResult>(`
+    const result = await db.getAllAsync(`
       SELECT SUM(price * quantity) as total_spent
       FROM items
       WHERE  comprato = true

@@ -28,7 +28,7 @@ const commStyle = StyleSheet.create({
         animation:'shift',
         tabBarStyle:{
             backgroundColor:'#274472',
-            borderTopWidth: 0,     //Rimuove il bordo superiore bianco
+            borderTopWidth: 0,
             height: 90,
             paddingTop:10,
         },
@@ -49,7 +49,7 @@ const commStyle = StyleSheet.create({
 
         textShadowColor: 'rgba(0, 0, 0, 0.3)',
         textShadowOffset: { width: 1, height: 1 },
-        textShadowRadius: 2,                     // sfocatura
+        textShadowRadius: 2,
 
     },
 
@@ -135,12 +135,12 @@ const commStyle = StyleSheet.create({
             backgroundColor: 'rgba(23,124,239,0.5)',
             justifyContent: 'center',
             alignItems: 'center',
-            elevation: 3, // Per Android
+            elevation: 3,
             borderWidth: 0.3,
             borderColor: 'white',
             shadowColor: '#000',
             shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.1, // Più leggera
+            shadowOpacity: 0.1,
             shadowRadius: 3,
             position: 'absolute',
 

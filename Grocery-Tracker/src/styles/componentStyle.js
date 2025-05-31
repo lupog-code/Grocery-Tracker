@@ -118,13 +118,13 @@ const compStyle = StyleSheet.create({
     SmallProductContainer: {
         backgroundColor: '#274472',
         height: 140,
-        width: screenWidth * 0.4, // circa 45% dello schermo
+        width: screenWidth * 0.4,
         marginTop: 20,
         borderRadius: 15,
         padding: 10,
         flexDirection: 'row',
-        alignItems: 'center', // centra verticalmente gli elementi nella row
-        justifyContent: 'space-between', // spazio tra emoji e contenuto
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
 
     SmallCategoryEmoji: {

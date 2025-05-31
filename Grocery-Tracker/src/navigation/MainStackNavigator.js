@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ListsScreen from "../screens/ListsScreen";
 import BottomNavigation from "./BottomNavigation";
 import SingleListScreen from "../screens/SingleListScreen";
 import RecentProducts from "../screens/RecentProducts";

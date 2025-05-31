@@ -1,7 +1,6 @@
-import React, { useState, useEffect, use } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import{ OldProduct} from '../components/listObj';
-import { getFiltroCategorie } from '../data/db';
 import commStyle from '../styles/commonStyle';
 import { getItemsCompratiPerCategoria } from '../data/db';
 import { getTotalSpentForCategory } from '../data/db';

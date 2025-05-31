@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { getCostiMensili } from '../../data/db';
+import { lineStyles } from '../styles/lineStyle';
 
 const LineChartItems = ({startDate}) => {
   const [chartData, setChartData] = useState({
@@ -68,8 +69,8 @@ const LineChartItems = ({startDate}) => {
   };
   
   return (
-    <View style={styles.container}>
-      <Text style={[styles.cardTitle, {marginLeft:'auto', marginRight:'auto'}]}>Annual Expenses</Text>
+    <View style={lineStyles.container}>
+      <Text style={[lineStyles.cardTitle, {marginLeft:'auto', marginRight:'auto'}]}>Annual Expenses</Text>
       {chartData.datasets[0].data.length > 0 ? (
         <LineChart
           data={{
@@ -86,59 +87,18 @@ const LineChartItems = ({startDate}) => {
           height={220}
           chartConfig={chartConfig}
           bezier
-          style={styles.chart}
+          style={lineStyles.chart}
           yAxisSuffix=" €"
           verticalLabelRotation={0}
           fromZero
         />
       ) : (
-        <View style={styles.emptyContainer}>
-          <Text style={styles.emptyText}>Nessun dato disponibile per il periodo selezionato</Text>
+        <View style={lineStyles.emptyContainer}>
+          <Text style={lineStyles.emptyText}>Nessun dato disponibile per il periodo selezionato</Text>
         </View>
       )}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#ffffff',
-    borderRadius: 16,
-    padding: 16,
-    marginVertical: 10,
-    marginHorizontal: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 3,
-  },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#1f2937',
-    marginBottom: 16,
-    marginLeft: 4,
-  },
-  chart: {
-    marginVertical: 8,
-    borderRadius: 16,
-    alignSelf: 'center',
-  },
-  emptyContainer: {
-    height: 220,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f8f9fa',
-    borderRadius: 12,
-  },
-  emptyText: {
-    color: '#6b7280',
-    fontSize: 14,
-    fontWeight: '500',
-    textAlign: 'center',
-    paddingHorizontal: 20,
-  }
-});
 
 export default LineChartItems;
