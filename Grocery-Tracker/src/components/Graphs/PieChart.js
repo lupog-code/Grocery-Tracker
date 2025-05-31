@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { getItemsCompratiPerDataECategoria } from "../../data/db";
 import { PieChart } from "react-native-chart-kit";
 import { View, Text, Dimensions, ActivityIndicator } from "react-native";
-import { pieStyles } from '../styles/pieStyle';
+import { pieStyles } from '../../styles/pieStyle';
 import { useFocusEffect } from '@react-navigation/native';
 
 const screenWidth = Dimensions.get("window").width;

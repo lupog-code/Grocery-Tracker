@@ -3,7 +3,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { View, Text, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { getCostiMensili } from '../../data/db';
-import { lineStyles } from '../styles/lineStyle';
+import { lineStyles } from '../../styles/lineStyle';
 
 const LineChartItems = ({startDate}) => {
   const [chartData, setChartData] = useState({
