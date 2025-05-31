@@ -16,7 +16,6 @@ const enableForeignKeys = async () => {
 export const createTables = async () => {
   try {
     await enableForeignKeys();
-    // Create tables if they don't exist
     await db.execAsync(`
       CREATE TABLE IF NOT EXISTS lists (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
