@@ -335,6 +335,7 @@ export const PopUp_AddList = ({ onAdd, visible, setVisible }) => {
             await inserisciLista(name.trim());
             setVisible(false);
             setName('');
+            onAdd(); 
         } catch (error) {
             console.error("Error adding list:", error);
         }
@@ -365,7 +366,7 @@ export const PopUp_AddList = ({ onAdd, visible, setVisible }) => {
                         placeholderTextColor="#d0d0d0"
                     />
 
-                    <Button style={{fontSize: 10}} title="Add List" onPress={() => { inserisciNuovaLista(); onAdd(name); }} />
+                    <Button style={{fontSize: 10}} title="Add List" onPress={inserisciNuovaLista} />
                 </View>
             </TouchableOpacity>
         </Modal>

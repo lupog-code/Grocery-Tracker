@@ -70,17 +70,7 @@ const HomeScreen = () => {
   );
 
   const handleAddList = () => {
-    const fetchListsAndUpdate = async () => {
-      try {
-        const data = await getUltimeDueListe();
-        await getListe();
-        setLists(data);
-        await fetchLists();
-      } catch (error) {
-        console.error("Error fetching lists:", error);
-      }
-    };
-    fetchListsAndUpdate();
+    fetchLists();
   };
 
   const navigation = useNavigation();

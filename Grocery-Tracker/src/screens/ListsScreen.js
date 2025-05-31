@@ -3,7 +3,7 @@ import { View, Text, FlatList, Alert } from 'react-native';
 import commStyle from '../styles/commonStyle';
 import { List } from "../components/listObj";
 import { AddListBtn } from "../components/btnsObj";
-import { getListe, getUltimeDueListe, rimuoviLista } from '../data/db';
+import { getListe, rimuoviLista } from '../data/db';
 import { useFocusEffect } from '@react-navigation/native';
 import { FallbackList } from '../components/fallback';
 import * as Animatable from 'react-native-animatable';
@@ -28,17 +28,9 @@ const ListsScreen = () => {
     }
   };
 
-  function handleAddList() {
-    const fetchUltimeDueListe = async () => {
-      try {
-        await getUltimeDueListe();
-        await fetchLists();
-      } catch (error) {
-        console.error("Error fetching lists:", error);
-      }
-    };
-    fetchUltimeDueListe();
-  }
+  const handleAddList = () => {
+    fetchLists();
+  };
 
   useFocusEffect(
     useCallback(() => {
