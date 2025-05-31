@@ -14,10 +14,10 @@ const StatisticsCard = ({ startDate }) => {
     currentDate.setHours(0, 0, 0, 0);
     const start = new Date(startDate);
     start.setHours(0, 0, 0, 0);
-    const days = Math.ceil((currentDate.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
-    const average = days > 0 ? total / days : 0;
+    const weeks = Math.ceil((currentDate.getTime() - start.getTime()) / (1000 * 60 * 60 * 24 * 7));
+    const average = weeks > 0 ? total / weeks : 0;
     setTotalSpending(total);
-    setDailyAverage(average);
+    setWeeklyAverage(average);
   }, [startDate]);
 
   useFocusEffect(
@@ -39,8 +39,8 @@ const StatisticsCard = ({ startDate }) => {
         <View style={statStyles.divider} />
         
         <View style={statStyles.statItem}>
-          <Text style={statStyles.statValue}>€ {dailyAverage.toFixed(2)}</Text>
-          <Text style={statStyles.statLabel}>Daily Average</Text>
+          <Text style={statStyles.statValue}>€ {weeklyAverage.toFixed(2)}</Text>
+          <Text style={statStyles.statLabel}>Weekly Average</Text>
         </View>
       </View>
     </View>
