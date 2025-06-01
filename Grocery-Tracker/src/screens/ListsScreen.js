@@ -28,15 +28,21 @@ const ListsScreen = () => {
     }
   };
 
-  const handleAddList = () => {
-    fetchLists();
-  };
-
   useFocusEffect(
     useCallback(() => {
       fetchLists();
     }, [])
   );
+
+  const confirmDelete = async (id) => {
+    try {
+      await rimuoviLista(id);
+      const data = await getListe();
+      setLists(data);
+    } catch (error) {
+      console.error("Error deleting list:", error);
+    }
+  };
 
   const handleDeleteList = async (id) => {
     try {
@@ -47,11 +53,7 @@ const ListsScreen = () => {
           { text: "Cancel", style: "cancel" },
           {
             text: "Delete",
-            onPress: async () => {
-              await rimuoviLista(id);
-              const data = await getListe();
-              setLists(data);
-            },
+            onPress: () => confirmDelete(id),
           },
         ],
         { cancelable: false }
@@ -85,7 +87,7 @@ const ListsScreen = () => {
               delay={300}
               style={{ alignSelf: 'flex-end', borderRadius: 30, padding: 4 }}
             >
-              <AddListBtn onAdd={handleAddList} />
+              <AddListBtn onAdd={fetchLists} />
             </Animatable.View>
           </View>
         </>
@@ -101,7 +103,7 @@ const ListsScreen = () => {
             initialNumToRender={8}
           />
           <View style={{ position: 'absolute', bottom: 20, right: 20 }}>
-            <AddListBtn onAdd={handleAddList} />
+            <AddListBtn onAdd={fetchLists} />
           </View>
         </>
       )}

@@ -26,7 +26,7 @@ export const AddProductBtn = ({setItems,listID}) => {
             <PopUp_AddProduct visible={visible} setVisible={setVisible} setItems={setItems} listID={listID}/>
             <TouchableOpacity onPress={() => setVisible(true)}>
                 <View style={btnStyle.insertBtnSqrt}>
-                    <Text style={[btnStyle.insertBtnText, {fontSize: 30, fontWeight: 300}]}>+</Text>
+                    <Text style={[btnStyle.insertBtnText, {fontSize: 30, fontWeight: '300'}]}>+</Text>
                 </View>
             </TouchableOpacity>
         </>

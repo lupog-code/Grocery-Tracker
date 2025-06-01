@@ -23,7 +23,6 @@ const LineChartItems = ({startDate}) => {
       const fetchData = async () => {
         try {
           const data = await getCostiMensili();
-          console.log('Fetched data per linechart:', data);
             const labels = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'];
             const values = Array(12).fill(0);
             data.forEach(item => {
@@ -94,7 +93,7 @@ const LineChartItems = ({startDate}) => {
         />
       ) : (
         <View style={lineStyles.emptyContainer}>
-          <Text style={lineStyles.emptyText}>Nessun dato disponibile per il periodo selezionato</Text>
+          <Text style={lineStyles.emptyText}>No data available for the selected period.</Text>
         </View>
       )}
     </View>

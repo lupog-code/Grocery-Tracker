@@ -13,38 +13,21 @@ const CategoriesScreen = () => {
     const [fixedCategory, setFixedCategory] = useState([]);
 
     useEffect(() => {
-            const fetchMod = async () => {
-                try {
-                    const data = await getModifiableCategorie();
-                    console.log("Fetched lists:", data);
-                    setModCategory(data);
-                } catch (error) {
-                    console.error("Error fetching lists:", error);
-                }
-            };
-            fetchMod();
-        }
-        , [])
+        const fetchCategories = async () => {
+            try {
+            const modifiable = await getModifiableCategorie();
+            const fixed = await getFixedCategorie();
+            setModCategory(modifiable);
+            setFixedCategory(fixed);
+            } catch (error) {
+            console.error("Error fetching categories:", error);
+            }
+        };
+        fetchCategories();
+    }, []);
 
-    useEffect(() => {
-            const fetchMod = async () => {
-                try {
-                    const data = await getFixedCategorie();
-                    console.log("Fetched lists:", data);
-                    setFixedCategory(data);
-                } catch (error) {
-                    console.error("Error fetching lists:", error);
-                }
-            };
-            fetchMod();
-        }
-        , [])
-
-        //Funzione per aggiungere una categoria
         const handleAddCategory = async (categoryName) => {
             try {
-                
-                // Aggiungi la categoria al database
                 await addCategory(categoryName);
                 setModCategory((prevCategories) => [...prevCategories, { name: categoryName }]);
             } catch (error) {
@@ -52,7 +35,6 @@ const CategoriesScreen = () => {
             }
         };
 
-         //Funzione per eliminare una categoria
     const handledeleteCategory = async (categoryName) => {
         Alert.alert(
             "Delete Category",
@@ -67,7 +49,6 @@ const CategoriesScreen = () => {
                     onPress: async () => {
                         try {
                             await rimuoviCategoria(categoryName);
-                            //Refresha la lista delle categorie
                             const data = await getModifiableCategorie();
                             setModCategory(data);
                         } catch (error) {

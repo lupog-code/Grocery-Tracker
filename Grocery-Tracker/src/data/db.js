@@ -6,7 +6,6 @@ const db = SQLite.openDatabaseSync('grocery');
 const enableForeignKeys = async () => {
   try {
     await db.execAsync('PRAGMA foreign_keys = ON;');
-    console.log('Foreign keys enabled');
   } catch (error) {
     console.error('Error enabling foreign keys:', error);
   }
@@ -45,7 +44,6 @@ export const createTables = async () => {
         ('Beverages'),
         ('Other');
     `);
-    console.log(db.databasePath);
   } catch (error) {
     console.error('Failed to create tables:', error);
   }
@@ -210,7 +208,6 @@ export const modificaItem = async (idItem, nome, quantita, prezzo, categoria) =>
       `UPDATE items SET name = ?, quantity = ?, price = ?, category = ? WHERE id = ?;`,
       [nome, quantita, prezzo, categoria, idItem]
     );
-    console.log('Item modificato con successo');
   } catch (error) {
     console.error('Errore nella modifica dell\'item', error);
   }
@@ -252,7 +249,6 @@ export  const getItemsCompratiPerDataECategoria = async (startDate) => {
       WHERE data_compera > ? AND comprato = true
       GROUP BY category;
     `, [startDate]);
-    console.log('Items comprati per data e categoria:', result);
     return result;
   } catch (error) {
     console.error('Error fetching purchased items by date and category:', error);
@@ -357,7 +353,6 @@ export const DropTabelle = async () => {
       DROP TABLE IF EXISTS lists;
       DROP TABLE IF EXISTS categories;
     `);
-    console.log('Tabelle eliminate con successo');
   } catch (error) {
     console.error('Errore nell\'eliminazione delle tabelle', error);
   }
@@ -370,7 +365,6 @@ export const buyItem = async (idItem) => {
       `UPDATE items SET comprato = true, data_compera = CURRENT_TIMESTAMP WHERE id = ?;`,
       [idItem]
     );
-    console.log('Item comprato con successo');
   } catch (error) {
     console.error('Errore nell\'acquisto dell\'item', error);
   }
@@ -382,7 +376,6 @@ export const addCategory = async (category) => {
       `INSERT INTO categories (name) VALUES (?);`,
       [category]
     );
-    console.log('Categoria aggiunta con successo');
   } catch (error) {
     console.error('Errore nell\'aggiunta della categoria', error);
   }
@@ -392,7 +385,6 @@ export const addCategory = async (category) => {
 export const rimuoviItemComprato = async (idItem) => {
   try {
     await db.runAsync(`UPDATE items SET comprato = false, data_compera = null WHERE id = ?;`, [idItem]);
-    console.log('Item rimosso con successo');
   } catch (error) {
     console.error('Errore nella rimozione dell\'item', error);
   }

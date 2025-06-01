@@ -6,7 +6,7 @@ import commStyle from "../styles/commonStyle";
 import {OldProduct} from "../components/listObj";
 import { FallbackRecents } from '../components/fallback';
 
-const RecentProducts = ({navigation , route}) => {
+const RecentProducts = ({navigation}) => {
     const [prodotti , setProdotti] = useState([]);
 
     useEffect(() => {
@@ -14,7 +14,6 @@ const RecentProducts = ({navigation , route}) => {
             try {
                 const data = await getUltimiDieciItemComprati();
                 setProdotti(data);
-                console.log(data); 
             } catch (error) {
                 console.error("Error fetching products:", error);
             }
@@ -38,10 +37,9 @@ const RecentProducts = ({navigation , route}) => {
             </View>
 
             {prodotti.length > 0 ? (
-                <ScrollView showsVerticalScrollIndicator={false}>
                     <FlatList
                         data={prodotti}
-                        scrollEnabled={false}
+                        showsVerticalScrollIndicator={false}
                         renderItem={({ item }) => (
                             <OldProduct
                                 id={item.id}
@@ -54,7 +52,6 @@ const RecentProducts = ({navigation , route}) => {
                         )}
                         keyExtractor={(item) => item.id.toString()}
                     />
-                </ScrollView>
             ) : (
                 <FallbackRecents />
             )}

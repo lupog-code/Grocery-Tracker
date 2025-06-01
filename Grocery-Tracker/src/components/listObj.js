@@ -17,7 +17,7 @@ const getEmoji = ( category ) => {
         case "Snacks": return "🍫";
         case "Beverages": return "🍶";
         case "Other": return "🍽️";
-        default: return "🛍️";
+        default: return "🛒";
     }
 };
 export const List = ({onSwipeableOpen, id, name, onDelete }) => {
@@ -33,7 +33,7 @@ export const List = ({onSwipeableOpen, id, name, onDelete }) => {
       <TouchableOpacity
         style={compStyle.listSwipDelete}
         onPress={() => { 
-          ref.current.close(); 
+          if (ref.current) ref.current.close();
           onDelete(id); 
         }}
       >

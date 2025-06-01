@@ -32,7 +32,6 @@ const HomeScreen = () => {
   const fetchProducts = async () => {
     try {
       const data = await getUltimiDieciItemComprati();
-      if (JSON.stringify(data) === JSON.stringify(products)) return;
       setProducts(data);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -68,10 +67,6 @@ const HomeScreen = () => {
       fetchProducts();
     }, [])
   );
-
-  const handleAddList = () => {
-    fetchLists();
-  };
 
   const navigation = useNavigation();
   const goToRecentProducts = () => {
@@ -128,7 +123,7 @@ const HomeScreen = () => {
         />
       </ScrollView>
 
-      <AddListBtn onAdd={handleAddList} />
+      <AddListBtn onAdd={fetchLists} />
     </View>
   );
 };

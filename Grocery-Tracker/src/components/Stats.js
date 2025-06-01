@@ -6,9 +6,9 @@ import { statStyles } from '../styles/statStyle';
 
 const StatisticsCard = ({ startDate }) => {
   const [totalSpending, setTotalSpending] = useState(0);
-  const [dailyAverage, setDailyAverage] = useState(0);
+  const [weeklyAverage, setWeeklyAverage] = useState(0);
 
-  const fetchData = React.useCallback(async () => {
+  const fetchData = async () => {
     const total = await getSpesaTotale(startDate);
     const currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0);
@@ -18,12 +18,12 @@ const StatisticsCard = ({ startDate }) => {
     const average = weeks > 0 ? total / weeks : 0;
     setTotalSpending(total);
     setWeeklyAverage(average);
-  }, [startDate]);
+  };
 
   useFocusEffect(
     React.useCallback(() => {
       fetchData();
-    }, [fetchData])
+    }, [startDate])
   );
 
   return (

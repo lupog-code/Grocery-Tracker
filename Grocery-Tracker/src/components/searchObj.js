@@ -18,7 +18,7 @@ export const SearchBar = ({setSearchText}) => {
                     borderRadius: 25,
                     paddingHorizontal: 19,
                     margin: 10,
-                    backgroundColor: '(0,0,0,0)',
+                    backgroundColor: 'rgba(0,0,0,0)',
                 }}
             >
                 <TextInput
@@ -26,7 +26,6 @@ export const SearchBar = ({setSearchText}) => {
                         flex: 1,
                         height: 40,
                         color: 'white',
-                        fontColor: 'white',
                         fontWeight: 'bold',
                         fontSize: 15,
                     }}
@@ -50,7 +49,7 @@ export const FilterBar = ({ setFiltri }) => {
         const [category, setCategory] = useState('');
         const [minPrice, setMinPrice] = useState(null);
         const [maxPrice, setMaxPrice] = useState(null);
-        const [open, setOpen] = React.useState(false);
+        const [open, setOpen] = useState(false);
 
         const applyFilters = () => {
             setFiltri({ category, minPrice, maxPrice });
@@ -77,7 +76,7 @@ export const FilterBar = ({ setFiltri }) => {
 
         return (
             <View>
-                <Button title="Open Filters" onPress={() => setModalVisible(true)} color="white" />
+                <Button title="Open Filter" onPress={() => setModalVisible(true)} color="white" />
                 <Modal
                     animationType="slide"
                     transparent={true}

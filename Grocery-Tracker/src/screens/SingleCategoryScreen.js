@@ -20,10 +20,8 @@ const CategoryScreen = ({ navigation, route }) => {
 
   const fetchProducts = async () => {
     try {
-      console.log("Category:", category);
       const data = await getItemsCompratiPerCategoria(category);
       setProducts(data);
-      console.log("Fetched products per category:", data);
     } catch (error) {
       console.error('Error fetching products:', error);
     }
@@ -60,7 +58,6 @@ const CategoryScreen = ({ navigation, route }) => {
         data={products}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          console.log("Data compera:", item.data_compera),
           <OldProduct
             id={item.id}
             name={item.name}

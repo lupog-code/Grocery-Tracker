@@ -12,8 +12,7 @@ import { analysisStyles } from '../styles/analysisStyle';
 
 const AnalysisScreen = () => {
   const [currentPeriod, setCurrentPeriod] = useState("3 months");
-  const [startDate, setStartDate] = useState("");
-
+  
   const periods = ["1 month", "3 months", "6 months", "1 year"];
 
   const getStartDate = (period) => {
@@ -35,6 +34,8 @@ const AnalysisScreen = () => {
     }
     return newDate.toISOString().split('T')[0]; // Formato YYYY-MM-DD
   };
+
+  const [startDate, setStartDate] = useState(getStartDate(currentPeriod));
 
   useFocusEffect(
     React.useCallback(() => {
@@ -59,7 +60,7 @@ const AnalysisScreen = () => {
           </View>
 
         <ScrollView showsVerticalScrollIndicator={false}>
-          <>
+          
           <View style={analysisStyles.card}>
             <Text style={[analysisStyles.cardTitle, {marginLeft:'auto', marginRight:'auto'}]}>Analysis Period</Text>
             <SegmentedButtons
@@ -79,7 +80,7 @@ const AnalysisScreen = () => {
             <StatisticsCard startDate={startDate} />
           </View>
             <PieChartItems startDate={startDate} />      
-          </>
+          
           <View>
             <LineChartItems startDate={startDate} />
           </View>

@@ -10,6 +10,7 @@ import { rimuoviLista } from '../data/db';
 import { getCostoTotalePerLista, getItemsCompratiByListId, modificaLista } from '../data/db';
 import {FallbackSingleList} from '../components/fallback';
 import * as Animatable from 'react-native-animatable';
+import { useFocusEffect } from '@react-navigation/native';
 
 
 const ListsScreen = ({navigation , route}) => {
@@ -24,16 +25,17 @@ const ListsScreen = ({navigation , route}) => {
     const fetchCostoTotale = async () => {
         try {
             const costo = await getCostoTotalePerLista(listId);
-            console.log("Costo totale:", costo);
             setCostoTotale(costo || 0); 
         } catch (error) {
             console.error("Error fetching total cost:", error);
         }
     };
 
-    useEffect(() => {
-        fetchCostoTotale();
-    }, [listId, productsComprati]);
+    useFocusEffect(
+      React.useCallback(() => {
+          fetchCostoTotale();
+      }, [listId, productsComprati])
+    );
 
     const refreshComprati = async () => {
         try {
@@ -47,19 +49,32 @@ const ListsScreen = ({navigation , route}) => {
     const fetchProducts = async () => {
         try {
             const data = await getItemsByListId(listId);
-            if(JSON.stringify(data) === JSON.stringify(products)) return; 
             setProducts(data);
         } catch (error) {
             console.error("Error fetching products:", error);
         }
     };
 
-    useEffect(() => {
-        
-        fetchProducts();
-    }, [products]);
+    useFocusEffect(
+      React.useCallback(() => {
+          fetchProducts();
+      }, [])
+    );
 
-    const handleDeleteList = (listId) => {
+    const confirmDeleteList = async () => {
+        try {
+            await rimuoviLista(listId);
+            navigation.goBack();
+        } catch (error) {
+            console.error("Error deleting list:", error);
+            Alert.alert(
+                "Error",
+                "Could not delete the list. Please try again."
+            );
+        }
+    };
+
+    const handleDeleteList = () => {
         Alert.alert(
             "Delete List",  
             "Are you sure you want to delete this list? This action cannot be undone.",
@@ -72,21 +87,9 @@ const ListsScreen = ({navigation , route}) => {
                 {
                     text: "Delete",
                     style: "destructive",
-                    onPress: async () => {
-                        try {
-                            await rimuoviLista(listId);
-                            navigation.goBack();
-                        } catch (error) {
-                            console.error("Error deleting list:", error);
-                            Alert.alert(
-                                "Error",
-                                "Could not delete the list. Please try again."
-                            );
-                        }
-                    }
+                    onPress: confirmDeleteList
                 }
             ],
-            // Additional options
             {
                 cancelable: true,
                 onDismiss: () => {}
@@ -102,7 +105,6 @@ const ListsScreen = ({navigation , route}) => {
                 }
                 await modificaLista(listId, editableName.trim());
                 setEditableName(editableName.trim());
-                console.log("List name updated to:", editableName.trim());
             } catch (error) {
                 console.error("Error updating list name:", error);
             }

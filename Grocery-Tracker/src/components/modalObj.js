@@ -197,7 +197,6 @@ export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, vis
                     await rimuoviItem(idProduct);
                     setVisible(false);
                     onEdit();
-                    console.log("Deleted product with id: " + idProduct);
                 } catch (error) {
                     console.error("Error deleting product:", error);
                 }
@@ -227,7 +226,6 @@ export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, vis
                             await modificaItem(idProduct, name.trim(), quantity, price, category);
                             setVisible(false);
                             onEdit();
-                            console.log("Saved product with id: " + idProduct);
                         } catch (error) {
                             console.error("Error saving product:", error);
                         }
@@ -384,7 +382,6 @@ export const PopUp_addCategory = ({ namein, visible, setVisible ,onAddCategory,c
             return;
         }
 
-        // Check if the category already exists
         if (categories.some(category => category.name.toLowerCase() === categoryName.trim().toLowerCase())) {
             Alert.alert('Error', 'Category already exists');
             return;
@@ -405,7 +402,7 @@ export const PopUp_addCategory = ({ namein, visible, setVisible ,onAddCategory,c
     return (
         <Modal
             visible={visible}
-            transparent={visible}
+            transparent={true}
             onRequestClose={() => setVisible(false)}
             animationType="slide"
         >
@@ -427,7 +424,7 @@ export const PopUp_addCategory = ({ namein, visible, setVisible ,onAddCategory,c
                         placeholderTextColor="#d0d0d0"
                     />
 
-                    <Button title="Add Cateogry" style={{fontSize: 10}} onPress={() => handleSubmit()} />
+                    <Button title="Add Category" style={{fontSize: 10}} onPress={() => handleSubmit()} />
 
 
                 </View>
