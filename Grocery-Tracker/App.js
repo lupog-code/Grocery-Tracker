@@ -1,11 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, SafeAreaView , View, ActivityIndicator } from 'react-native';
+import { SafeAreaView, ActivityIndicator } from 'react-native';
 import { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import BottomNavigation from './src/navigation/BottomNavigation';
-import { createTables , DropTabelle} from './src/data/db';
+import { createTables } from './src/data/db';
 import MainStackNavigator from './src/navigation/MainStackNavigator';
-import { Gesture } from 'react-native-gesture-handler';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
@@ -14,7 +11,7 @@ export default function App() {
     const createTablesAsync = async () => {
       try {
         await createTables();
-        setDbReady(true); // ora il DB è pronto
+        setDbReady(true); 
       } catch (error) {
         console.error('Error creating tables:', error);
       }
