@@ -68,11 +68,14 @@ const HomeScreen = () => {
     }, [])
   );
 
-  const navigation = useNavigation();
+  const navigation = useNavigation(); //Avremmo potuto mettere anche navigation passata come prop 
+  
   const goToRecentProducts = () => {
-    navigation.navigate("RecentProducts", { products: products });
+    navigation.navigate("RecentProducts", { products: products }); //Quando andiamo ai prodotti recenti , passiamo a questa schermata la lista dei prodotti recenti
   };
 
+
+  //Funzione per scrivere il saluto 
   const saluto = () => {
     const data = new Date();
     const ora = data.getHours();
@@ -123,7 +126,7 @@ const HomeScreen = () => {
         />
       </ScrollView>
 
-      <AddListBtn onAdd={fetchLists} />
+      <AddListBtn onAdd={fetchLists} /*Funzione di callback per refreshare la home e prendere solo le ultime due aggiunte*/ />
     </View>
   );
 };

@@ -5,6 +5,8 @@ import { useState } from 'react';
 import {Button, Modal, Text, TouchableOpacity } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import btnStyle from "../styles/btnStyle";
+import { getCategorie } from '../data/db';
+import { useEffect } from 'react';
 
 export const SearchBar = ({setSearchText}) => {
     return (
@@ -64,15 +66,24 @@ export const FilterBar = ({ setFiltri }) => {
             setModalVisible(false);
         };
 
-        const [pickerItems, setPickerItems] = React.useState([
-                { label: 'Fruits', value: 'Fruits' },
-                { label: 'Vegetables', value: 'Vegetables' },
-                { label: 'Meat', value: 'Meat' },
-                { label: 'Dairy', value: 'Dairy' },
-                { label: 'Snacks', value: 'Snacks' },
-                { label: 'Beverages', value: 'Beverages' },
-                { label: 'Other', value: 'Other' },
-            ]);
+         useEffect(() => {
+                const fetchCategories = async () => {
+                    try {
+                        const data = await getCategorie();
+                        const formattedData = data.map(item => ({
+                            label: item.name,
+                            value: item.name
+                        }));
+                        setPickerItems(formattedData);
+                    } catch (error) {
+                        console.error("Error fetching categories:", error);
+                    }
+                };
+                fetchCategories();
+            }, []);
+
+        const [pickerItems, setPickerItems] = useState([]); 
+             
 
         return (
             <View>

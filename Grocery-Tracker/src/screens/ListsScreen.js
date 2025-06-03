@@ -10,8 +10,13 @@ import * as Animatable from 'react-native-animatable';
 
 const ListsScreen = () => {
   const [lists, setLists] = useState([]);
-  const openRef = useRef(null);
+  const openRef = useRef(null); //useRef restituisce un oggetto js che ha una proprietà detta: current , che 
+  //quando viene settato all'inizio è null , e poi può essere assegnata ad un riferimento costante , infatti il valore non cambia per mezzo di re-rendering  
 
+
+  //Funzione per gestire un solo elemento swipeable aperto alla volta. Infatti 
+  //se esiste un elemento già aperto(openRef) ed è diverso da quello che stiamo per aprire(ref) , 
+  //allora chiudiamo quello attualmente aperto 
   const onSwipeableOpen = (ref) => {
     if (openRef.current && openRef.current !== ref) {
       openRef.current.close();
@@ -19,6 +24,8 @@ const ListsScreen = () => {
     openRef.current = ref;
   };
 
+
+  //Funzione di callback ogni volta che si metta a focus la pagina 
   const fetchLists = async () => {
     try {
       const data = await getListe();
@@ -34,6 +41,8 @@ const ListsScreen = () => {
     }, [])
   );
 
+
+
   const confirmDelete = async (id) => {
     try {
       await rimuoviLista(id);
@@ -44,6 +53,8 @@ const ListsScreen = () => {
     }
   };
 
+
+//Funzione di callback per eliminare una lista passata al componento List
   const handleDeleteList = async (id) => {
     try {
       Alert.alert(
