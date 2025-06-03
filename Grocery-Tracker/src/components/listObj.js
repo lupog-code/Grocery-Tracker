@@ -20,6 +20,7 @@ const getEmoji = ( category ) => {
         default: return "🛒";
     }
 };
+
 export const List = ({onSwipeableOpen, id, name, onDelete }) => {
   const navigation = useNavigation();
   const ref = useRef(null);
@@ -32,7 +33,7 @@ export const List = ({onSwipeableOpen, id, name, onDelete }) => {
     return (
       <TouchableOpacity
         style={compStyle.listSwipDelete}
-        onPress={() => { 
+        onPress={() => {
           if (ref.current) ref.current.close();
           onDelete(id); 
         }}
@@ -183,21 +184,9 @@ export const FixedCategory = ({ name }) => {
 };
 
 export const OldProduct = ({ id, name, quantity, price, category, data, onDelete }) => {
-    const [visible, setVisible] = useState(false);
 
     return (
         <>
-            <PopUp_editProduct
-                onDelete={() => onDelete(id)}
-                idProduct={id}
-                namein={name}
-                quantityin={quantity}
-                pricein={price}
-                categoryin={category}
-                visible={visible}
-                setVisible={setVisible}
-                items={null}
-            />
             <View style={compStyle.ProductContainer}>
                 <View style={compStyle.Cont20}>
                     <Text style={compStyle.categoryEmoji}>{getEmoji(category)}</Text>
