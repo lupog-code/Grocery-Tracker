@@ -183,7 +183,7 @@ export const FixedCategory = ({ name }) => {
     );
 };
 
-export const OldProduct = ({ id, name, quantity, price, category, data, onDelete }) => {
+export const OldProduct = ({ id, name, quantity, price, category, data }) => {
 
     return (
         <>
