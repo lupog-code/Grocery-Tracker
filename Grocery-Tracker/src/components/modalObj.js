@@ -108,7 +108,6 @@ export const PopUp_AddProduct = ({ visible, setVisible, setItems, listID }) => {
                     <TextInput
                         style={btnStyle.textInput}
                         placeholder="Price per unit"
-                        keyboardType="numeric"
                         onChangeText={val => setPrice(val)}
                         value={price}
                         placeholderTextColor="#d0d0d0"
@@ -273,7 +272,6 @@ export const PopUp_editProduct = ({ namein, quantityin, pricein, categoryin, vis
                     <TextInput
                         style={btnStyle.textInput}
                         placeholder="Price"
-                        keyboardType="numeric"
                         value={price}
                         onChangeText={val => setPrice(val)}
                         placeholderTextColor="#d0d0d0"
